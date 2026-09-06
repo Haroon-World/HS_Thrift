@@ -434,10 +434,10 @@ function renderProductCardHTML(p) {
   const priceNum = Number(p.price) || 0;
   const isDiscounted = (salePriceNum > 0 && salePriceNum < priceNum) || Boolean(p.is_on_sale);
   const effectivePrice = isDiscounted ? salePriceNum : (Number(p.effective_price) || priceNum);
-  const catName = p.category ? (p.category.name || p.category) : (p.category_name || 'Thrift Find');
   const cond = p.condition_rating || '9.5/10';
   const size = p.size || 'M';
   const isPristine = cond.startsWith('10');
+  const discountPercent = isDiscounted ? Math.round((1 - effectivePrice / priceNum) * 100) : 0;
 
   const productObj = JSON.stringify({
     id: p.id, name: p.name, slug: p.slug, price: effectivePrice,
@@ -448,42 +448,52 @@ function renderProductCardHTML(p) {
   return `
     <div class="product-card h-100">
       <div class="product-image-container">
-        <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop';">
+        <a href="/product.html?slug=${p.slug}" class="d-block w-100 h-100 product-img-link" aria-label="View ${p.name}">
+          <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop';">
+        </a>
 
+        <!-- Top Badges -->
         <span class="badge-condition ${isPristine ? 'cond-pristine' : 'cond-mint'}">
           <i class="bi bi-patch-check-fill"></i> ${cond}
         </span>
 
-        ${isDiscounted ? `<span class="badge-sale">SALE</span>` : ''}
         ${size ? `<span class="badge-size">${size}</span>` : ''}
-        ${!isOutOfStock ? `<span class="badge-single-stock"><i class="bi bi-lightning-fill"></i> 1 Left</span>` : ''}
 
-        ${isOutOfStock ? `<div class="position-absolute inset-0 d-flex align-items-center justify-content-center" style="background:rgba(255,255,255,0.75); inset:0; position:absolute;"><span class="badge bg-secondary fs-7 fw-bold px-3 py-2 rounded-pill">Out of Stock</span></div>` : ''}
+        <!-- Hover Quick View Button over Image -->
+        <button type="button" class="card-img-quickview js-quickview-btn" data-product-id="${p.id}" data-product-obj='${productObj}' aria-label="Quick View ${p.name}">
+          <i class="bi bi-eye"></i> Quick View
+        </button>
+
+        ${isOutOfStock ? `
+          <div class="product-sold-overlay">
+            <span class="badge bg-secondary fs-7 fw-bold px-3 py-2 rounded-pill">Sold Out</span>
+          </div>
+        ` : ''}
       </div>
 
       <div class="product-info">
-        <div class="product-category-meta">${catName}</div>
         <h3 class="product-title">
-          <a href="/product.html?slug=${p.slug}" class="text-decoration-none stretched-link-title" style="color:inherit;">${p.name}</a>
+          <a href="/product.html?slug=${p.slug}" class="text-decoration-none text-reset">${p.name}</a>
         </h3>
-        ${p.tagline ? `<p class="product-tagline">${p.tagline}</p>` : ''}
 
         <div class="product-price-row">
           <span class="product-price">${isOutOfStock ? 'Sold Out' : formatPKR(effectivePrice)}</span>
-          ${isDiscounted && !isOutOfStock ? `<span class="product-original-price">${formatPKR(priceNum)}</span>` : ''}
-          ${isDiscounted && !isOutOfStock ? `<span class="badge bg-danger ms-1 fs-8 fw-bold rounded-1">${Math.round((1 - effectivePrice/priceNum)*100)}% OFF</span>` : ''}
+          ${isDiscounted && !isOutOfStock ? `
+            <span class="product-original-price">${formatPKR(priceNum)}</span>
+            <span class="product-discount-pill">-${discountPercent}%</span>
+          ` : ''}
         </div>
 
-        <div class="product-action-bar mt-3">
-          <button type="button" class="btn-card-action js-quickview-btn" data-product-id="${p.id}" data-product-obj='${productObj}'>
-            <i class="bi bi-eye"></i> Quick View
+        <div class="product-action-bar">
+          <button type="button" class="btn-card-action-icon js-quickview-btn" data-product-id="${p.id}" data-product-obj='${productObj}' title="Quick View" aria-label="Quick View">
+            <i class="bi bi-eye"></i>
           </button>
           ${!isOutOfStock ? `
-            <button type="button" class="btn-card-action btn-card-primary js-add-to-cart" data-product-id="${p.id}" data-product-obj='${productObj}'>
-              <i class="bi bi-bag-plus"></i> Add
+            <button type="button" class="btn-card-action-main js-add-to-cart" data-product-id="${p.id}" data-product-obj='${productObj}'>
+              <i class="bi bi-bag-plus me-1"></i> Add
             </button>
           ` : `
-            <button class="btn-card-action" disabled style="opacity:0.45; cursor:not-allowed;">Sold Out</button>
+            <button class="btn-card-action-main" disabled style="opacity:0.5; cursor:not-allowed;">Sold Out</button>
           `}
         </div>
       </div>
