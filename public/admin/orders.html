@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=2.0">
   <style>
     .history-card {
       background: var(--admin-bg);
@@ -88,10 +88,10 @@
     <div class="admin-topbar" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
       <div class="page-title">Order Fulfillment &amp; Management</div>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-        <button type="button" class="btn-admin-ghost" onclick="openExcelExportModal()" style="font-weight:700;font-size:.84rem;color:#155724;background:#d4edda;border:1px solid #c3e6cb;">
+        <button type="button" class="btn-admin-ghost" onclick="openExcelExportModal()" style="font-weight:700;font-size:.84rem;color:#00F59B;background:rgba(0,245,155,0.12);border:1px solid rgba(0,245,155,0.35);">
           <i class="bi bi-file-earmark-excel me-1"></i> Export to Excel
         </button>
-        <button type="button" class="btn-admin-ghost text-danger" onclick="openDateRangeDeleteModal()" style="font-weight:700;font-size:.84rem;background:#f8d7da;border:1px solid #f5c6cb;">
+        <button type="button" class="btn-admin-ghost text-danger" onclick="openDateRangeDeleteModal()" style="font-weight:700;font-size:.84rem;color:#FB7185;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);">
           <i class="bi bi-calendar-x me-1"></i> Bulk Delete Orders
         </button>
       </div>
@@ -166,8 +166,8 @@
       </div>
 
       <!-- Bulk Select Floating Action Bar -->
-      <div id="bulkSelectActionBar" style="display:none;background:#fff8e6;border:1px solid #ffe58f;border-radius:8px;padding:.65rem 1rem;margin-bottom:.75rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-        <div style="font-weight:700;font-size:.85rem;color:#8c6b00;">
+      <div id="bulkSelectActionBar" style="display:none;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);border-radius:8px;padding:.65rem 1rem;margin-bottom:.75rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+        <div style="font-weight:700;font-size:.85rem;color:#FBBF24;">
           <i class="bi bi-check2-square me-1"></i> <span id="selectedOrdersCountText">0</span> order(s) selected
         </div>
         <div style="display:flex;gap:.5rem;">
@@ -605,7 +605,7 @@
       <div style="font-size:.84rem;line-height:1.6;border-top:1px dashed var(--admin-border);padding-top:.5rem;">
         <div style="display:flex;justify-content:space-between;"><span>Subtotal:</span> <strong>${formatPKR(subtotal)}</strong></div>
         <div style="display:flex;justify-content:space-between;"><span>Shipping Fee:</span> <strong>${shippingFee === 0 ? 'FREE' : formatPKR(shippingFee)}</strong></div>
-        <div style="display:flex;justify-content:space-between;font-size:.95rem;font-weight:700;color:var(--admin-text);margin-top:.2rem;"><span>Total Amount:</span> <span style="color:#c17c3a;">${formatPKR(order.total_amount)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.95rem;font-weight:700;color:var(--admin-text);margin-top:.2rem;"><span>Total Amount:</span> <span style="color:var(--admin-accent);">${formatPKR(order.total_amount)}</span></div>
       </div>
     `;
 

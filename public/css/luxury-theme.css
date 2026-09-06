@@ -17,6 +17,14 @@
   --color-emerald-light:    #ECFDF5;
   --color-emerald-border:   #A7F3D0;
   
+  /* Modern Streetwear Neon Tokens */
+  --color-neon-primary:     #00F59B; /* High-voltage Electric Neon Green */
+  --color-neon-hover:       #00D684;
+  --color-neon-glow:        0 0 16px rgba(0, 245, 155, 0.45);
+  --color-neon-subtle:      rgba(0, 245, 155, 0.12);
+  --color-neon-border:      rgba(0, 245, 155, 0.35);
+  --color-neon-text-dark:   #090D16; /* Deep obsidian for 14.2:1 contrast on neon bg */
+
   --color-amber-accent:     #F59E0B;
   --color-amber-hover:      #D97706;
   --color-amber-light:      #FEF3C7;
@@ -196,17 +204,20 @@ img { max-width: 100%; height: auto; }
   gap: 6px;
 }
 .brand-logo-text .thrift-highlight {
-  background: linear-gradient(135deg, var(--color-emerald-primary), #059669);
+  color: var(--color-neon-primary);
+  background: linear-gradient(135deg, var(--color-neon-primary), #10B981);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-style: normal;
+  filter: drop-shadow(0 0 10px rgba(0, 245, 155, 0.4));
 }
 .brand-badge-pill {
   font-size: 0.65rem;
   font-weight: 800;
-  background-color: var(--color-obsidian);
-  color: #FFFFFF;
-  padding: 2px 7px;
+  background-color: rgba(0, 245, 155, 0.12);
+  color: #047857;
+  border: 1px solid rgba(0, 245, 155, 0.4);
+  padding: 3px 8px;
   border-radius: 9999px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -522,12 +533,14 @@ img { max-width: 100%; height: auto; }
   z-index: 2;
 }
 .badge-condition.cond-pristine {
-  background: #10B981;
-  color: #FFFFFF;
+  background: var(--color-neon-primary);
+  color: var(--color-neon-text-dark);
+  box-shadow: 0 0 10px rgba(0, 245, 155, 0.4);
 }
 .badge-condition.cond-mint {
   background: #0F172A;
-  color: #F8FAFC;
+  color: var(--color-neon-primary);
+  border: 1px solid var(--color-neon-border);
 }
 
 .badge-sale {
@@ -813,20 +826,44 @@ img { max-width: 100%; height: auto; }
 .footer-section {
   background-color: var(--color-obsidian);
   color: #94A3B8;
-  padding: 70px 0 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 75px 0 30px;
+  border-top: 1px solid rgba(0, 245, 155, 0.25);
+  position: relative;
+}
+.footer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 155, 0.6), transparent);
 }
 .footer-section h5 {
   color: #FFFFFF;
   font-size: 1.1rem;
+  font-weight: 700;
   margin-bottom: 20px;
+  letter-spacing: 0.02em;
 }
 .footer-section a {
   color: #94A3B8;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 .footer-section a:hover {
-  color: var(--color-emerald-primary);
+  color: var(--color-neon-primary);
+}
+.footer-section .brand-logo-text {
+  color: #FFFFFF;
+}
+.footer-section .brand-logo-text:hover {
+  color: #FFFFFF;
+}
+.footer-section .brand-logo-text .thrift-highlight {
+  color: var(--color-neon-primary);
+  -webkit-text-fill-color: var(--color-neon-primary);
+  text-shadow: 0 0 16px rgba(0, 245, 155, 0.6);
 }
 .footer-bottom {
   margin-top: 50px;

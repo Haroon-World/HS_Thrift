@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=2.0">
 </head>
 <body>
 <div class="admin-layout">
@@ -55,7 +55,7 @@
         <!-- City-Specific Shipping Costs Card -->
         <div class="admin-card mb-4">
           <div class="admin-card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0"><i class="bi bi-geo-alt me-2 text-terracotta"></i> City-Specific Shipping Charges</h5>
+            <h5 class="mb-0"><i class="bi bi-geo-alt me-2" style="color:var(--admin-accent);"></i> City-Specific Shipping Charges</h5>
             <button type="button" class="btn-admin-ghost btn-sm" onclick="addNewCityRow()">
               <i class="bi bi-plus-circle me-1"></i> Add City
             </button>
@@ -89,7 +89,7 @@
         <!-- Online Payment Instructions Card -->
         <div class="admin-card mb-4">
           <div class="admin-card-header">
-            <h5 class="mb-0"><i class="bi bi-bank me-2 text-terracotta"></i> Online Payment Instructions</h5>
+            <h5 class="mb-0"><i class="bi bi-bank me-2" style="color:var(--admin-accent);"></i> Online Payment Instructions</h5>
           </div>
           <div class="p-4">
             <p class="text-muted fs-7 mb-3">
@@ -119,7 +119,7 @@
         <!-- Standard Shipping Settings Card -->
         <div class="admin-card mb-4">
           <div class="admin-card-header">
-            <h5 class="mb-0"><i class="bi bi-truck me-2 text-terracotta"></i> Shipping Charges &amp; Free Shipping Threshold</h5>
+            <h5 class="mb-0"><i class="bi bi-truck me-2" style="color:var(--admin-accent);"></i> Shipping Charges &amp; Free Shipping Threshold</h5>
           </div>
           <div class="p-4">
             <p class="text-muted fs-7 mb-3">
@@ -133,7 +133,7 @@
                     Free Shipping Threshold (PKR)
                   </label>
                   <div class="input-group">
-                    <span class="input-group-text" style="font-size:.85rem;background:#f8f9fa;">PKR</span>
+                    <span class="input-group-text" style="font-size:.85rem;background:#090D16;color:var(--admin-muted);border-color:var(--admin-border);">PKR</span>
                     <input type="number" id="freeShippingThreshold" class="form-control" placeholder="10000" min="0" required style="font-weight:600;">
                   </div>
                   <div class="form-text text-muted" style="font-size:.78rem;">Order subtotal required to qualify for free shipping.</div>
@@ -152,7 +152,7 @@
         <!-- Customer Data Retention Card -->
         <div class="admin-card mb-4">
           <div class="admin-card-header">
-            <h5 class="mb-0"><i class="bi bi-shield-lock me-2 text-terracotta"></i> Order Data Retention Policy</h5>
+            <h5 class="mb-0"><i class="bi bi-shield-lock me-2" style="color:var(--admin-accent);"></i> Order Data Retention Policy</h5>
           </div>
           <div class="p-4">
             <p class="text-muted fs-7 mb-3">

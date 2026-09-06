@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=2.0">
 </head>
 <body>
 <div class="admin-layout">
@@ -139,9 +139,9 @@
         <label style="font-weight:700;">Product Image (Upload from PC Storage or Web URL)</label>
         
         <!-- Drag & Drop Zone for PC Storage -->
-        <div id="imageDropZone" style="border:2px dashed var(--admin-border);border-radius:10px;padding:1.25rem;text-align:center;cursor:pointer;background:#faf9f7;transition:all .2s;position:relative;" onclick="document.getElementById('imageFileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+        <div id="imageDropZone" style="border:2px dashed var(--admin-border);border-radius:10px;padding:1.25rem;text-align:center;cursor:pointer;background:rgba(255,255,255,0.03);transition:all .2s;position:relative;" onclick="document.getElementById('imageFileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
           <div id="dropZoneContent">
-            <i class="bi bi-cloud-arrow-up text-terracotta" style="font-size:2.2rem;"></i>
+            <i class="bi bi-cloud-arrow-up" style="font-size:2.2rem;color:var(--admin-accent);"></i>
             <p style="margin:.4rem 0 .2rem;font-size:.85rem;font-weight:700;color:var(--admin-text);">Click to upload from PC storage or drag &amp; drop image here</p>
             <p style="font-size:.75rem;color:var(--admin-muted);margin:0;">Supports JPG, PNG, WEBP files</p>
           </div>
@@ -163,14 +163,16 @@
         <label>Category</label>
         <select id="pCategoryId" class="form-control">
           <option value="">— Select Category —</option>
-          <option value="1">Aromatherapy Candles</option>
-          <option value="2">Knit Crafts</option>
-          <option value="3">Artisan Gift Sets</option>
+          <option value="1">Vintage Jackets &amp; Outerwear</option>
+          <option value="2">Streetwear Hoodies &amp; Sweaters</option>
+          <option value="3">Graphic &amp; Vintage Tees</option>
+          <option value="4">Cargo Pants &amp; Vintage Denim</option>
+          <option value="5">Caps, Bags &amp; Retro Accessories</option>
         </select>
       </div>
 
       <!-- Feature Toggles -->
-      <div class="form-group" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;background:#f9f8f6;padding:.75rem;border-radius:8px;">
+      <div class="form-group" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;background:rgba(255,255,255,0.04);border:1px solid var(--admin-border);padding:.75rem;border-radius:8px;">
         <label style="display:flex;align-items:center;gap:.5rem;margin:0;font-size:.85rem;cursor:pointer;">
           <input type="checkbox" id="pStockStatus" checked style="width:16px;height:16px;accent-color:var(--admin-accent);"> In Stock
         </label>
@@ -229,7 +231,7 @@
 
     tbody.innerHTML = filtered.map(p => {
       const isDiscounted = p.sale_price && p.sale_price > 0 && p.sale_price < p.price;
-      const categoryName = p.category ? (p.category.name || p.category) : (p.category_name || 'Artisan Craft');
+      const categoryName = p.category ? (p.category.name || p.category) : (p.category_name || 'Thrift Drop');
       const img = p.image_url || p.image || '';
 
       return `
