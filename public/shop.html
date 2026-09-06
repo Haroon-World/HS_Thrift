@@ -3,16 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Curated Thrift Drops | HS_Thrift</title>
-  <meta name="description" content="Browse curated vintage streetwear, 90s jackets, oversized hoodies, graphic tees, cargo pants & accessories. Hand-picked, steam-sanitized & graded for quality.">
+  <title>Shop All Curated Thrift Drops | HS_Thrift</title>
+  <meta name="description" content="Explore all curated thrift streetwear, vintage 90s jackets, hoodies, graphic tees, cargo pants, and retro accessories. Filter by category, size, condition, and price.">
   <meta name="theme-color" content="#0F172A">
-
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="HS_Thrift">
-  <meta property="og:title" content="Shop Curated Thrift Drops | HS_Thrift">
-  <meta property="og:description" content="Browse curated vintage streetwear, 90s jackets, oversized hoodies, graphic tees & more. WhatsApp order in 30 seconds.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1200&auto=format&fit=crop">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -28,9 +21,53 @@
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <!-- Theme -->
   <link rel="stylesheet" href="css/luxury-theme.css">
+
+  <style>
+    .cat-pill-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--color-obsidian);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .cat-pill-card:hover, .cat-pill-card.active {
+      border-color: var(--color-emerald-primary);
+      background: #F0FDF4;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16,185,129,0.12);
+    }
+    .cat-pill-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-cream-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--color-emerald-primary);
+      transition: all 0.2s ease;
+    }
+    .cat-pill-card:hover .cat-pill-icon, .cat-pill-card.active .cat-pill-icon {
+      background: var(--color-emerald-primary);
+      color: #FFFFFF;
+    }
+    .cat-pill-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+  </style>
 </head>
 <body>
 
@@ -49,29 +86,24 @@
     </div>
   </div>
 
-  <!-- Navbar -->
+  <!-- Unified Navbar -->
   <nav class="luxury-navbar" role="navigation" aria-label="Main navigation">
     <div class="container d-flex align-items-center justify-content-between gap-3">
 
       <a href="index.html" class="brand-logo-text text-decoration-none">
         HS<span class="thrift-highlight">_Thrift</span>
-        <span class="brand-badge-pill ms-1">NEW DROPS</span>
+        <span class="brand-badge-pill ms-1">SHOP HUB</span>
       </a>
 
-      <div class="d-none d-lg-flex align-items-center gap-1 flex-grow-1 justify-content-center">
+      <!-- Clean Unified Menu: All Shopping Material is Inside Shop -->
+      <div class="d-none d-lg-flex align-items-center gap-2 flex-grow-1 justify-content-center">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="shop.html" class="nav-link active">Shop All</a>
-        <a href="shop.html?category=vintage-jackets" class="nav-link">Jackets</a>
-        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies</a>
-        <a href="shop.html?category=retro-tees" class="nav-link">Tees</a>
+        <a href="shop.html" class="nav-link active fw-bold">Shop (All Drops)</a>
         <a href="about.html" class="nav-link">Our Story</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <div class="d-none d-md-block">
-          <input type="search" id="topSearchInput" class="form-control form-control-sm rounded-pill px-3" placeholder="Search drops…" style="max-width:180px; font-size:0.85rem;">
-        </div>
         <button type="button" class="navbar-icon-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
           <i class="bi bi-bag fs-6"></i>
           <span class="cart-badge-count js-cart-badge" style="display:none;">0</span>
@@ -90,82 +122,131 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
-      <nav class="d-flex flex-column gap-1">
+      <nav class="d-flex flex-column gap-2">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="shop.html" class="nav-link active fw-bold">Shop All</a>
-        <a href="shop.html?category=vintage-jackets" class="nav-link">Vintage Jackets</a>
-        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies & Sweaters</a>
-        <a href="shop.html?category=retro-tees" class="nav-link">Graphic Tees</a>
-        <a href="shop.html?category=denim-bottoms" class="nav-link">Cargo & Denim</a>
-        <a href="shop.html?category=thrift-accessories" class="nav-link">Accessories</a>
-        <a href="shop.html?under_999=1" class="nav-link fw-bold text-danger">🔥 Under Rs. 999 Steals</a>
-        <hr>
+        <a href="shop.html" class="nav-link active fw-bold">Shop (All Drops &amp; Collections)</a>
+        <hr class="my-2">
         <a href="about.html" class="nav-link">Our Story</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
     </div>
   </div>
 
-  <!-- Page Header -->
+  <!-- Shop Header Banner -->
   <section class="py-5" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
     <div class="container text-center text-white">
       <span class="badge mb-2 px-3 py-2 fw-bold rounded-pill" style="background:rgba(16, 185, 129, 0.2); color:var(--color-emerald-primary); border:1px solid rgba(16,185,129,0.3);">
-        <i class="bi bi-lightning-charge-fill me-1"></i> Fresh Thrift Drops
+        <i class="bi bi-lightning-charge-fill me-1"></i> All Drops in One Place
       </span>
-      <h1 class="font-heading fw-black display-5 mb-2" id="catalogHeading">Curated Thrift Collection</h1>
-      <p class="opacity-75 mx-auto mb-0" style="max-width: 580px; font-size:1rem;">
-        Every garment is hand-picked, steam-sanitized, and graded 9/10 or better. Unique vintage pieces at prices you won't find anywhere else.
+      <h1 class="font-heading fw-black display-5 mb-2">Curated Thrift Collection</h1>
+      <p class="opacity-75 mx-auto mb-0" style="max-width: 600px; font-size:1rem;">
+        Everything in one shop — jackets, hoodies, graphic tees, cargo denim &amp; accessories. Graded 9/10 or better, steam-sanitized, and ready to wear.
       </p>
     </div>
   </section>
 
-  <!-- Quick Filter Bar -->
+  <!-- Visual Category Carousel / Cards on Shop Page -->
+  <section class="py-4 bg-white border-bottom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h6 class="fw-bold text-uppercase fs-8 text-muted mb-0" style="letter-spacing:1px;">
+          <i class="bi bi-grid-fill me-1 text-success"></i> Browse Collections
+        </h6>
+        <span class="small text-muted" id="totalDropsCount">18 Curated Drops Available</span>
+      </div>
+
+      <div class="row g-2 g-md-3" id="categoryCardsGrid">
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card active js-cat-selector" data-cat="">
+            <div class="cat-pill-icon"><i class="bi bi-collection-fill"></i></div>
+            <div class="cat-pill-title">All Drops</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card js-cat-selector" data-cat="vintage-jackets">
+            <div class="cat-pill-icon"><i class="bi bi-tag-fill"></i></div>
+            <div class="cat-pill-title">Vintage Jackets</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card js-cat-selector" data-cat="graphic-hoodies">
+            <div class="cat-pill-icon"><i class="bi bi-fire"></i></div>
+            <div class="cat-pill-title">Hoodies &amp; Knits</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card js-cat-selector" data-cat="retro-tees">
+            <div class="cat-pill-icon"><i class="bi bi-award-fill"></i></div>
+            <div class="cat-pill-title">Graphic Tees</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card js-cat-selector" data-cat="denim-bottoms">
+            <div class="cat-pill-icon"><i class="bi bi-layers-fill"></i></div>
+            <div class="cat-pill-title">Cargo &amp; Denim</div>
+          </div>
+        </div>
+        <div class="col-4 col-md-2">
+          <div class="cat-pill-card js-cat-selector" data-cat="thrift-accessories">
+            <div class="cat-pill-icon"><i class="bi bi-stars"></i></div>
+            <div class="cat-pill-title">Accessories</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Quick Filter & Search Bar -->
   <div class="border-bottom bg-white py-3 sticky-top" style="top:70px; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
     <div class="container">
-      <div class="d-flex align-items-center gap-2 overflow-auto pb-1" id="quickFilterPills">
-        <button type="button" class="btn btn-sm rounded-pill px-3 fw-bold js-quick-filter active" data-filter="" style="white-space:nowrap;">
-          All Drops
-        </button>
-        <button type="button" class="btn btn-sm rounded-pill px-3 fw-bold js-quick-filter" data-filter="under_999" style="white-space:nowrap; background:#FEF3C7; color:#D97706; border:1px solid #FDE68A;">
-          🔥 Under Rs. 999
-        </button>
-        <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="vintage-jackets" style="white-space:nowrap;">
-          Jackets & Coats
-        </button>
-        <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="graphic-hoodies" style="white-space:nowrap;">
-          Hoodies & Sweaters
-        </button>
-        <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="retro-tees" style="white-space:nowrap;">
-          Graphic Tees
-        </button>
-        <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="denim-bottoms" style="white-space:nowrap;">
-          Cargo & Denim
-        </button>
-        <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="thrift-accessories" style="white-space:nowrap;">
-          Accessories
-        </button>
+      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+        
+        <!-- Quick Filter Pills -->
+        <div class="d-flex align-items-center gap-2 overflow-auto pb-1" id="quickFilterPills">
+          <button type="button" class="btn btn-sm rounded-pill px-3 fw-bold js-quick-filter active" data-filter="">
+            All Items
+          </button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 fw-bold js-quick-filter" data-filter="under_999" style="background:#FEF3C7; color:#D97706; border:1px solid #FDE68A;">
+            🔥 Under Rs. 999 Steals
+          </button>
+          <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="pristine">
+            ⭐ 10/10 Like New Only
+          </button>
+          <button type="button" class="btn btn-sm btn-light border rounded-pill px-3 fw-bold js-quick-filter" data-filter="sale">
+            🏷️ On Sale
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="d-flex align-items-center gap-2">
+          <div class="input-group input-group-sm" style="max-width:240px;">
+            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
+            <input type="search" id="topSearchInput" class="form-control border-start-0" placeholder="Search all drops…">
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Shop Main Content -->
-  <section class="py-5" style="background:var(--color-cream-bg); min-height:600px;">
+  <!-- Shop Main Content (All Shopping Material) -->
+  <section class="py-5" style="background:var(--color-cream-bg); min-height:700px;">
     <div class="container">
       <div class="row g-4">
 
         <!-- Sidebar Filters -->
         <div class="col-lg-3">
-          <div class="bg-white p-4 rounded-4 border shadow-sm sticky-top" style="top:140px;">
+          <div class="bg-white p-4 rounded-4 border shadow-sm sticky-top" style="top:145px;">
             <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
               <h5 class="fw-bold mb-0 fs-6 text-uppercase" style="letter-spacing:1px;">
-                <i class="bi bi-funnel me-1"></i> Filter Drops
+                <i class="bi bi-sliders me-1"></i> Filter Shop
               </h5>
               <button type="button" class="btn btn-link p-0 text-muted small text-decoration-none" id="resetFiltersBtn">Reset All</button>
             </div>
 
             <!-- Sort By -->
             <div class="mb-4">
-              <label class="form-label small fw-bold text-muted text-uppercase mb-1">Sort By</label>
+              <label class="form-label small fw-bold text-muted text-uppercase mb-1">Sort Drops</label>
               <select id="sortSelect" class="form-select form-select-sm rounded-3 fw-semibold">
                 <option value="newest">⚡ Newest Arrivals</option>
                 <option value="price_low">💰 Price: Low to High</option>
@@ -174,7 +255,7 @@
               </select>
             </div>
 
-            <!-- Categories -->
+            <!-- Categories Radio List -->
             <div class="mb-4">
               <label class="form-label small fw-bold text-muted text-uppercase mb-2">Category</label>
               <div id="categoryFiltersContainer" class="d-flex flex-column gap-2">
@@ -198,11 +279,11 @@
               </div>
             </div>
 
-            <!-- Condition Filter -->
+            <!-- Condition Rating Filter -->
             <div class="mb-4">
-              <label class="form-label small fw-bold text-muted text-uppercase mb-2">Condition</label>
+              <label class="form-label small fw-bold text-muted text-uppercase mb-2">Condition Grade</label>
               <select id="conditionSelect" class="form-select form-select-sm rounded-3">
-                <option value="">Any Condition (All 9+)</option>
+                <option value="">Any Condition Grade</option>
                 <option value="10/10">10/10 Like New / Pristine</option>
                 <option value="9.5/10">9.5/10 Excellent Mint</option>
                 <option value="9/10">9/10 Great Vintage</option>
@@ -210,11 +291,20 @@
             </div>
 
             <!-- In Stock Check -->
-            <div class="pt-2 border-top">
+            <div class="pt-3 border-top">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="inStockCheck" checked>
                 <label class="form-check-label small fw-semibold" for="inStockCheck">In-Stock Only</label>
               </div>
+            </div>
+
+            <!-- Direct Help -->
+            <div class="mt-4 p-3 rounded-3 border bg-light text-center">
+              <div class="small fw-bold mb-1">Looking for a specific piece?</div>
+              <div class="small text-muted mb-2">Ask on WhatsApp directly</div>
+              <a href="https://wa.me/92319715071" target="_blank" class="btn btn-sm btn-whatsapp w-100 fw-bold">
+                <i class="bi bi-whatsapp me-1"></i> 0319715071
+              </a>
             </div>
           </div>
         </div>
@@ -228,7 +318,10 @@
             </div>
             <div class="d-flex align-items-center gap-2">
               <span class="badge bg-light text-dark border small fw-semibold">
-                <i class="bi bi-shield-check text-success me-1"></i> Graded &amp; Sanitized
+                <i class="bi bi-shield-check text-success me-1"></i> Steam Sanitized
+              </span>
+              <span class="badge bg-light text-dark border small fw-semibold">
+                <i class="bi bi-lightning-fill text-warning me-1"></i> 1 of 1 Pieces
               </span>
             </div>
           </div>
@@ -278,7 +371,7 @@
     </div>
   </div>
 
-  <!-- Quick View Modal -->
+  <!-- Interactive Quick View Modal (All Details Right on the Shop Page) -->
   <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -305,6 +398,7 @@
                 <span class="text-muted text-decoration-line-through ms-2 fs-6" id="qvOriginalPrice"></span>
               </div>
               <p id="qvDescription" class="text-muted mb-3" style="font-size:0.92rem; line-height:1.65;"></p>
+              
               <div class="mb-4">
                 <div class="d-flex gap-2 flex-wrap">
                   <div class="p-2 px-3 rounded-2 border text-center" style="flex:1; min-width:100px;">
@@ -321,12 +415,17 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Action Buttons -->
               <div class="d-grid gap-2">
                 <button type="button" class="btn btn-luxury py-3 js-add-to-cart fw-bold" id="qvAddToCartBtn">
-                  <i class="bi bi-bag-plus me-2"></i>Add to Cart
+                  <i class="bi bi-bag-plus me-2"></i>Add to Bag
                 </button>
-                <a id="qvDetailLink" href="#" class="btn btn-luxury-outline py-2">
-                  View Full Details
+                <a id="qvWhatsAppBtn" href="https://wa.me/92319715071" target="_blank" class="btn btn-whatsapp py-3 fw-bold text-center">
+                  <i class="bi bi-whatsapp me-2"></i>Order Directly via WhatsApp
+                </a>
+                <a id="qvDetailLink" href="#" class="btn btn-luxury-outline py-2 fs-7 text-center">
+                  View Full Product Page
                 </a>
               </div>
             </div>
@@ -349,18 +448,18 @@
           </p>
           <div class="d-flex gap-2">
             <a href="https://wa.me/92319715071" class="btn btn-whatsapp px-3 py-2 fw-bold">
-              <i class="bi bi-whatsapp me-1"></i> WhatsApp Order
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp: 0319715071
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-6">
-          <h5>Shop</h5>
+          <h5>Shop Collections</h5>
           <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="shop.html">All Drops</a></li>
             <li><a href="shop.html?category=vintage-jackets">Vintage Jackets</a></li>
             <li><a href="shop.html?category=graphic-hoodies">Hoodies</a></li>
             <li><a href="shop.html?category=retro-tees">Graphic Tees</a></li>
-            <li><a href="shop.html?category=denim-bottoms">Cargo & Denim</a></li>
+            <li><a href="shop.html?category=denim-bottoms">Cargo &amp; Denim</a></li>
             <li><a href="shop.html?under_999=1" style="color:var(--color-amber-accent);">🔥 Under Rs. 999</a></li>
           </ul>
         </div>
@@ -414,6 +513,8 @@
     let currentCondition = '';
     let inStockOnly = true;
     let under999Only = false;
+    let pristineOnly = false;
+    let saleOnly = false;
     let allLoadedProducts = [];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -421,16 +522,14 @@
       const urlParams = new URLSearchParams(window.location.search);
       currentCategory = urlParams.get('category') || '';
       currentSearch = urlParams.get('q') || '';
-      if (urlParams.get('under_999') === '1') {
-        under999Only = true;
-      }
+      if (urlParams.get('under_999') === '1') under999Only = true;
       if (urlParams.get('sort')) {
         currentSort = urlParams.get('sort');
         const sortSel = document.getElementById('sortSelect');
         if (sortSel) sortSel.value = currentSort;
       }
 
-      // Search inputs
+      // Search input
       const topSearch = document.getElementById('topSearchInput');
       if (topSearch) {
         if (currentSearch) topSearch.value = currentSearch;
@@ -478,12 +577,15 @@
           currentCondition = '';
           inStockOnly = false;
           under999Only = false;
+          pristineOnly = false;
+          saleOnly = false;
           if (sortSelect) sortSelect.value = 'newest';
           if (condSelect) condSelect.value = '';
           if (inStockCheck) inStockCheck.checked = false;
           if (topSearch) topSearch.value = '';
           document.querySelectorAll('.js-size-btn').forEach(b => b.classList.toggle('active', b.dataset.size === ''));
           document.querySelectorAll('.js-quick-filter').forEach(b => b.classList.toggle('active', b.dataset.filter === ''));
+          document.querySelectorAll('.js-cat-selector').forEach(b => b.classList.toggle('active', b.dataset.cat === ''));
           const catAllRadio = document.getElementById('cat_all');
           if (catAllRadio) catAllRadio.checked = true;
           filterAndRenderProducts();
@@ -500,27 +602,49 @@
         });
       });
 
-      // Quick filter buttons
+      // Quick filter pills
       document.querySelectorAll('.js-quick-filter').forEach(btn => {
-        const filterVal = btn.dataset.filter;
-        if ((filterVal === 'under_999' && under999Only) || (filterVal === currentCategory)) {
-          document.querySelectorAll('.js-quick-filter').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-        }
         btn.addEventListener('click', () => {
+          const filterVal = btn.dataset.filter;
           document.querySelectorAll('.js-quick-filter').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
+
           if (filterVal === 'under_999') {
             under999Only = true;
-            currentCategory = '';
+            pristineOnly = false;
+            saleOnly = false;
+          } else if (filterVal === 'pristine') {
+            pristineOnly = true;
+            under999Only = false;
+            saleOnly = false;
+          } else if (filterVal === 'sale') {
+            saleOnly = true;
+            under999Only = false;
+            pristineOnly = false;
           } else {
             under999Only = false;
-            currentCategory = filterVal;
+            pristineOnly = false;
+            saleOnly = false;
           }
-          // sync radio
+          filterAndRenderProducts();
+        });
+      });
+
+      // Visual Category Card Selectors
+      document.querySelectorAll('.js-cat-selector').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const cat = card.dataset.cat;
+          currentCategory = cat;
+          document.querySelectorAll('.js-cat-selector').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          // Sync radio in sidebar
           const radio = document.querySelector(`input[name="categoryFilter"][value="${currentCategory}"]`);
           if (radio) radio.checked = true;
+
           filterAndRenderProducts();
+          window.scrollTo({ top: 380, behavior: 'smooth' });
         });
       });
 
@@ -554,9 +678,8 @@
           container.querySelectorAll('input[name="categoryFilter"]').forEach(radio => {
             radio.addEventListener('change', () => {
               currentCategory = radio.value;
-              under999Only = false;
-              document.querySelectorAll('.js-quick-filter').forEach(b => {
-                b.classList.toggle('active', b.dataset.filter === currentCategory);
+              document.querySelectorAll('.js-cat-selector').forEach(c => {
+                c.classList.toggle('active', c.dataset.cat === currentCategory);
               });
               filterAndRenderProducts();
             });
@@ -573,6 +696,8 @@
         const data = await res.json();
         if (data.success && Array.isArray(data.products)) {
           allLoadedProducts = data.products;
+          const countEl = document.getElementById('totalDropsCount');
+          if (countEl) countEl.textContent = `${allLoadedProducts.length} Curated Drops Available`;
           filterAndRenderProducts();
         } else {
           document.getElementById('productsGridContainer').innerHTML = `
@@ -600,6 +725,18 @@
         if (under999Only) {
           const effPrice = (p.sale_price && Number(p.sale_price) > 0) ? Number(p.sale_price) : Number(p.price);
           if (effPrice >= 1000) return false;
+        }
+
+        // Pristine 10/10 filter
+        if (pristineOnly) {
+          if (!p.condition_rating || !p.condition_rating.startsWith('10')) return false;
+        }
+
+        // Sale filter
+        if (saleOnly) {
+          const salePriceNum = Number(p.sale_price) || 0;
+          const priceNum = Number(p.price) || 0;
+          if (!(salePriceNum > 0 && salePriceNum < priceNum) && !p.is_on_sale) return false;
         }
 
         // Size filter
@@ -654,9 +791,9 @@
       const grid = document.getElementById('productsGridContainer');
       if (filtered.length === 0) {
         grid.innerHTML = `
-          <div class="col-12 text-center py-5">
+          <div class="col-12 text-center py-5 bg-white rounded-4 border p-5">
             <i class="bi bi-search display-3 text-muted opacity-50 mb-3 d-block"></i>
-            <h4 class="fw-bold">No thrift drops found</h4>
+            <h4 class="fw-bold">No thrift drops match your filters</h4>
             <p class="text-muted">Try clearing some filters or search for something else.</p>
             <button class="btn btn-luxury btn-sm mt-2" onclick="document.getElementById('resetFiltersBtn').click()">Show All Drops</button>
           </div>

@@ -364,6 +364,11 @@ function initQuickViewModal() {
     if (qvSize) qvSize.textContent = p.size || 'M';
     if (qvMaterials) qvMaterials.textContent = p.materials || 'Curated Thrift';
     if (qvDetailLink) qvDetailLink.href = `/product.html?slug=${p.slug || ''}`;
+    const qvWaBtn = document.getElementById('qvWhatsAppBtn');
+    if (qvWaBtn) {
+      const waText = encodeURIComponent(`Hi HS_Thrift! I want to order this piece:\n\n👕 Item: ${p.name}\n📏 Size: ${p.size || 'M'}\n⭐ Condition: ${p.condition_rating || '9.5/10'}\n💰 Price: ${formatPKR(effectivePrice)}\n\nPlease confirm availability!`);
+      qvWaBtn.href = `https://wa.me/92319715071?text=${waText}`;
+    }
     if (addBtn) {
       addBtn.dataset.productId = p.id;
       addBtn.dataset.productObj = JSON.stringify({ id: p.id, name: p.name, slug: p.slug, price: effectivePrice, effective_price: effectivePrice, image_url: p.image_url || p.image, stock_status: p.stock_status, condition_rating: p.condition_rating, size: p.size });
@@ -470,9 +475,9 @@ function renderProductCardHTML(p) {
         </div>
 
         <div class="product-action-bar mt-3">
-          <a href="/product.html?slug=${p.slug}" class="btn-card-action">
-            <i class="bi bi-eye"></i> View
-          </a>
+          <button type="button" class="btn-card-action js-quickview-btn" data-product-id="${p.id}" data-product-obj='${productObj}'>
+            <i class="bi bi-eye"></i> Quick View
+          </button>
           ${!isOutOfStock ? `
             <button type="button" class="btn-card-action btn-card-primary js-add-to-cart" data-product-id="${p.id}" data-product-obj='${productObj}'>
               <i class="bi bi-bag-plus"></i> Add
