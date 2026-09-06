@@ -472,8 +472,9 @@ img { max-width: 100%; height: auto; }
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
-  flex-column: column;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
   transition: var(--transition-smooth);
   position: relative;
 }
@@ -484,14 +485,18 @@ img { max-width: 100%; height: auto; }
 }
 .product-image-container {
   position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1.15;
+  min-height: 260px;
   background-color: var(--color-surface-subtle);
   overflow: hidden;
+  flex-shrink: 0;
 }
 .product-image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.5s ease;
 }
 .product-card:hover .product-image-container img {

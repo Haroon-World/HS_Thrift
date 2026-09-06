@@ -448,7 +448,7 @@ function renderProductCardHTML(p) {
   return `
     <div class="product-card h-100">
       <div class="product-image-container">
-        <img src="${imgSrc}" alt="${p.name}" loading="lazy">
+        <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop';">
 
         <span class="badge-condition ${isPristine ? 'cond-pristine' : 'cond-mint'}">
           <i class="bi bi-patch-check-fill"></i> ${cond}
