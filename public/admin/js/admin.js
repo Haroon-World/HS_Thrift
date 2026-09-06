@@ -1,7 +1,6 @@
 /**
- * admin.js — Shared JS for the Hand & Heart Admin Panel (Pakistan Market)
+ * admin.js — Shared JS for the HS_Thrift Admin Panel
  * Handles: JWT auth guard, API calls, store settings, order state, utilities
- * Single Source of Truth: Neon PostgreSQL via Backend Serverless APIs.
  */
 
 'use strict';

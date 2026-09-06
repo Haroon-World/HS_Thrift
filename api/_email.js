@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
  * without throwing an exception to ensure order creation flow never breaks.
  */
 async function sendAdminOrderNotificationEmail(orderData) {
-  const adminEmail = process.env.ADMIN_EMAIL || 'handandheart09@gmail.com';
+  const adminEmail = process.env.ADMIN_EMAIL || 'hsthrift59@gmail.com';
   const resendApiKey = process.env.RESEND_API_KEY;
   const host = process.env.SMTP_HOST;
   const port = parseInt(process.env.SMTP_PORT) || 587;
@@ -39,7 +39,7 @@ async function sendAdminOrderNotificationEmail(orderData) {
   const isCOD = payment_method === 'COD';
   const payInstructionsText = isCOD 
     ? 'Your order will be processed shortly for Cash on Delivery.' 
-    : 'Please complete your payment using your preferred bank/Easypaisa/JazzCash account and send the payment screenshot to us on WhatsApp so that we can verify your payment and proceed with your order.';
+    : 'Please complete your payment using your preferred bank/Easypaisa/JazzCash account and send the payment screenshot to us on WhatsApp (+92 319 715071) so that we can verify your payment and proceed with your order.';
 
   let itemsText = '';
   let itemsHtml = '';
@@ -56,13 +56,13 @@ async function sendAdminOrderNotificationEmail(orderData) {
     </tr>`;
   });
 
-  const waPreWrittenMsg = `Hello ${customer_name || 'Valued Customer'}! ❤️
+  const waPreWrittenMsg = `Hello ${customer_name || 'Valued Customer'}! 🔥
 
-Thank you for your order #${order_id} from Hand & Heart Studio.
+Thank you for your order #${order_id} from HS_Thrift.
 
 Payment Method: ${paymentMethodLabel}
 Payment Status: UNPAID
-Order Total: PKR ${Number(total_amount).toLocaleString('en-US')}
+Order Total: Rs. ${Number(total_amount).toLocaleString('en-US')}
 
 Order Details:
 ${itemsText}
@@ -71,19 +71,19 @@ ${customer_address || 'Provided address'}
 
 ${payInstructionsText}
 
-Crafted by Hand, Made with Heart by Daim Afzal.`;
+HS_Thrift — Curated Streetwear & Vintage Finds.`;
 
   const waLink = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waPreWrittenMsg)}` : '#';
 
   const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL 
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` 
-    : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://handandheartpk.vercel.app');
+    : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
   const adminOrderUrl = `${baseUrl}/admin/orders.html?id=${order_id}`;
 
-  const subject = `🛍️ New Order Notification — #${order_id} | Hand & Heart Studio`;
+  const subject = `🛍️ New Order Notification — #${order_id} | HS_Thrift`;
 
   const textContent = `
-NEW ORDER RECEIVED — Hand & Heart Studio
+NEW ORDER RECEIVED — HS_Thrift
 
 Order ID: #${order_id}
 Date/Time: ${formattedDate}

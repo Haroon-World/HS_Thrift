@@ -163,7 +163,7 @@ async function ensureSchema() {
           customer_data_retention_days INTEGER NOT NULL DEFAULT 45,
           standard_shipping_fee INTEGER NOT NULL DEFAULT 200,
           free_shipping_threshold INTEGER NOT NULL DEFAULT 3500,
-          online_payment_instructions TEXT DEFAULT 'Please send payment screenshot on official WhatsApp (+92 312 4894571) with your Order ID.',
+          online_payment_instructions TEXT DEFAULT 'Please send payment screenshot on official WhatsApp (+92 319 715071) with your Order ID.',
           city_shipping_rates JSONB DEFAULT '${DEFAULT_CITY_RATES}',
           promo_popup_enabled BOOLEAN DEFAULT false,
           promo_popup_title TEXT,
@@ -220,7 +220,7 @@ async function ensureSchema() {
         );
 
         INSERT INTO settings (id, customer_data_retention_days, standard_shipping_fee, free_shipping_threshold, online_payment_instructions, city_shipping_rates)
-        VALUES (1, 45, 200, 3500, 'Please send payment screenshot on official WhatsApp (+92 312 4894571) with your Order ID.', '${DEFAULT_CITY_RATES}')
+        VALUES (1, 45, 200, 3500, 'Please send payment screenshot on official WhatsApp (+92 319 715071) with your Order ID.', '${DEFAULT_CITY_RATES}')
         ON CONFLICT (id) DO NOTHING;
       `);
       schemaInitialized = true;
@@ -384,7 +384,7 @@ async function ensureSchema() {
     if (!setRow) {
       db.prepare(`
         INSERT INTO settings (id, customer_data_retention_days, standard_shipping_fee, free_shipping_threshold, online_payment_instructions, city_shipping_rates)
-        VALUES (1, 45, 200, 3500, 'Please send payment screenshot on official WhatsApp (+92 312 4894571) with your Order ID.', ?)
+        VALUES (1, 45, 200, 3500, 'Please send payment screenshot on official WhatsApp (+92 319 715071) with your Order ID.', ?)
       `).run(DEFAULT_CITY_RATES);
     }
 

@@ -27,7 +27,7 @@ const handler = async (event) => {
       let settings = {
         standard_shipping_fee: 200,
         free_shipping_threshold: 3500,
-        online_payment_instructions: 'Please transfer the payment via Easypaisa / JazzCash / Bank Transfer and send screenshot to our WhatsApp (+92 312 4894571) along with your Order ID.',
+        online_payment_instructions: 'Please transfer the payment via Easypaisa / JazzCash / Bank Transfer and send screenshot to our WhatsApp (+92 319 715071) along with your Order ID.',
         city_shipping_rates: [
           { city: "Lahore", rate: 200 },
           { city: "Karachi", rate: 250 },

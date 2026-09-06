@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details | Hand &amp; Heart Studio</title>
-  <meta name="description" content="Artisan handcraft details. Materials, dimensions, and ordering directly via WhatsApp.">
-  <!-- Favicon & Preload Assets -->
-  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <title>Product Details | HS_Thrift</title>
+  <meta name="description" content="View curated thrift details, condition rating, sizing, measurements, and order directly on WhatsApp.">
+  <meta name="theme-color" content="#0F172A">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="HS_Thrift">
+  <meta property="og:type" content="product">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Theme -->
   <link rel="stylesheet" href="css/luxury-theme.css">
-  <meta name="theme-color" content="#3b2820">
-  <meta property="og:type" content="product">
-  <meta property="og:site_name" content="Hand &amp; Heart Studio">
-  <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json" id="productSchemaJson"></script>
 </head>
 <body>
 
@@ -31,10 +35,10 @@
   <div class="top-bar">
     <div class="container top-bar-grid fs-7">
       <div class="d-none d-md-flex align-items-center gap-1">
-        <i class="bi bi-whatsapp text-success me-1"></i> Order via WhatsApp — fast &amp; easy
+        <i class="bi bi-whatsapp text-success me-1"></i> WhatsApp Order: <a href="https://wa.me/92319715071" class="text-white text-decoration-none fw-semibold ms-1">0319715071</a>
       </div>
       <div class="text-center" id="topBarFreeShippingText">
-        <i class="bi bi-truck me-1"></i> Free shipping on orders above PKR 10,000
+        <i class="bi bi-truck me-1"></i> Free shipping on orders above Rs. 3,500
       </div>
       <div class="d-none d-md-flex align-items-center justify-content-end gap-3">
         <a href="contact.html">Contact Us</a>
@@ -43,144 +47,182 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="luxury-navbar" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand me-auto d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+  <nav class="luxury-navbar" role="navigation" aria-label="Main navigation">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
 
-      <ul class="navbar-nav d-none d-lg-flex flex-row align-items-center mx-auto mb-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
+      <a href="index.html" class="brand-logo-text text-decoration-none">
+        HS<span class="thrift-highlight">_Thrift</span>
+        <span class="brand-badge-pill ms-1">NEW DROPS</span>
+      </a>
 
-      <div class="d-none d-lg-flex align-items-center gap-2 ms-3">
-        <form action="shop.html" method="GET" role="search">
-          <input type="search" name="q" class="nav-search-input" placeholder="Search products…">
-        </form>
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
-        </button>
+      <div class="d-none d-lg-flex align-items-center gap-1 flex-grow-1 justify-content-center">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Tees</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </div>
 
-      <div class="d-flex d-lg-none align-items-center gap-1 ms-2">
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
+      <div class="d-flex align-items-center gap-2">
+        <a href="shop.html" class="navbar-icon-btn" title="Search">
+          <i class="bi bi-search fs-6"></i>
+        </a>
+        <button type="button" class="navbar-icon-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
+          <i class="bi bi-bag fs-6"></i>
+          <span class="cart-badge-count js-cart-badge" style="display:none;">0</span>
         </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
-          <i class="bi bi-list"></i>
+        <button class="d-lg-none navbar-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Menu">
+          <i class="bi bi-list fs-5"></i>
         </button>
-      </div>
-
-      <div class="collapse navbar-collapse w-100" id="mobileNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        </ul>
-        <div class="nav-mobile-footer">
-          <form action="shop.html" method="GET" class="flex-grow-1">
-            <input type="search" name="q" class="form-control rounded-pill px-3 py-2 fs-7" placeholder="Search products…">
-          </form>
-        </div>
       </div>
     </div>
   </nav>
 
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header border-bottom">
+      <span class="brand-logo-text">HS<span class="thrift-highlight">_Thrift</span></span>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="d-flex flex-column gap-1">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link fw-bold">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Vintage Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies & Sweaters</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Graphic Tees</a>
+        <a href="shop.html?category=denim-bottoms" class="nav-link">Cargo & Denim</a>
+        <a href="shop.html?category=thrift-accessories" class="nav-link">Accessories</a>
+        <hr>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </div>
+
   <!-- Breadcrumb -->
-  <div class="bg-ivory py-3 border-bottom border-beige">
+  <div class="border-bottom bg-white py-3">
     <div class="container fs-7" id="productBreadcrumb">
-      <a href="index.html" class="text-muted">Home</a>
+      <a href="index.html" class="text-muted text-decoration-none">Home</a>
       <span class="mx-2 text-muted">/</span>
-      <a href="shop.html" class="text-muted">Shop</a>
+      <a href="shop.html" class="text-muted text-decoration-none">Shop</a>
       <span class="mx-2 text-muted">/</span>
       <span class="fw-bold text-dark" id="breadcrumbProductName">Product Details</span>
     </div>
   </div>
 
-  <!-- Product Detail Section (Dynamic API Load with Fallback) -->
-  <section class="page-section" id="productDetailSection">
+  <!-- Product Detail Section -->
+  <section class="py-5" style="background:var(--color-cream-bg); min-height:650px;" id="productDetailSection">
     <div class="container">
       <div id="productDetailContainer">
         <!-- Loading State -->
         <div class="text-center py-5">
-          <div class="spinner-border text-terracotta" role="status"><span class="visually-hidden">Loading...</span></div>
-          <p class="text-muted mt-3 font-heading">Loading product details…</p>
+          <div class="spinner-border text-muted" role="status" style="width:2.5rem; height:2.5rem;"></div>
+          <p class="text-muted mt-3 fw-semibold">Loading thrift piece details…</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Cart Offcanvas Drawer -->
+  <!-- Cart Drawer -->
   <div class="offcanvas offcanvas-end luxury-offcanvas" tabindex="-1" id="cartDrawer">
     <div class="offcanvas-header border-bottom py-3">
-      <h5 class="offcanvas-title font-heading fs-4">Shopping Cart</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <h5 class="fw-bold fs-5 mb-0"><i class="bi bi-bag me-2"></i>Shopping Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
       <div id="cartDrawerItems" class="flex-grow-1 overflow-auto"></div>
       <div class="border-top pt-4 mt-auto">
         <div class="d-flex justify-content-between mb-2 fs-6">
-          <span>Subtotal</span>
+          <span class="fw-semibold">Subtotal</span>
           <span id="cartDrawerSubtotal" class="fw-bold">Rs. 0</span>
         </div>
         <div class="d-flex justify-content-between mb-3 text-muted small">
-          <span>Shipping Fee</span>
-          <span>To be calculated via WhatsApp</span>
+          <span>Shipping</span>
+          <span id="shippingThresholdNote">Calculated at checkout</span>
         </div>
-        <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">Proceed to Checkout</a>
+        <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">
+          Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i>
+        </a>
         <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Cart</a>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="luxury-footer">
+  <footer class="footer-section">
     <div class="container">
-      <div class="footer-bottom text-center d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-        <div>&copy; 2026 Hand &amp; Heart Studio. All rights reserved.</div>
-        <div class="footer-social-links" style="justify-content:center;">
-          <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="brand-logo-text mb-3">
+            HS<span class="thrift-highlight">_Thrift</span>
+          </div>
+          <p class="opacity-75 mb-4" style="max-width:320px;">
+            Pakistan's premier curated thrift destination. Hand-picked, graded, and steam-sanitized vintage streetwear at prices that actually make sense.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/92319715071" class="btn btn-whatsapp px-3 py-2 fw-bold">
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp Order
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h5>Shop</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="shop.html">All Drops</a></li>
+            <li><a href="shop.html?category=vintage-jackets">Vintage Jackets</a></li>
+            <li><a href="shop.html?category=graphic-hoodies">Hoodies</a></li>
+            <li><a href="shop.html?category=retro-tees">Graphic Tees</a></li>
+            <li><a href="shop.html?category=denim-bottoms">Cargo & Denim</a></li>
+            <li><a href="shop.html?under_999=1" style="color:var(--color-amber-accent);">🔥 Under Rs. 999</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h5>Info</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Get in Touch</h5>
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-whatsapp text-success fs-5"></i>
+              <a href="https://wa.me/92319715071" class="fw-semibold">0319715071</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope fs-5" style="color:var(--color-emerald-primary);"></i>
+              <a href="mailto:hsthrift59@gmail.com">hsthrift59@gmail.com</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt fs-5" style="color:var(--color-amber-accent);"></i>
+              <span class="opacity-75">Pakistan — Nationwide Delivery</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0 opacity-60">&copy; 2026 HS_Thrift. All rights reserved.</p>
+        <div class="d-flex gap-3 opacity-60">
+          <span>Curated · Graded · Sustainable</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
 
   <script>
-    const FALLBACK_PRODUCT = {
-      id: 1,
-      name: 'Hand-Poured Soy Candle',
-      tagline: 'Pure Soy Wax & Lavender Essential Oil',
-      description: 'Hand-poured in small batches using 100% natural soy wax, lead-free cotton wicks, and pure essential oils for a clean, comforting burn.',
-      price: 95000,
-      effective_price: 95000,
-      image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=1000&auto=format&fit=crop',
-      category: { name: 'Aromatherapy Candles' },
-      stock_status: true,
-      crafted_time_hours: 4,
-      materials: 'Natural Soy Wax, Lavender & Vanilla Essential Oils',
-      scent_notes: 'Top notes of Lavender, base notes of Warm Vanilla'
-    };
-
     document.addEventListener('DOMContentLoaded', async () => {
       const urlParams = new URLSearchParams(window.location.search);
       let slug = urlParams.get('slug');
       let id = urlParams.get('id');
-
-      if (!slug && !id) {
-        const pathParts = window.location.pathname.split('/product/');
-        if (pathParts.length > 1 && pathParts[1]) {
-          slug = decodeURIComponent(pathParts[1].replace('.html', '').trim());
-        }
-      }
 
       const container = document.getElementById('productDetailContainer');
       const breadcrumbName = document.getElementById('breadcrumbProductName');
@@ -205,26 +247,25 @@
           const listData = await listRes.json();
           if (listData.success && Array.isArray(listData.products) && listData.products.length > 0) {
             if (slug) {
-              p = listData.products.find(item => item.slug === slug || item.slug.includes(slug));
+              p = listData.products.find(item => item.slug === slug);
             } else if (id) {
               p = listData.products.find(item => String(item.id) === String(id));
             }
-            if (!p && listData.products.length > 0) {
-              p = listData.products[0];
-            }
+            if (!p) p = listData.products[0];
             rel = listData.products.filter(item => item.id !== p.id).slice(0, 4);
           }
         }
       } catch (err) {
-        console.error('Error fetching product details:', err);
+        console.error('Error fetching product:', err);
       }
 
       if (!p) {
         container.innerHTML = `
-          <div class="text-center py-5">
-            <i class="bi bi-exclamation-triangle display-4 text-danger opacity-75"></i>
-            <h4 class="font-heading mt-3 text-dark">Unable to load product details. Please try again.</h4>
-            <a href="shop.html" class="btn btn-luxury-outline mt-3"><i class="bi bi-arrow-left me-1"></i> Back to Shop</a>
+          <div class="text-center py-5 bg-white rounded-4 border p-5">
+            <i class="bi bi-exclamation-triangle display-4 text-warning mb-3 d-block"></i>
+            <h4 class="fw-bold">Thrift piece not found</h4>
+            <p class="text-muted">This piece may have already sold out or been removed.</p>
+            <a href="shop.html" class="btn btn-luxury mt-2"><i class="bi bi-arrow-left me-1"></i> Browse Other Drops</a>
           </div>
         `;
         return;
@@ -234,140 +275,186 @@
       const effectivePrice = isDiscounted ? p.sale_price : (p.effective_price || p.price);
       p.effective_price = effectivePrice;
       p.is_on_sale = isDiscounted;
+      const cond = p.condition_rating || '9.5/10';
+      const size = p.size || 'M';
+      const isOutOfStock = p.stock_status === false;
+      const catName = p.category ? (p.category.name || p.category) : (p.category_name || 'Curated Thrift');
+      const imgSrc = p.image_url || p.image || 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800';
 
-      document.title = `${p.name} | Hand & Heart`;
+      document.title = `${p.name} | HS_Thrift`;
       if (breadcrumbName) breadcrumbName.textContent = p.name;
 
-      const schemaEl = document.getElementById('productSchemaJson');
-      if (schemaEl) {
-        schemaEl.textContent = JSON.stringify({
-          "@context": "https://schema.org/",
-          "@type": "Product",
-          "name": p.name,
-          "image": [p.image],
-          "description": p.description || p.short_description || p.name,
-          "brand": { "@type": "Brand", "name": "Hand & Heart Studio" },
-          "offers": {
-            "@type": "Offer",
-            "url": window.location.href,
-            "priceCurrency": "PKR",
-            "price": p.effective_price,
-            "availability": p.stock_status !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
-          }
-        });
-      }
+      const productJSON = JSON.stringify({
+        id: p.id, name: p.name, slug: p.slug, price: effectivePrice,
+        effective_price: effectivePrice, image_url: imgSrc, stock_status: p.stock_status,
+        condition_rating: cond, size: size
+      }).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
 
-      const isOutOfStock = p.stock_status === false;
-      const productJSON = JSON.stringify(p).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+      const waMsg = encodeURIComponent(`Hi HS_Thrift! I want to order this piece:\n\n👕 Item: ${p.name}\n📏 Size: ${size}\n⭐ Condition: ${cond}\n💰 Price: ${formatPKR(effectivePrice)}\n🔗 Link: ${window.location.href}\n\nPlease confirm availability!`);
+      const waOrderLink = `https://wa.me/92319715071?text=${waMsg}`;
 
       let html = `
         <div class="row g-5">
           <!-- Image Gallery -->
           <div class="col-lg-6">
-            <div class="bg-white p-3 rounded-4 border border-beige shadow-sm">
-              <div class="rounded-4 overflow-hidden mb-3 bg-ivory text-center position-relative">
-                <img id="mainProductImage" src="${p.image}" alt="${p.name}" class="img-fluid w-100 object-fit-cover" style="max-height: 540px; aspect-ratio: 4/5;">
-                ${isOutOfStock ? `<div class="out-of-stock-overlay"><span class="out-of-stock-label">Out of Stock</span></div>` : ''}
+            <div class="bg-white p-3 rounded-4 border shadow-sm">
+              <div class="rounded-4 overflow-hidden position-relative" style="background:#F1F5F9; aspect-ratio:4/5;">
+                <img id="mainProductImage" src="${imgSrc}" alt="${p.name}" class="img-fluid w-100 h-100" style="object-fit:cover;">
+                
+                <span class="badge-condition cond-pristine" style="top:16px; left:16px; font-size:0.9rem; padding:8px 14px;">
+                  <i class="bi bi-patch-check-fill"></i> ${cond} Condition
+                </span>
+
+                ${size ? `<span class="badge-size" style="top:16px; right:16px; font-size:0.9rem; padding:6px 14px;">${size}</span>` : ''}
+
+                ${isOutOfStock ? `
+                  <div class="position-absolute d-flex align-items-center justify-content-center" style="inset:0; background:rgba(255,255,255,0.85);">
+                    <span class="badge bg-secondary fs-5 px-4 py-2 rounded-pill">Sold Out</span>
+                  </div>
+                ` : ''}
               </div>
             </div>
           </div>
 
           <!-- Info & Actions -->
           <div class="col-lg-6">
-            <div class="ps-lg-3">
-              ${(() => {
-                const catName = p.category ? (p.category.name || p.category) : (p.category_name || 'Handicraft');
-                return `<div class="d-flex align-items-center gap-2 mb-3"><span class="product-category-badge"><i class="bi bi-tag-fill"></i> ${catName}</span></div>`;
-              })()}
-
-              <h1 class="font-heading display-4 mb-2">${p.name}</h1>
-              ${p.tagline ? `<p class="fs-5 text-muted fst-italic mb-3">${p.tagline}</p>` : ''}
-
-              <div class="d-flex align-items-center gap-3 mb-4">
-                <div class="fs-2 fw-bold text-dark">
-                  ${formatRupiah(p.effective_price)}
-                </div>
-                ${p.is_on_sale ? `
-                  <div class="fs-5 text-muted text-decoration-line-through">${formatRupiah(p.price)}</div>
-                  <span class="badge bg-danger text-white rounded-pill px-2 py-1 small">Save ${formatRupiah(p.price - p.sale_price)}</span>
+            <div class="ps-lg-2">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small fw-semibold">
+                  <i class="bi bi-tag-fill me-1 text-success"></i> ${catName}
+                </span>
+                ${!isOutOfStock ? `
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 rounded-pill small fw-bold">
+                    <i class="bi bi-lightning-charge-fill me-1"></i> ONLY 1 PIECE AVAILABLE
+                  </span>
                 ` : ''}
               </div>
 
-              <hr class="my-4">
+              <h1 class="fw-black fs-2 mb-2" style="font-family:var(--font-heading);">${p.name}</h1>
+              ${p.tagline ? `<p class="text-muted fw-semibold mb-3">${p.tagline}</p>` : ''}
 
-              <div class="bg-ivory p-4 rounded-4 border border-beige mb-4">
-                <div class="row g-3 text-center">
-                  <div class="col-4 border-end border-beige">
-                    <i class="bi bi-clock-history fs-3 text-terracotta d-block mb-1"></i>
-                    <div class="fw-bold fs-6 text-dark">${p.crafted_time_hours || 4} Hours</div>
-                    <div class="small text-muted">Craft Time</div>
+              <!-- Pricing -->
+              <div class="d-flex align-items-baseline gap-3 mb-4">
+                <div class="fs-2 fw-black" style="color:var(--color-obsidian); font-family:var(--font-heading);">
+                  ${formatPKR(effectivePrice)}
+                </div>
+                ${isDiscounted ? `
+                  <div class="fs-5 text-muted text-decoration-line-through">${formatPKR(p.price)}</div>
+                  <span class="badge bg-danger rounded-pill px-3 py-1 fs-7 fw-bold">
+                    SAVE ${formatPKR(p.price - effectivePrice)}
+                  </span>
+                ` : ''}
+              </div>
+
+              <!-- Thrift Condition Box -->
+              <div class="thrift-condition-box mb-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div>
+                    <div class="fw-bold fs-6">Quality &amp; Condition Rating</div>
+                    <div class="small text-muted">Personally inspected &amp; graded by HS_Thrift</div>
                   </div>
-                  <div class="col-4 border-end border-beige">
-                    <i class="bi bi-box-seam fs-3 text-terracotta d-block mb-1"></i>
-                    <div class="fw-bold fs-6 text-dark">Limited Edition</div>
-                    <div class="small text-muted">Handmade</div>
+                  <span class="condition-badge-large">
+                    <i class="bi bi-patch-check-fill me-1"></i> ${cond}
+                  </span>
+                </div>
+                <div class="d-flex gap-3 flex-wrap pt-2 border-top">
+                  <div class="d-flex align-items-center gap-1 small text-muted">
+                    <i class="bi bi-check-circle-fill text-success"></i> Steam Sanitized
                   </div>
-                  <div class="col-4">
-                    <i class="bi bi-gift fs-3 text-terracotta d-block mb-1"></i>
-                    <div class="fw-bold fs-6 text-dark">Ready to Ship</div>
-                    <div class="small text-muted">Gift Packed</div>
+                  <div class="d-flex align-items-center gap-1 small text-muted">
+                    <i class="bi bi-check-circle-fill text-success"></i> No Tears / Odor
+                  </div>
+                  <div class="d-flex align-items-center gap-1 small text-muted">
+                    <i class="bi bi-check-circle-fill text-success"></i> Authentic Quality
                   </div>
                 </div>
               </div>
 
-              <p class="text-muted fs-6 mb-4">${p.description}</p>
+              <!-- Description -->
+              <p class="text-muted mb-4" style="line-height:1.75; font-size:0.95rem;">
+                ${p.description || 'Rare curated thrift find in top condition. Ready to wear.'}
+              </p>
 
-              <!-- Quantity & Add to Cart -->
-              <div class="d-flex align-items-center gap-3 mb-4">
+              <!-- Actions Group -->
+              <div class="d-grid gap-2 mb-4">
                 ${!isOutOfStock ? `
-                  <div class="quantity-picker p-1">
-                    <button type="button" class="quantity-btn" onclick="let i=document.getElementById('productQtyInput'); i.value=Math.max(1, parseInt(i.value)-1);">-</button>
-                    <input type="text" id="productQtyInput" class="quantity-input" value="1" readonly aria-label="Quantity">
-                    <button type="button" class="quantity-btn" onclick="let i=document.getElementById('productQtyInput'); i.value=parseInt(i.value)+1;">+</button>
-                  </div>
-                  <button type="button" id="mainAddToCartBtn" class="btn btn-luxury flex-grow-1 py-3 js-add-to-cart" data-product-id="${p.id}" data-product-obj='${productJSON}'>
-                    <i class="bi bi-bag-plus me-2"></i> Add to Cart
+                  <button type="button" id="mainAddToCartBtn" class="btn btn-luxury py-3 fs-6 fw-bold js-add-to-cart" data-product-id="${p.id}" data-product-obj='${productJSON}'>
+                    <i class="bi bi-bag-plus me-2"></i> Add to Bag
                   </button>
+                  <a href="${waOrderLink}" target="_blank" rel="noopener" class="btn btn-whatsapp py-3 fs-6 fw-bold text-center">
+                    <i class="bi bi-whatsapp me-2"></i> Order Directly via WhatsApp
+                  </a>
                 ` : `
-                  <button type="button" class="btn btn-luxury-dark flex-grow-1 py-3" disabled>
-                    <i class="bi bi-slash-circle me-2"></i> Out of Stock
+                  <button type="button" class="btn btn-secondary py-3 fs-6" disabled>
+                    <i class="bi bi-slash-circle me-2"></i> Sold Out
                   </button>
                 `}
               </div>
 
-              <!-- Trust Badges -->
-              <div class="border-top border-beige pt-3 d-flex flex-wrap gap-4 text-muted small">
-                <div><i class="bi bi-whatsapp text-terracotta me-1"></i> Easy WhatsApp Checkout</div>
-                <div><i class="bi bi-truck text-terracotta me-1"></i> Nationwide Shipping</div>
-                <div><i class="bi bi-shield-check text-terracotta me-1"></i> 100% Handmade</div>
+              <!-- Perks -->
+              <div class="border rounded-3 p-3 bg-white d-flex flex-column gap-2 text-muted small">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-truck text-success fs-6"></i>
+                  <span>Nationwide Courier Delivery across Pakistan (Standard Rs. 200 / Free above Rs. 3,500)</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-cash-stack text-success fs-6"></i>
+                  <span>Cash on Delivery (COD) &amp; Advance EasyPaisa / JazzCash accepted</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-shield-check text-success fs-6"></i>
+                  <span>100% money-back condition guarantee if not as described</span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
 
-        <!-- Specs Tab -->
+        <!-- Specifications & Measurements -->
         <div class="mt-5 pt-4">
-          <div class="max-w-2xl mx-auto p-4 bg-white rounded-4 border border-beige shadow-sm" style="max-width: 800px;">
-            <h4 class="font-heading mb-3">Details &amp; Materials</h4>
-            <table class="table table-borderless table-striped align-middle">
-              <tbody>
-                <tr><td class="fw-bold text-dark" style="width: 200px;">Main Materials:</td><td class="text-muted">${p.materials || 'Natural Materials'}</td></tr>
-                ${p.dimensions ? `<tr><td class="fw-bold text-dark">Dimensions:</td><td class="text-muted">${p.dimensions}</td></tr>` : ''}
-                ${p.scent_notes ? `<tr><td class="fw-bold text-dark">Scent Notes:</td><td class="text-muted">${p.scent_notes}</td></tr>` : ''}
-                ${p.yarn_type ? `<tr><td class="fw-bold text-dark">Yarn Type:</td><td class="text-muted">${p.yarn_type}</td></tr>` : ''}
-                ${p.care_instructions ? `<tr><td class="fw-bold text-dark">Care Instructions:</td><td class="text-muted">${p.care_instructions}</td></tr>` : ''}
-              </tbody>
-            </table>
+          <div class="bg-white p-4 p-md-5 rounded-4 border shadow-sm mx-auto" style="max-width: 800px;">
+            <h4 class="fw-bold mb-4" style="font-family:var(--font-heading);"><i class="bi bi-rulers me-2 text-success"></i> Measurements &amp; Garment Details</h4>
+            <div class="table-responsive">
+              <table class="table table-borderless table-striped align-middle mb-0">
+                <tbody>
+                  <tr>
+                    <td class="fw-bold text-dark" style="width: 220px;">Size Label</td>
+                    <td><span class="badge bg-dark px-3 py-2 rounded-pill fw-bold">${size}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold text-dark">Condition Rating</td>
+                    <td><strong class="text-success">${cond}</strong> (Excellent vintage condition)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold text-dark">Materials / Fabric</td>
+                    <td class="text-muted">${p.materials || 'Curated Cotton / Blend'}</td>
+                  </tr>
+                  ${p.dimensions ? `
+                    <tr>
+                      <td class="fw-bold text-dark">Measurements</td>
+                      <td class="text-muted">${p.dimensions}</td>
+                    </tr>
+                  ` : ''}
+                  ${p.care_instructions ? `
+                    <tr>
+                      <td class="fw-bold text-dark">Care Instructions</td>
+                      <td class="text-muted">${p.care_instructions}</td>
+                    </tr>
+                  ` : ''}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       `;
 
       if (rel.length > 0) {
         html += `
-          <div class="mt-5 pt-4">
-            <div class="text-center mb-4">
-              <span class="section-overline">Recommendations</span>
-              <h3 class="font-heading">Similar Products</h3>
+          <div class="mt-5 pt-5 border-top">
+            <div class="text-center mb-5">
+              <span class="section-overline">More Rare Finds</span>
+              <h3 class="fw-black fs-2" style="font-family:var(--font-heading);">Similar Drops You Might Like</h3>
             </div>
             <div class="row g-4">
         `;
@@ -378,7 +465,9 @@
       }
 
       container.innerHTML = html;
+      initScrollReveal();
     });
   </script>
+
 </body>
 </html>

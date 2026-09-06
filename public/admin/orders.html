@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orders | Admin Hand &amp; Heart</title>
+  <title>Orders | Admin HS_Thrift</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/admin.css">
   <style>
@@ -60,7 +60,7 @@
   <aside class="admin-sidebar">
     <div class="sidebar-brand">
       <div class="brand-text-wrap">
-        <div class="brand-name"><img src="../assets/logo.png" alt="Hand &amp; Heart" style="height: 38px; width: auto; object-fit: contain;"></div>
+        <div class="brand-name"><img src="../assets/logo.png" alt="HS_Thrift" style="height: 34px; width: auto; object-fit: contain;"></div>
         <div class="brand-sub">Admin Panel</div>
       </div>
       <button type="button" class="sidebar-toggle-btn js-sidebar-toggle" onclick="toggleAdminSidebar()" title="Toggle Sidebar (Expand/Collapse)">
@@ -739,62 +739,62 @@
     if (ordStatus === 'CANCELLED') {
       return `Hello ${name},
 
-Your order ${orderId} from Hand & Heart Studio (Artisan Daim Afzal) has been cancelled.
+Your order ${orderId} from HS_Thrift has been cancelled.
 
-If you have any questions or would like to re-order, please reply to this message.
+If you have any questions or would like to choose another piece, please reply to this message.
 
 Thank you,
-Hand & Heart Studio`;
+HS_Thrift`;
     }
 
     if (ordStatus === 'COMPLETED') {
-      const note = isCOD && payStatus === 'UNPAID' ? 'Please ensure the COD payment has been collected.' : 'Thank you for choosing Hand & Heart!';
-      return `Hello ${name}! 🌿
+      const note = isCOD && payStatus === 'UNPAID' ? 'Please ensure the COD payment has been collected.' : 'Thank you for choosing HS_Thrift!';
+      return `Hello ${name}! 🔥
 
-Your order ${orderId} from Hand & Heart Studio has been delivered successfully.
+Your order ${orderId} from HS_Thrift has been delivered successfully.
 
 ${note}
 
-Crafted by Hand, Made with Heart by Daim Afzal.`;
+HS_Thrift — Curated Streetwear & Vintage Finds.`;
     }
 
     if (ordStatus === 'SHIPPED') {
       const shippingNote = isCOD ? 'Please ensure cash payment is ready upon courier delivery.' : 'Thank you for completing your online payment!';
       return `Hello ${name}! 🚚
 
-Your order ${orderId} from Hand & Heart Studio has been shipped.
+Your order ${orderId} from HS_Thrift has been shipped.
 
-Order Total: PKR ${grandTotalStr}
+Order Total: Rs. ${grandTotalStr}
 Payment Method: ${paymentMethodText}
 Payment Status: ${payStatus}
 
 ${shippingNote}
 
-Thank you for choosing Hand & Heart!`;
+Thank you for choosing HS_Thrift!`;
     }
 
     if (ordStatus === 'READY') {
       return `Hello ${name}! 🎁
 
-Great news! Your handcrafted order ${orderId} from Hand & Heart Studio is packed and ready to ship.
+Great news! Your thrift order ${orderId} from HS_Thrift is packed and ready to ship.
 
-Order Total: PKR ${grandTotalStr}
+Order Total: Rs. ${grandTotalStr}
 Payment Method: ${paymentMethodText}
 Payment Status: ${payStatus}
 
-Thank you for choosing Hand & Heart!`;
+Thank you for choosing HS_Thrift!`;
     }
 
     if (ordStatus === 'PROCESSING') {
-      return `Hello ${name}! 🔨
+      return `Hello ${name}! ⚡
 
-Your order ${orderId} from Hand & Heart Studio is now being handcrafted & prepared by Master Artisan Daim Afzal.
+Your order ${orderId} from HS_Thrift has been verified and is being prepared for dispatch.
 
-Order Total: PKR ${grandTotalStr}
+Order Total: Rs. ${grandTotalStr}
 Payment Method: ${paymentMethodText}
 Payment Status: ${payStatus}
 
-We will notify you as soon as your order is ready to ship.`;
+We will notify you as soon as your order is on its way.`;
     }
 
     if (payStatus === 'PAID') {
@@ -803,25 +803,25 @@ We will notify you as soon as your order is ready to ship.`;
 We have received and verified your payment for order ${orderId}.
 
 Payment Status: Paid
-Amount: PKR ${grandTotalStr}
+Amount: Rs. ${grandTotalStr}
 
-Your order will now proceed to the next stage.
+Your order will now proceed to dispatch.
 
-Thank you for choosing Hand & Heart Studio!`;
+Thank you for choosing HS_Thrift!`;
     }
 
     // Default: Order Confirmation / Unpaid
     const payInstructions = isCOD 
       ? 'Your order will be processed shortly for Cash on Delivery.' 
-      : 'Please complete your payment using your preferred bank/Easypaisa/JazzCash account and send the payment screenshot to us on WhatsApp so that we can verify your payment and proceed with your order.';
+      : 'Please complete your payment using your preferred bank/Easypaisa/JazzCash account and send the payment screenshot to us on WhatsApp (+92 319 715071) with your Order ID.';
 
-    return `Hello ${name}! ❤️
+    return `Hello ${name}! 🔥
 
-Thank you for your order ${orderId} from Hand & Heart Studio.
+Thank you for your order ${orderId} from HS_Thrift.
 
 Payment Method: ${paymentMethodText}
 Payment Status: ${payStatus}
-Order Total: PKR ${grandTotalStr}
+Order Total: Rs. ${grandTotalStr}
 
 Order Details:
 ${itemsStr}
@@ -831,7 +831,7 @@ ${address}
 
 ${payInstructions}
 
-Crafted by Hand, Made with Heart by Daim Afzal.`;
+HS_Thrift — Curated Streetwear & Vintage Finds.`;
   }
 
   function updateWhatsAppNotificationPreview() {
@@ -1301,7 +1301,7 @@ Crafted by Hand, Made with Heart by Daim Afzal.`;
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute('href', csvContent);
       const filenameDate = sDate && eDate ? `${sDate}_to_${eDate}` : new Date().toISOString().split('T')[0];
-      downloadAnchor.setAttribute('download', `Hand_And_Heart_Orders_${filenameDate}.csv`);
+      downloadAnchor.setAttribute('download', `HS_Thrift_Orders_${filenameDate}.csv`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       document.body.removeChild(downloadAnchor);

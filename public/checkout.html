@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | Hand &amp; Heart Studio — Handcrafted by Daim Afzal</title>
-  <meta name="description" content="Complete your shipping details and select payment method to place an order at Hand &amp; Heart Studio.">
+  <title>Checkout | HS_Thrift</title>
+  <meta name="description" content="Complete your delivery details and choose payment method to order your curated thrift items.">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#0F172A">
 
-  <!-- Favicon & Preload Assets -->
-  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/luxury-theme.css">
@@ -35,39 +34,51 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background-color: var(--terracotta);
+      background-color: var(--color-obsidian);
       color: #fff;
-      font-family: var(--font-heading);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
-
     .order-item-row {
       display: flex;
       align-items: center;
       gap: 1rem;
       padding: 0.85rem 0;
-      border-bottom: 1px solid var(--sand-beige);
+      border-bottom: 1px solid var(--color-border);
     }
-
     .order-item-row:last-child {
       border-bottom: none;
     }
-
     .order-item-img {
-      width: 60px;
-      height: 72px;
+      width: 58px;
+      height: 68px;
       object-fit: cover;
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       flex-shrink: 0;
     }
-
+    .payment-option-card {
+      border: 2px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+    .payment-option-card:hover {
+      border-color: var(--color-emerald-primary);
+      background: #F8FAFC;
+    }
+    .payment-option-card.selected {
+      border-color: var(--color-emerald-primary);
+      background: #F0FDF4;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+    }
     .checkout-success-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(74, 52, 46, 0.85);
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(8px);
       z-index: 2000;
       align-items: center;
@@ -75,93 +86,70 @@
       padding: 1.5rem;
       overflow-y: auto;
     }
-
     .checkout-success-overlay.show {
       display: flex;
     }
-
     .checkout-success-card {
-      background: var(--bg-ivory);
-      border-radius: var(--radius-lg);
+      background: #fff;
+      border-radius: 20px;
       padding: 2.5rem 2rem;
       max-width: 560px;
       width: 100%;
       text-align: center;
-      box-shadow: var(--shadow-float);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     }
-
-    .payment-option-card {
-      border: 2px solid var(--sand-beige);
-      border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: #fff;
-    }
-
-    .payment-option-card:hover {
-      border-color: var(--terracotta);
-      background: #fffdfb;
-    }
-
-    .payment-option-card.selected {
-      border-color: var(--terracotta);
-      background: #fff8f3;
-      box-shadow: 0 4px 12px rgba(193, 124, 58, 0.12);
-    }
-
     .online-instructions-box {
       display: none;
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       padding: 1.25rem;
       margin-top: 1rem;
     }
   </style>
-  <meta name="theme-color" content="#3b2820">
 </head>
-
 <body>
 
   <!-- Top Bar -->
   <div class="top-bar">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="fs-7"><i class="bi bi-shield-lock me-1"></i> Secure Checkout — Hand &amp; Heart Studio</div>
-      <a href="shop.html" class="text-white-50 fs-7"><i class="bi bi-arrow-left me-1"></i> Back to Shop</a>
+    <div class="container d-flex justify-content-between align-items-center fs-7">
+      <div><i class="bi bi-shield-lock me-1"></i> Secure Checkout &mdash; HS_Thrift</div>
+      <a href="shop.html" class="text-white text-decoration-none"><i class="bi bi-arrow-left me-1"></i> Continue Shopping</a>
     </div>
   </div>
 
   <!-- Navbar -->
-  <nav class="luxury-navbar" style="border-bottom: 1px solid var(--sand-beige);">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+  <nav class="luxury-navbar" style="border-bottom: 1px solid var(--color-border);">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="brand-logo-text text-decoration-none">
+        HS<span class="thrift-highlight">_Thrift</span>
+        <span class="brand-badge-pill ms-1">CHECKOUT</span>
+      </a>
 
       <div class="d-none d-md-flex align-items-center gap-3 mx-auto text-muted fs-7">
-        <span class="d-flex align-items-center gap-1"><i class="bi bi-check-circle-fill text-success"></i> Cart</span>
+        <span class="d-flex align-items-center gap-1"><i class="bi bi-check-circle-fill text-success"></i> Bag</span>
         <i class="bi bi-chevron-right opacity-50"></i>
-        <span class="d-flex align-items-center gap-1 fw-bold text-dark"><i
-            class="bi bi-credit-card text-terracotta"></i> Delivery &amp; Payment</span>
+        <span class="d-flex align-items-center gap-1 fw-bold text-dark"><i class="bi bi-truck text-success"></i> Delivery &amp; Payment</span>
         <i class="bi bi-chevron-right opacity-50"></i>
-        <span class="d-flex align-items-center gap-1"><i class="bi bi-check2-circle text-muted"></i> Order Confirmation</span>
+        <span class="d-flex align-items-center gap-1"><i class="bi bi-check2-circle text-muted"></i> Confirmation</span>
       </div>
 
-      <a href="cart.html" class="btn btn-luxury-outline btn-sm ms-3 d-none d-md-inline-flex">
-        <i class="bi bi-bag me-1"></i> Edit Cart
+      <a href="cart.html" class="btn btn-luxury-outline btn-sm">
+        <i class="bi bi-bag me-1"></i> Edit Bag
       </a>
     </div>
   </nav>
 
   <!-- Main Checkout Content -->
-  <section class="page-section">
+  <section class="py-5" style="background:var(--color-cream-bg); min-height:600px;">
     <div class="container">
 
       <!-- Empty Cart Guard -->
-      <div id="emptyCartMessage" class="text-center py-5" style="display:none !important;">
-        <i class="bi bi-bag-x display-1 text-muted opacity-50"></i>
-        <h3 class="font-heading mt-3">Your cart is empty</h3>
-        <p class="text-muted">Please add products to your cart before proceeding to checkout.</p>
-        <a href="shop.html" class="btn btn-luxury mt-2">Back to Shop</a>
+      <div id="emptyCartMessage" class="text-center py-5 bg-white rounded-4 border p-5 mx-auto" style="display:none !important; max-width:500px;">
+        <i class="bi bi-bag-x display-1 text-muted opacity-50 mb-3 d-block"></i>
+        <h4 class="fw-bold mb-2">Your shopping bag is empty</h4>
+        <p class="text-muted mb-4">Please add thrift pieces to your bag before proceeding to checkout.</p>
+        <a href="shop.html" class="btn btn-luxury">Browse Thrift Drops</a>
       </div>
 
       <!-- Checkout Form -->
@@ -171,108 +159,100 @@
           <!-- LEFT: Customer & Payment Form -->
           <div class="col-lg-7">
             <form id="checkoutForm" novalidate>
+              
               <!-- Section 1: Customer Info -->
-              <div class="bg-white p-4 rounded-4 border border-beige shadow-sm mb-4">
+              <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
                 <div class="d-flex align-items-center gap-3 mb-4">
                   <div class="checkout-step-badge">1</div>
-                  <h4 class="font-heading mb-0">Customer Information</h4>
+                  <h5 class="fw-bold mb-0">Customer Contact</h5>
                 </div>
 
                 <div class="row g-3">
                   <div class="col-12">
-                    <label class="form-label" for="customerName">Full Name <span class="text-danger">*</span></label>
-                    <input type="text" id="customerName" name="customer_name" class="form-control"
-                      placeholder="Full name for courier delivery" required autocomplete="name">
+                    <label class="form-label small fw-bold" for="customerName">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" id="customerName" name="customer_name" class="form-control rounded-3"
+                      placeholder="Receiver's full name" required autocomplete="name">
                     <div class="invalid-feedback">Full name is required.</div>
                   </div>
 
                   <div class="col-12">
-                    <label class="form-label" for="customerPhone">WhatsApp / Phone Number <span
-                        class="text-danger">*</span></label>
+                    <label class="form-label small fw-bold" for="customerPhone">WhatsApp / Mobile Number <span class="text-danger">*</span></label>
                     <div class="d-flex flex-row flex-nowrap align-items-center gap-2">
-                      <select id="countryCodeSelect" class="form-select bg-ivory border-beige text-dark fw-bold"
-                        style="width: 135px !important; min-width: 135px !important; max-width: 135px !important; flex: 0 0 135px !important; padding-left: 0.5rem; padding-right: 1.4rem; font-size: 0.88rem; height: 46px;"
+                      <select id="countryCodeSelect" class="form-select bg-light border fw-bold rounded-3"
+                        style="width: 120px !important; min-width: 120px !important; flex: 0 0 120px !important;"
                         aria-label="Country Code">
-                        <option value="+92" selected>🇵🇰 +92 (PK)</option>
-                        <option value="+1">🇺🇸 +1 (US)</option>
-                        <option value="+44">🇬🇧 +44 (UK)</option>
-                        <option value="+971">🇦🇪 +971 (UAE)</option>
-                        <option value="+966">🇸🇦 +966 (KSA)</option>
-                        <option value="+60">🇲🇾 +60 (MY)</option>
-                        <option value="+65">🇸🇬 +65 (SG)</option>
-                        <option value="+91">🇮🇳 +91 (IN)</option>
-                        <option value="+61">🇦🇺 +61 (AU)</option>
-                        <option value="+49">🇩🇪 +49 (DE)</option>
+                        <option value="+92" selected>🇵🇰 +92</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+971">🇦🇪 +971</option>
+                        <option value="+966">🇸🇦 +966</option>
                       </select>
-                      <input type="tel" id="customerPhone" name="customer_phone" class="form-control"
-                        style="flex: 1 1 auto; height: 46px;" placeholder="03001234567" required autocomplete="tel">
+                      <input type="tel" id="customerPhone" name="customer_phone" class="form-control rounded-3"
+                        placeholder="0319715071" required autocomplete="tel">
                     </div>
-                    <div class="form-text text-muted">We will send order status updates to this WhatsApp number.</div>
-                    <div id="phoneErrorFeedback" class="text-danger small mt-1" style="display: none;">Please enter a valid WhatsApp number.</div>
+                    <div class="form-text text-muted">We will send your dispatch confirmation to this WhatsApp number.</div>
+                    <div id="phoneErrorFeedback" class="text-danger small mt-1" style="display: none;">Please enter a valid phone number.</div>
                   </div>
                 </div>
               </div>
 
               <!-- Section 2: Shipping Address -->
-              <div class="bg-white p-4 rounded-4 border border-beige shadow-sm mb-4">
+              <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
                 <div class="d-flex align-items-center gap-3 mb-4">
                   <div class="checkout-step-badge">2</div>
-                  <h4 class="font-heading mb-0">Shipping Address</h4>
+                  <h5 class="fw-bold mb-0">Delivery Address</h5>
                 </div>
 
                 <div class="row g-3">
                   <div class="col-12">
-                    <label class="form-label" for="customerAddress">Street Address <span
-                        class="text-danger">*</span></label>
-                    <textarea id="customerAddress" name="customer_address" class="form-control" rows="3"
-                      placeholder="House/Apartment number, street name, area, sector/block" required
-                      autocomplete="street-address"></textarea>
+                    <label class="form-label small fw-bold" for="customerAddress">Street Address / House / Flat <span class="text-danger">*</span></label>
+                    <textarea id="customerAddress" name="customer_address" class="form-control rounded-3" rows="3"
+                      placeholder="House/Apartment #, street name, colony/area" required autocomplete="street-address"></textarea>
                     <div class="invalid-feedback">Shipping address is required.</div>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label" for="customerCitySelect">City / Destination <span
-                        class="text-danger">*</span></label>
-                    <select id="customerCitySelect" name="customer_city" class="form-select fw-semibold" required>
-                      <option value="" selected disabled>— Select Destination City —</option>
+                    <label class="form-label small fw-bold" for="customerCitySelect">City / Destination <span class="text-danger">*</span></label>
+                    <select id="customerCitySelect" name="customer_city" class="form-select fw-semibold rounded-3" required>
+                      <option value="" selected disabled>— Select City —</option>
                     </select>
                     <div class="invalid-feedback">Please select your shipping city.</div>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label" for="customerPostal">Postal Code (Optional)</label>
-                    <input type="text" id="customerPostal" name="customer_postal" class="form-control"
+                    <label class="form-label small fw-bold" for="customerPostal">Postal Code (Optional)</label>
+                    <input type="text" id="customerPostal" name="customer_postal" class="form-control rounded-3"
                       placeholder="e.g. 54000" autocomplete="postal-code" maxlength="10">
                   </div>
 
                   <div class="col-12">
-                    <label class="form-label" for="orderNotes">Order Notes (optional)</label>
-                    <textarea id="orderNotes" name="order_notes" class="form-control" rows="2"
-                      placeholder="Special instructions for delivery or maker Daim Afzal"></textarea>
+                    <label class="form-label small fw-bold" for="orderNotes">Order Notes (Optional)</label>
+                    <textarea id="orderNotes" name="order_notes" class="form-control rounded-3" rows="2"
+                      placeholder="Any specific delivery instructions..."></textarea>
                   </div>
                 </div>
               </div>
 
-              <!-- Section 3: Payment Method Selection -->
-              <div class="bg-white p-4 rounded-4 border border-beige shadow-sm mb-4">
+              <!-- Section 3: Payment Method -->
+              <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
                 <div class="d-flex align-items-center gap-3 mb-3">
-                  <div class="checkout-step-badge" style="background: var(--terracotta);">3</div>
-                  <h4 class="font-heading mb-0">Payment Method <span class="text-danger">*</span></h4>
+                  <div class="checkout-step-badge" style="background:var(--color-emerald-primary);">3</div>
+                  <h5 class="fw-bold mb-0">Payment Method <span class="text-danger">*</span></h5>
                 </div>
-                <p class="text-muted small mb-3">Please select your preferred payment method:</p>
+                <p class="text-muted small mb-3">Choose how you'd like to pay for your thrift drops:</p>
 
                 <div class="row g-3">
                   <!-- COD Option -->
                   <div class="col-12">
                     <div class="payment-option-card d-flex align-items-center justify-content-between" id="codOptionCard" onclick="selectPaymentMethod('COD')">
                       <div class="d-flex align-items-center gap-3">
-                        <input type="radio" name="payment_method" id="payCOD" value="COD" class="form-check-input mt-0" style="width: 20px; height: 20px;" required>
+                        <input type="radio" name="payment_method" id="payCOD" value="COD" class="form-check-input mt-0" style="width:20px; height:20px;" required>
                         <div>
                           <strong class="d-block text-dark">Cash on Delivery (COD)</strong>
-                          <span class="text-muted small">Pay with cash when your parcel is delivered to your doorstep.</span>
+                          <span class="text-muted small">Pay cash to the rider upon parcel delivery.</span>
                         </div>
                       </div>
-                      <i class="bi bi-truck fs-3 text-terracotta"></i>
+                      <i class="bi bi-truck fs-3" style="color:var(--color-emerald-primary);"></i>
                     </div>
                   </div>
 
@@ -280,381 +260,377 @@
                   <div class="col-12">
                     <div class="payment-option-card d-flex align-items-center justify-content-between" id="onlineOptionCard" onclick="selectPaymentMethod('ONLINE')">
                       <div class="d-flex align-items-center gap-3">
-                        <input type="radio" name="payment_method" id="payOnline" value="ONLINE" class="form-check-input mt-0" style="width: 20px; height: 20px;" required>
+                        <input type="radio" name="payment_method" id="payOnline" value="ONLINE" class="form-check-input mt-0" style="width:20px; height:20px;" required>
                         <div>
-                          <strong class="d-block text-dark">Online Payment</strong>
-                          <span class="text-muted small">Transfer payment via Bank Transfer, Easypaisa, or JazzCash.</span>
+                          <strong class="d-block text-dark">Online Transfer (JazzCash / EasyPaisa / Bank)</strong>
+                          <span class="text-muted small">Send payment screenshot to WhatsApp <strong>0319715071</strong>.</span>
                         </div>
                       </div>
-                      <i class="bi bi-bank fs-3 text-terracotta"></i>
+                      <i class="bi bi-phone-flip fs-3" style="color:var(--color-amber-accent);"></i>
                     </div>
                   </div>
                 </div>
 
                 <div id="paymentMethodError" class="text-danger small mt-2" style="display:none;">
-                  Please select a payment method before placing your order.
+                  Please select a payment method.
                 </div>
 
                 <!-- Online Payment Instructions Box -->
                 <div class="online-instructions-box" id="onlineInstructionsBox">
                   <div class="d-flex align-items-center gap-2 mb-2 text-success fw-bold">
                     <i class="bi bi-info-circle-fill"></i>
-                    <span>Online Payment Instructions</span>
+                    <span>Online Payment Details</span>
                   </div>
                   <p class="text-dark small mb-2" id="onlineInstructionsText" style="white-space: pre-wrap; line-height: 1.6;">
-                    Please complete the payment using your preferred bank/Easypaisa/JazzCash account and send your payment screenshot to our official WhatsApp number along with your Order ID.
+                    Please transfer via EasyPaisa / JazzCash / Bank and send payment screenshot to WhatsApp (+92 319 715071) with your Order ID.
                   </p>
                   <div class="badge bg-warning text-dark font-mono p-2 text-wrap w-100 text-start fw-normal" style="font-size: 0.78rem;">
                     <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                    Initial payment status will remain <strong>UNPAID</strong> until verified by admin.
+                    Status remains <strong>UNPAID</strong> until verified by HS_Thrift admin.
                   </div>
                 </div>
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" id="submitOrderBtn" class="btn btn-luxury w-100 py-3 fs-5">
+              <button type="submit" id="submitOrderBtn" class="btn btn-luxury w-100 py-3 fs-5 fw-bold">
                 <i class="bi bi-bag-check me-2"></i> Place Order Now
               </button>
               <p class="text-center text-muted small mt-3">
-                <i class="bi bi-lock-fill me-1 text-terracotta"></i>
-                Handcrafted by Master Artisan Daim Afzal. Your data is used strictly for shipping and order fulfillment.
+                <i class="bi bi-shield-check me-1 text-success"></i>
+                Guaranteed genuine thrift pieces. Your data is strictly used for delivery dispatch.
               </p>
             </form>
           </div>
 
           <!-- RIGHT: Order Summary -->
           <div class="col-lg-5">
-            <div class="bg-white p-4 rounded-4 border border-beige shadow-sm position-sticky" style="top: 90px;">
-              <h4 class="font-heading mb-4">Order Summary</h4>
+            <div class="bg-white p-4 rounded-4 border shadow-sm position-sticky" style="top: 90px;">
+              <h5 class="fw-bold mb-3 pb-2 border-bottom">Bag Summary</h5>
 
               <div id="checkoutItemsList">
                 <!-- Rendered by JS -->
               </div>
 
-              <hr class="my-3 border-beige">
+              <hr class="my-3">
 
               <div class="d-flex justify-content-between mb-2 text-muted small">
-                <span>Product Subtotal</span>
+                <span>Items Subtotal</span>
                 <span id="summarySubtotal" class="fw-bold text-dark">Rs. 0</span>
               </div>
               <div class="d-flex justify-content-between mb-3 text-muted small">
-                <span>Shipping Fee (<span id="selectedCityLabel">Standard</span>)</span>
-                <span id="summaryShippingFee" class="fw-semibold text-dark">Rs. 250</span>
+                <span>Shipping (<span id="selectedCityLabel">Standard</span>)</span>
+                <span id="summaryShippingFee" class="fw-semibold text-dark">Rs. 200</span>
               </div>
-              <hr class="my-3 border-beige">
+              <hr class="my-3">
               <div class="d-flex justify-content-between mb-1">
-                <span class="font-heading fs-5 fw-bold">Order Total</span>
-                <span id="summaryTotal" class="font-heading fs-5 fw-bold text-terracotta">Rs. 0</span>
+                <span class="fs-5 fw-bold">Grand Total</span>
+                <span id="summaryTotal" class="fs-4 fw-black" style="color:var(--color-obsidian);">Rs. 0</span>
               </div>
               <p class="text-muted fs-8 mt-2" id="shippingThresholdNote">
-                Free shipping on orders of Rs. 10,000 or above!
+                Free shipping on orders of Rs. 3,500 or above!
               </p>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
   </section>
 
   <!-- Success Overlay -->
-  <div class="checkout-success-overlay" id="successOverlay" role="dialog" aria-modal="true"
-    aria-labelledby="successTitle">
+  <div class="checkout-success-overlay" id="successOverlay">
     <div class="checkout-success-card">
-      <div class="success-icon-circle">
+      <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:72px; height:72px; background:rgba(16,185,129,0.15); color:var(--color-emerald-primary); font-size:2.2rem;">
         <i class="bi bi-check-lg"></i>
       </div>
-      <h2 class="font-heading display-6 mb-2" id="successTitle">Order Received Successfully!</h2>
-      <p class="text-muted mb-2">Order ID: <strong id="successOrderId" class="text-dark font-heading fs-4">#—</strong></p>
+      <h3 class="fw-black mb-1">Order Placed Successfully!</h3>
+      <p class="text-muted mb-3">Order ID: <strong class="text-dark" id="successOrderId">#HST-000000</strong></p>
       
-      <div class="bg-white p-3 rounded-3 border border-beige my-3 text-start small">
+      <div class="bg-light p-3 rounded-3 mb-4 text-start small">
         <div class="d-flex justify-content-between mb-1">
-          <span class="text-muted">Payment Method:</span>
-          <strong id="successPaymentMethod" class="text-dark">Cash on Delivery</strong>
+          <span class="text-muted">Payment:</span>
+          <strong id="successPaymentMethod">COD</strong>
         </div>
-        <div class="d-flex justify-content-between mb-1">
-          <span class="text-muted">Payment Status:</span>
-          <span class="badge bg-warning text-dark">UNPAID</span>
-        </div>
-        <div class="d-flex justify-content-between">
-          <span class="text-muted">Order Status:</span>
-          <span class="badge bg-secondary">PENDING</span>
+        <div class="text-muted mt-2" id="successMsgText">
+          Thank you for shopping with HS_Thrift! Your order has been placed in our system. We will contact you via WhatsApp shortly to confirm dispatch.
         </div>
       </div>
 
-      <p class="text-muted mb-4" id="successMsgText" style="font-size: 0.92rem; line-height: 1.6;">
-        Thank you for shopping with Hand &amp; Heart Studio. Your order has been placed in our database, and our team has been notified. We will contact you via WhatsApp shortly to confirm dispatch.
-      </p>
-      <a href="shop.html" class="btn btn-luxury w-100 py-3 mb-2">Continue Shopping</a>
+      <div class="d-grid gap-2">
+        <a id="successWhatsAppBtn" href="https://wa.me/92319715071" target="_blank" class="btn btn-whatsapp py-3 fw-bold">
+          <i class="bi bi-whatsapp me-2"></i> Confirm on WhatsApp
+        </a>
+        <a href="shop.html" class="btn btn-luxury-outline py-2">
+          Browse More Drops
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="luxury-footer" style="margin-top: 4rem;">
+  <footer class="footer-section">
     <div class="container">
-      <div class="footer-bottom text-center d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-        <div>&copy; 2026 Hand &amp; Heart Studio. Handcrafted by Master Artisan Daim Afzal. All rights reserved.</div>
-        <div class="footer-social-links" style="justify-content:center;">
-          <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="brand-logo-text mb-3">
+            HS<span class="thrift-highlight">_Thrift</span>
+          </div>
+          <p class="opacity-75 mb-4" style="max-width:320px;">
+            Pakistan's premier curated thrift destination. Hand-picked, graded, and steam-sanitized vintage streetwear at prices that actually make sense.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/92319715071" class="btn btn-whatsapp px-3 py-2 fw-bold">
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp: 0319715071
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h5>Shop</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="shop.html">All Drops</a></li>
+            <li><a href="shop.html?category=vintage-jackets">Vintage Jackets</a></li>
+            <li><a href="shop.html?category=graphic-hoodies">Hoodies</a></li>
+            <li><a href="shop.html?category=retro-tees">Graphic Tees</a></li>
+            <li><a href="shop.html?category=denim-bottoms">Cargo & Denim</a></li>
+            <li><a href="shop.html?under_999=1" style="color:var(--color-amber-accent);">🔥 Under Rs. 999</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h5>Info</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Get in Touch</h5>
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-whatsapp text-success fs-5"></i>
+              <a href="https://wa.me/92319715071" class="fw-semibold">0319715071</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope fs-5" style="color:var(--color-emerald-primary);"></i>
+              <a href="mailto:hsthrift59@gmail.com">hsthrift59@gmail.com</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt fs-5" style="color:var(--color-amber-accent);"></i>
+              <span class="opacity-75">Pakistan — Nationwide Delivery</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0 opacity-60">&copy; 2026 HS_Thrift. All rights reserved.</p>
+        <div class="d-flex gap-3 opacity-60">
+          <span>Curated · Graded · Sustainable</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="js/app.js?v=101" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
 
   <script>
-    let _storeStandardFee = 250;
-    let _storeFreeThreshold = 10000;
-    let _cityRatesList = [
-      { city: "Lahore", rate: 250 },
-      { city: "Karachi", rate: 250 },
-      { city: "Islamabad", rate: 250 },
-      { city: "Rawalpindi", rate: 250 },
-      { city: "Faisalabad", rate: 250 },
-      { city: "Peshawar", rate: 250 },
-      { city: "Quetta", rate: 250 },
-      { city: "Multan", rate: 250 },
-      { city: "Sialkot", rate: 250 },
-      { city: "Gujranwala", rate: 250 }
+    let _cityRates = [
+      { name: 'Lahore', rate: 200 },
+      { name: 'Karachi', rate: 250 },
+      { name: 'Islamabad', rate: 220 },
+      { name: 'Rawalpindi', rate: 220 },
+      { name: 'Faisalabad', rate: 220 },
+      { name: 'Multan', rate: 220 },
+      { name: 'Peshawar', rate: 250 },
+      { name: 'Quetta', rate: 280 },
+      { name: 'Other Cities', rate: 250 }
     ];
+    let _standardShippingFee = 200;
+    let _freeShippingThreshold = 3500;
     let _selectedPaymentMethod = '';
+    let _lastGeneratedOrderId = '';
+
+    function selectPaymentMethod(method) {
+      _selectedPaymentMethod = method;
+      const codCard = document.getElementById('codOptionCard');
+      const onlineCard = document.getElementById('onlineOptionCard');
+      const codRadio = document.getElementById('payCOD');
+      const onlineRadio = document.getElementById('payOnline');
+      const onlineBox = document.getElementById('onlineInstructionsBox');
+      const payErr = document.getElementById('paymentMethodError');
+
+      if (payErr) payErr.style.display = 'none';
+
+      if (method === 'COD') {
+        codRadio.checked = true;
+        codCard.classList.add('selected');
+        onlineCard.classList.remove('selected');
+        if (onlineBox) onlineBox.style.display = 'none';
+      } else if (method === 'ONLINE') {
+        onlineRadio.checked = true;
+        onlineCard.classList.add('selected');
+        codCard.classList.remove('selected');
+        if (onlineBox) onlineBox.style.display = 'block';
+      }
+    }
 
     document.addEventListener('DOMContentLoaded', async () => {
-      await loadStoreSettings();
-
       const cart = getCart();
-      const emptyMsg = document.getElementById('emptyCartMessage');
-      const checkoutContent = document.getElementById('checkoutContent');
 
-      if (!cart || cart.length === 0) {
-        emptyMsg.style.display = 'block';
-        checkoutContent.style.display = 'none';
+      if (cart.length === 0) {
+        document.getElementById('emptyCartMessage').style.display = 'block';
+        document.getElementById('checkoutContent').style.display = 'none';
         return;
       }
 
-      populateCitySelectDropdown();
-      renderOrderSummary(cart);
-      initCheckoutForm(cart);
+      await loadStoreSettings();
+      renderOrderSummary();
+      initCheckoutForm();
     });
 
     async function loadStoreSettings() {
       try {
-        const res = await fetch('/api/get-products?settings=true');
+        const res = await fetch('/api/get-products?settings=true&_=' + Date.now(), { cache: 'no-store' });
         const data = await res.json();
         if (data.success && data.settings) {
-          if (data.settings.standard_shipping_fee !== undefined) _storeStandardFee = parseInt(data.settings.standard_shipping_fee);
-          if (data.settings.free_shipping_threshold !== undefined) _storeFreeThreshold = parseInt(data.settings.free_shipping_threshold);
-          if (data.settings.online_payment_instructions) {
-            document.getElementById('onlineInstructionsText').textContent = data.settings.online_payment_instructions;
+          const s = data.settings;
+          if (s.standard_shipping_fee !== undefined) _standardShippingFee = parseInt(s.standard_shipping_fee) || 200;
+          if (s.free_shipping_threshold !== undefined) _freeShippingThreshold = parseInt(s.free_shipping_threshold) || 3500;
+
+          if (s.online_payment_instructions) {
+            const instrEl = document.getElementById('onlineInstructionsText');
+            if (instrEl) instrEl.textContent = s.online_payment_instructions;
           }
-          if (data.settings.city_shipping_rates && Array.isArray(data.settings.city_shipping_rates)) {
-            _cityRatesList = data.settings.city_shipping_rates;
+
+          if (s.city_shipping_rates) {
+            try {
+              const parsed = typeof s.city_shipping_rates === 'string' ? JSON.parse(s.city_shipping_rates) : s.city_shipping_rates;
+              if (Array.isArray(parsed) && parsed.length > 0) _cityRates = parsed;
+            } catch (e) {}
           }
         }
-      } catch (e) {
-        console.warn('Could not load settings:', e);
+      } catch (err) {
+        console.warn('Could not load settings:', err);
       }
+
+      populateCitySelect();
     }
 
-    function populateCitySelectDropdown() {
+    function populateCitySelect() {
       const select = document.getElementById('customerCitySelect');
       if (!select) return;
+      select.innerHTML = '<option value="" selected disabled>— Select City —</option>';
+      _cityRates.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.name;
+        opt.textContent = `${c.name} — Rs. ${c.rate}`;
+        select.appendChild(opt);
+      });
 
-      const currentSelection = select.value;
-      let html = '<option value="" selected disabled>— Select Destination City —</option>';
-      if (Array.isArray(_cityRatesList)) {
-        _cityRatesList.forEach(c => {
-          if (c && c.city) {
-            const cityName = escapeHtml(String(c.city).trim());
-            const rate = parseInt(c.rate) || 0;
-            const rateLabel = rate === 0 ? 'Free Delivery' : `Rs. ${rate}`;
-            html += `<option value="${cityName}" data-rate="${rate}">${cityName} (${rateLabel})</option>`;
-          }
-        });
-      }
-
-      select.innerHTML = html;
-      if (currentSelection) select.value = currentSelection;
+      select.addEventListener('change', () => {
+        const selected = _cityRates.find(c => c.name === select.value);
+        if (selected) {
+          _standardShippingFee = selected.rate;
+          const label = document.getElementById('selectedCityLabel');
+          if (label) label.textContent = selected.name;
+          renderOrderSummary();
+        }
+      });
     }
 
-    function escapeHtml(str) {
-      return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-    }
-
-    function selectPaymentMethod(method) {
-      _selectedPaymentMethod = method;
-      const codRadio = document.getElementById('payCOD');
-      const onlineRadio = document.getElementById('payOnline');
-      const codCard = document.getElementById('codOptionCard');
-      const onlineCard = document.getElementById('onlineOptionCard');
-      const instructionsBox = document.getElementById('onlineInstructionsBox');
-      const errEl = document.getElementById('paymentMethodError');
-
-      if (errEl) errEl.style.display = 'none';
-
-      if (method === 'COD') {
-        codRadio.checked = true;
-        onlineRadio.checked = false;
-        codCard.classList.add('selected');
-        onlineCard.classList.remove('selected');
-        instructionsBox.style.display = 'none';
-      } else if (method === 'ONLINE') {
-        onlineRadio.checked = true;
-        codRadio.checked = false;
-        onlineCard.classList.add('selected');
-        codCard.classList.remove('selected');
-        instructionsBox.style.display = 'block';
-      }
-    }
-
-    function getSelectedCityShippingRate() {
-      const select = document.getElementById('customerCitySelect');
-      if (!select || !select.value) return _storeStandardFee;
-
-      const selectedOption = select.options[select.selectedIndex];
-      if (selectedOption && selectedOption.dataset.rate !== undefined) {
-        return parseInt(selectedOption.dataset.rate) || _storeStandardFee;
-      }
-      return _storeStandardFee;
-    }
-
-    function calculateShippingFee(subtotal) {
-      if (subtotal >= _storeFreeThreshold) return 0;
-      return getSelectedCityShippingRate();
-    }
-
-    function renderOrderSummary(cart) {
-      const container = document.getElementById('checkoutItemsList');
-      const subtotalEl = document.getElementById('summarySubtotal');
-      const shippingFeeEl = document.getElementById('summaryShippingFee');
-      const totalEl = document.getElementById('summaryTotal');
-      const thresholdNoteEl = document.getElementById('shippingThresholdNote');
-      const cityLabelEl = document.getElementById('selectedCityLabel');
-      if (!container) return;
+    function renderOrderSummary() {
+      const cart = getCart();
+      const listEl = document.getElementById('checkoutItemsList');
+      if (!listEl) return;
 
       let subtotal = 0;
       let html = '';
 
       cart.forEach(item => {
-        const lineTotal = item.price * item.quantity;
-        subtotal += lineTotal;
+        const total = item.price * item.quantity;
+        subtotal += total;
         html += `
           <div class="order-item-row">
             <img src="${item.image_url}" alt="${item.name}" class="order-item-img">
             <div class="flex-grow-1">
-              <h6 class="font-heading mb-1 text-dark fs-6">${item.name}</h6>
-              <div class="text-muted small">${item.quantity} × ${formatPKR(item.price)}</div>
+              <h6 class="mb-0 fw-bold fs-7">${item.name}</h6>
+              <div class="d-flex gap-1 my-1">
+                ${item.condition_rating ? `<span class="badge bg-dark fs-8">${item.condition_rating}</span>` : ''}
+                ${item.size ? `<span class="badge bg-light text-dark border fs-8">${item.size}</span>` : ''}
+              </div>
+              <div class="small text-muted">${formatPKR(item.price)} &times; ${item.quantity}</div>
             </div>
-            <div class="fw-bold text-dark fs-6">${formatPKR(lineTotal)}</div>
+            <div class="fw-bold fs-7">${formatPKR(total)}</div>
           </div>
         `;
       });
 
-      const citySelect = document.getElementById('customerCitySelect');
-      const selectedCityName = (citySelect && citySelect.value) ? citySelect.value : 'Standard';
-      if (cityLabelEl) cityLabelEl.textContent = selectedCityName;
+      listEl.innerHTML = html;
 
-      const shippingFee = calculateShippingFee(subtotal);
-      const grandTotal = subtotal + shippingFee;
+      const isFree = subtotal >= _freeShippingThreshold;
+      const fee = isFree ? 0 : _standardShippingFee;
+      const grandTotal = subtotal + fee;
 
-      container.innerHTML = html;
-      if (subtotalEl) subtotalEl.textContent = formatPKR(subtotal);
-      if (shippingFeeEl) {
-        if (shippingFee === 0) {
-          shippingFeeEl.innerHTML = '<span class="badge bg-success text-white">FREE (Promo)</span>';
-        } else {
-          shippingFeeEl.textContent = formatPKR(shippingFee);
-        }
+      document.getElementById('summarySubtotal').textContent = formatPKR(subtotal);
+      const shipEl = document.getElementById('summaryShippingFee');
+      if (shipEl) {
+        shipEl.textContent = isFree ? 'FREE' : formatPKR(fee);
+        shipEl.className = isFree ? 'fw-bold text-success' : 'fw-semibold text-dark';
       }
-      if (totalEl) totalEl.textContent = formatPKR(grandTotal);
-      if (thresholdNoteEl) {
-        thresholdNoteEl.textContent = `Free shipping on orders of ${formatPKR(_storeFreeThreshold)} or above!`;
+      document.getElementById('summaryTotal').textContent = formatPKR(grandTotal);
+
+      const noteEl = document.getElementById('shippingThresholdNote');
+      if (noteEl) {
+        noteEl.textContent = `Free shipping on orders above ${formatPKR(_freeShippingThreshold)}!`;
       }
     }
 
-    function validatePhoneInput(phoneVal, countryCodeVal) {
-      if (!phoneVal || !phoneVal.trim()) return false;
-      const clean = phoneVal.trim();
-      if (/[^\d\s\-\.\(\)\+]/.test(clean)) return false;
-      const plusCount = (clean.match(/\+/g) || []).length;
-      if (plusCount > 1 || (plusCount === 1 && !clean.startsWith('+'))) return false;
-
-      const digitsOnly = clean.replace(/[^\d]/g, '');
-      if (digitsOnly.length < 7 || digitsOnly.length > 15) return false;
-      return true;
-    }
-
-    function initCheckoutForm(cart) {
+    function initCheckoutForm() {
       const form = document.getElementById('checkoutForm');
       const submitBtn = document.getElementById('submitOrderBtn');
-      const phoneInput = document.getElementById('customerPhone');
-      const phoneErrEl = document.getElementById('phoneErrorFeedback');
-      const payErrEl = document.getElementById('paymentMethodError');
       if (!form) return;
-
-      const citySelect = document.getElementById('customerCitySelect');
-      if (citySelect) {
-        citySelect.addEventListener('change', () => renderOrderSummary(cart));
-      }
-
-      let idempotencyKey = sessionStorage.getItem('hh_checkout_idempotency_key');
-      if (!idempotencyKey) {
-        idempotencyKey = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : generateFallbackUUID();
-        sessionStorage.setItem('hh_checkout_idempotency_key', idempotencyKey);
-      }
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        if (phoneErrEl) phoneErrEl.style.display = 'none';
-        if (payErrEl) payErrEl.style.display = 'none';
-
-        const rawPhone = phoneInput.value;
-        const countryCode = document.getElementById('countryCodeSelect') ? document.getElementById('countryCodeSelect').value : '+92';
+        const cart = getCart();
+        if (cart.length === 0) return;
 
         if (!_selectedPaymentMethod) {
-          if (payErrEl) payErrEl.style.display = 'block';
-        }
-
-        if (!form.checkValidity() || !validatePhoneInput(rawPhone, countryCode) || !_selectedPaymentMethod) {
-          form.classList.add('was-validated');
-          if (!validatePhoneInput(rawPhone, countryCode)) {
-            phoneInput.classList.add('is-invalid');
-            if (phoneErrEl) phoneErrEl.style.display = 'block';
-          }
+          document.getElementById('paymentMethodError').style.display = 'block';
           return;
         }
 
-        phoneInput.classList.remove('is-invalid');
-
-        const city = citySelect ? citySelect.value : '';
-        const postal = document.getElementById('customerPostal').value.trim();
-        const notes = document.getElementById('orderNotes').value.trim();
-        const fullAddress = [
-          document.getElementById('customerAddress').value.trim(),
-          city
-        ].filter(Boolean).join(', ');
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Processing order…';
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Processing Order…';
+
+        const name = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const countryCode = document.getElementById('countryCodeSelect').value;
+        const address = document.getElementById('customerAddress').value.trim();
+        const city = document.getElementById('customerCitySelect').value;
+        const postal = document.getElementById('customerPostal').value.trim();
+        const notes = document.getElementById('orderNotes').value.trim();
 
         try {
           const payload = {
-            customer_name: document.getElementById('customerName').value.trim(),
-            customer_phone: rawPhone.trim(),
+            customer_name: name,
+            customer_phone: phone,
             country_code: countryCode,
-            customer_address: fullAddress,
+            customer_address: address,
             customer_city: city,
             postal_code: postal,
             order_notes: notes,
             payment_method: _selectedPaymentMethod,
-            idempotency_key: idempotencyKey,
-            items: cart.map(item => ({
-              product_id: item.id,
-              quantity: item.quantity
-            }))
+            items: cart.map(i => ({ product_id: i.id, quantity: i.quantity }))
           };
 
           const res = await fetch('/api/create-order', {
@@ -664,47 +640,37 @@
           });
           const data = await res.json();
 
-          if (!res.ok || !data || !data.success) {
-            showToast(data?.error || 'Failed to place order. Please try again.', 'danger');
+          if (!res.ok || !data.success) {
+            showToast(data.error || 'Failed to place order. Please try again.', 'danger');
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="bi bi-bag-check me-2"></i> Place Order Now';
             return;
           }
 
-          // Order created successfully in Neon DB!
-          sessionStorage.removeItem('hh_cart');
-          sessionStorage.removeItem('hh_checkout_idempotency_key');
+          // Clear cart
+          sessionStorage.removeItem('hst_cart');
           updateCartUI();
 
+          _lastGeneratedOrderId = data.order_id;
           document.getElementById('successOrderId').textContent = '#' + data.order_id;
-          document.getElementById('successPaymentMethod').textContent = data.payment_method === 'ONLINE' ? 'Online Payment' : 'Cash on Delivery (COD)';
+          document.getElementById('successPaymentMethod').textContent = _selectedPaymentMethod === 'ONLINE' ? 'Online Payment' : 'Cash on Delivery (COD)';
 
-          const msgEl = document.getElementById('successMsgText');
-          if (data.payment_method === 'ONLINE') {
-            msgEl.innerHTML = 'Thank you for choosing Online Payment! Please send your payment screenshot to our official WhatsApp number along with your Order ID (<strong>#' + data.order_id + '</strong>) so we can verify your payment and proceed.';
-          } else {
-            msgEl.textContent = 'Thank you for shopping with Hand & Heart Studio. Your Cash on Delivery order has been placed in our database, and our team has been notified. We will contact you via WhatsApp shortly to confirm dispatch.';
+          const waBtn = document.getElementById('successWhatsAppBtn');
+          if (waBtn) {
+            const waText = encodeURIComponent(`Hi HS_Thrift! I just placed Order #${data.order_id} for ${formatPKR(data.total_amount)}. Please confirm my order!`);
+            waBtn.href = `https://wa.me/92319715071?text=${waText}`;
           }
 
-          const overlay = document.getElementById('successOverlay');
-          overlay.classList.add('show');
+          document.getElementById('successOverlay').classList.add('show');
 
         } catch (err) {
-          console.error('Checkout error:', err);
-          showToast('Connection error. Please check your internet and try again.', 'danger');
+          console.error('Order creation error:', err);
+          showToast('Connection error. Please try again.', 'danger');
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<i class="bi bi-bag-check me-2"></i> Place Order Now';
         }
       });
     }
-
-    function generateFallbackUUID() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-    }
   </script>
 </body>
-
 </html>

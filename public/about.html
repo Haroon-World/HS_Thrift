@@ -3,28 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Story | Hand & Heart Studio</title>
-  <meta name="description" content="The story behind Hand & Heart — a small artisan studio crafting handmade goods with care, natural materials, and heart.">  <meta name="theme-color" content="#3b2820">
+  <title>Our Story | HS_Thrift — Curated Vintage & Streetwear</title>
+  <meta name="description" content="The story behind HS_Thrift — curating hand-picked, steam-sanitized 90s vintage and streetwear in Pakistan at prices that make sense.">
+  <meta name="theme-color" content="#0F172A">
 
-  <!-- Favicon & Preload Assets -->
-  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-  <link rel="canonical" href="https://handandheartpk.vercel.app/about.html">
-  <meta property="og:title" content="Our Story | Hand &amp; Heart Studio — Daim Afzal">
-  <meta property="og:description" content="The story behind Hand &amp; Heart — an artisan studio by Master Craftsman Daim Afzal crafting handmade goods with care.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://handandheartpk.vercel.app/about.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Our Story | Hand &amp; Heart Studio">
-  <meta name="twitter:description" content="The story behind Hand &amp; Heart — a small artisan studio crafting handmade goods with care.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/luxury-theme.css">
@@ -35,10 +29,10 @@
   <div class="top-bar">
     <div class="container top-bar-grid fs-7">
       <div class="d-none d-md-flex align-items-center gap-1">
-        <i class="bi bi-whatsapp text-success me-1"></i> Order via WhatsApp — fast &amp; easy
+        <i class="bi bi-whatsapp text-success me-1"></i> WhatsApp Order: <a href="https://wa.me/92319715071" class="text-white text-decoration-none fw-semibold ms-1">0319715071</a>
       </div>
       <div class="text-center" id="topBarFreeShippingText">
-        <i class="bi bi-truck me-1"></i> Free shipping on orders above PKR 10,000
+        <i class="bi bi-truck me-1"></i> Free shipping on orders above Rs. 3,500
       </div>
       <div class="d-none d-md-flex align-items-center justify-content-end gap-3">
         <a href="contact.html">Contact Us</a>
@@ -47,212 +41,245 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="luxury-navbar" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand me-auto d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+  <nav class="luxury-navbar" role="navigation" aria-label="Main navigation">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
 
-      <ul class="navbar-nav d-none d-lg-flex flex-row align-items-center mx-auto mb-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-        <li class="nav-item"><a class="nav-link active" href="about.html">Our Story</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
+      <a href="index.html" class="brand-logo-text text-decoration-none">
+        HS<span class="thrift-highlight">_Thrift</span>
+        <span class="brand-badge-pill ms-1">OUR STORY</span>
+      </a>
 
-      <div class="d-none d-lg-flex align-items-center gap-2 ms-3">
-        <form action="shop.html" method="GET" role="search">
-          <input type="search" name="q" class="nav-search-input" placeholder="Search products…">
-        </form>
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
-        </button>
+      <div class="d-none d-lg-flex align-items-center gap-1 flex-grow-1 justify-content-center">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Tees</a>
+        <a href="about.html" class="nav-link active">Our Story</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </div>
 
-      <div class="d-flex d-lg-none align-items-center gap-1 ms-2">
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="navbar-icon-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
+          <i class="bi bi-bag fs-6"></i>
+          <span class="cart-badge-count js-cart-badge" style="display:none;">0</span>
         </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavAbout">
-          <i class="bi bi-list"></i>
+        <button class="d-lg-none navbar-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Menu">
+          <i class="bi bi-list fs-5"></i>
         </button>
-      </div>
-
-      <div class="collapse navbar-collapse w-100" id="mobileNavAbout">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-          <li class="nav-item"><a class="nav-link active" href="about.html">Our Story</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        </ul>
-        <div class="nav-mobile-footer">
-          <form action="shop.html" method="GET" class="flex-grow-1">
-            <input type="search" name="q" class="form-control rounded-pill px-3 py-2 fs-7" placeholder="Search products…">
-          </form>
-        </div>
       </div>
     </div>
   </nav>
 
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header border-bottom">
+      <span class="brand-logo-text">HS<span class="thrift-highlight">_Thrift</span></span>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="d-flex flex-column gap-1">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Vintage Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies & Sweaters</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Graphic Tees</a>
+        <a href="shop.html?category=denim-bottoms" class="nav-link">Cargo & Denim</a>
+        <a href="about.html" class="nav-link active fw-bold">Our Story</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </div>
+
   <!-- Page Header -->
-  <section class="page-section-sm bg-ivory">
-    <div class="container py-2 text-center">
-      <span class="section-overline">Behind The Brand</span>
-      <h1 class="font-heading display-4 mb-2">Crafted by Hand, Made with Heart.</h1>
-      <p class="text-muted mx-auto fs-5 mb-0" style="max-width: 600px;">
-        Discover the story of our artisan studio — bringing warmth and soul to every handmade creation.
+  <section class="py-5" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+    <div class="container text-center text-white">
+      <span class="badge mb-2 px-3 py-2 fw-bold rounded-pill" style="background:rgba(16, 185, 129, 0.2); color:var(--color-emerald-primary); border:1px solid rgba(16,185,129,0.3);">
+        <i class="bi bi-patch-check-fill me-1"></i> Behind The Brand
+      </span>
+      <h1 class="font-heading fw-black display-5 mb-2">Curated Thrift. Real Quality.</h1>
+      <p class="opacity-75 mx-auto mb-0" style="max-width: 580px;">
+        How HS_Thrift is revolutionizing sustainable fashion and streetwear in Pakistan, one rare drop at a time.
       </p>
     </div>
   </section>
 
-  <!-- Our Story Section -->
-  <section class="page-section">
+  <!-- Story Main Section -->
+  <section class="py-6" style="background:var(--color-cream-bg);">
     <div class="container">
-      <div class="craft-journey-card p-4 p-md-5 mb-5">
-        <div class="row align-items-center g-4 g-lg-5">
+      <div class="bg-white rounded-4 border p-4 p-md-5 shadow-sm mb-5">
+        <div class="row align-items-center g-5">
           <div class="col-lg-6">
-            <div class="rounded-4 overflow-hidden shadow-lg">
-              <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200&auto=format&fit=crop" alt="Artisan Studio" class="img-fluid" loading="lazy">
+            <div class="rounded-4 overflow-hidden position-relative shadow" style="aspect-ratio:4/3;">
+              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop" alt="Curated Thrift Collection" class="img-fluid w-100 h-100" style="object-fit:cover;">
+              <div class="position-absolute bottom-0 start-0 p-3 bg-dark bg-opacity-75 text-white w-100">
+                <small class="fw-bold">Every piece hand-graded before listing</small>
+              </div>
             </div>
           </div>
           <div class="col-lg-6">
-            <span class="section-overline">Our Origin</span>
-            <h2 class="font-heading display-5 mb-4">Our Craft Journey</h2>
-            <p class="text-muted mb-3">
-              Hand &amp; Heart was founded with a simple vision: to bring warmth, the beauty of handmade texture, and high-value craftsmanship into every home.
+            <span class="section-overline">Our Mission</span>
+            <h2 class="fw-black fs-2 mb-3" style="font-family:var(--font-heading);">Why HS_Thrift Exists</h2>
+            <p class="text-muted mb-3" style="line-height:1.75;">
+              Fast fashion has made clothing disposable, while authentic vintage and streetwear brands cost a small fortune in retail stores. We started <strong>HS_Thrift</strong> to change that.
             </p>
-            <p class="text-muted mb-4">
-              In a world that moves fast and mass-produces everything, we chose the path of quality craftsmanship. Every aromatherapy candle is hand-poured in small batches using natural ingredients. Every knit piece is woven thread by thread with patience and precision.
+            <p class="text-muted mb-4" style="line-height:1.75;">
+              We spend hundreds of hours digging through thousands of bales to uncover genuine vintage gems &mdash; 90s windbreakers, heavyweight boxy hoodies, washed band tees, and durable utility cargo pants. Every piece is steam-sanitized, inspected for flaws, condition-graded, and priced so anyone can dress with unique character.
             </p>
-            <div class="row g-3">
+            
+            <div class="row g-3 pt-2">
               <div class="col-6">
-                <div class="border-start border-3 border-terracotta ps-3 py-1">
-                  <h3 class="font-heading mb-0 text-dark">100% Natural</h3>
-                  <span class="small text-muted">Eco-Friendly Materials</span>
+                <div class="border-start border-3 border-success ps-3 py-1">
+                  <h4 class="fw-black mb-0 fs-5" style="color:var(--color-obsidian);">9/10 or 10/10</h4>
+                  <span class="small text-muted">Strict Quality Grading</span>
                 </div>
               </div>
               <div class="col-6">
-                <div class="border-start border-3 border-terracotta ps-3 py-1">
-                  <h3 class="font-heading mb-0 text-dark">Limited Editions</h3>
-                  <span class="small text-muted">Quality Over Quantity</span>
+                <div class="border-start border-3 border-success ps-3 py-1">
+                  <h4 class="fw-black mb-0 fs-5" style="color:var(--color-obsidian);">Steam Sanitized</h4>
+                  <span class="small text-muted">100% Odor &amp; Dirt Free</span>
                 </div>
               </div>
               <div class="col-6">
-                <div class="border-start border-3 border-terracotta ps-3 py-1">
-                  <h3 class="font-heading mb-0 text-dark">WhatsApp Orders</h3>
-                  <span class="small text-muted">Personal & Direct</span>
+                <div class="border-start border-3 border-success ps-3 py-1">
+                  <h4 class="fw-black mb-0 fs-5" style="color:var(--color-obsidian);">1 of 1 Pieces</h4>
+                  <span class="small text-muted">Unique Thrift Drops</span>
                 </div>
               </div>
               <div class="col-6">
-                <div class="border-start border-3 border-terracotta ps-3 py-1">
-                  <h3 class="font-heading mb-0 text-dark">Custom Made</h3>
-                  <span class="small text-muted">Tailored to You</span>
+                <div class="border-start border-3 border-success ps-3 py-1">
+                  <h4 class="fw-black mb-0 fs-5" style="color:var(--color-obsidian);">Direct WhatsApp</h4>
+                  <span class="small text-muted">Quick 30s Checkout</span>
                 </div>
               </div>
             </div>
-            <div class="mt-4">
-              <a href="shop.html" class="btn btn-luxury me-2">Explore Collection</a>
-              <a href="contact.html" class="btn btn-luxury-outline">Get in Touch</a>
+
+            <div class="mt-4 pt-2">
+              <a href="shop.html" class="btn btn-luxury me-2">Explore Latest Drops</a>
+              <a href="contact.html" class="btn btn-luxury-outline">Contact Us</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Philosophy -->
-      <div class="row justify-content-center mt-3">
-        <div class="col-lg-8 text-center">
-          <span class="section-overline">Our Philosophy</span>
-          <h2 class="font-heading display-5 mb-4">Every Detail, Made with Intention</h2>
-          <p class="lead text-dark font-heading fs-4 fst-italic mb-4">
-            "We believe in things made slowly — with character, with care, and with the warmth that only hands can give."
-          </p>
-          <p class="text-muted">
-            Daim Afzal, Master Artisan &amp; Founder — Lahore, Pakistan
-          </p>
+      <!-- Values Grid -->
+      <div class="row g-4 mt-2">
+        <div class="col-md-4">
+          <div class="bg-white p-4 rounded-4 border shadow-sm h-100 text-center">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px; background:rgba(16,185,129,0.15); color:var(--color-emerald-primary); font-size:1.8rem;">
+              <i class="bi bi-recycle"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Sustainable Fashion</h5>
+            <p class="text-muted small mb-0">Extending the life cycle of pre-loved clothing saves thousands of liters of water and cuts textile waste drastically.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-white p-4 rounded-4 border shadow-sm h-100 text-center">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px; background:rgba(245,158,11,0.15); color:var(--color-amber-accent); font-size:1.8rem;">
+              <i class="bi bi-currency-dollar"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Honest Pricing</h5>
+            <p class="text-muted small mb-0">No exorbitant markups. We price every piece based on its true thrift value so you get genuine quality for a fraction of original retail.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-white p-4 rounded-4 border shadow-sm h-100 text-center">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:60px; height:60px; background:rgba(15,23,42,0.1); color:var(--color-obsidian); font-size:1.8rem;">
+              <i class="bi bi-truck"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Fast Nationwide Dispatch</h5>
+            <p class="text-muted small mb-0">Cash on Delivery across Pakistan. Carefully packed, protected, and dispatched within 24 hours of your order.</p>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- Cart Offcanvas Drawer -->
+  <!-- Cart Drawer -->
   <div class="offcanvas offcanvas-end luxury-offcanvas" tabindex="-1" id="cartDrawer">
     <div class="offcanvas-header border-bottom py-3">
-      <h5 class="offcanvas-title font-heading fs-4">Shopping Cart</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <h5 class="fw-bold fs-5 mb-0"><i class="bi bi-bag me-2"></i>Shopping Bag</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
       <div id="cartDrawerItems" class="flex-grow-1 overflow-auto"></div>
       <div class="border-top pt-4 mt-auto">
         <div class="d-flex justify-content-between mb-2 fs-6">
-          <span>Subtotal</span>
+          <span class="fw-semibold">Subtotal</span>
           <span id="cartDrawerSubtotal" class="fw-bold">Rs. 0</span>
         </div>
-        <div class="d-flex justify-content-between mb-3 text-muted small">
-          <span>Shipping Fee</span>
-          <span>To be calculated via WhatsApp</span>
-        </div>
         <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">Proceed to Checkout</a>
-        <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Cart</a>
+        <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Bag</a>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="luxury-footer">
+  <footer class="footer-section">
     <div class="container">
-      <div class="row g-5">
-        <div class="col-lg-4 col-md-6">
-          <a class="footer-brand" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="footer-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
-          <p class="mb-4" style="max-width: 340px; font-size: 0.9rem;">
-            Handmade with care, presented wholeheartedly. Premium artisan handcrafts — eco-friendly, made in small batches.
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="brand-logo-text mb-3">
+            HS<span class="thrift-highlight">_Thrift</span>
+          </div>
+          <p class="opacity-75 mb-4" style="max-width:320px;">
+            Pakistan's premier curated thrift destination. Hand-picked, graded, and steam-sanitized vintage streetwear at prices that actually make sense.
           </p>
-          <div class="footer-social-links">
-            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Facebook" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/92319715071" class="btn btn-whatsapp px-3 py-2 fw-bold">
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp: 0319715071
+            </a>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6">
+        <div class="col-lg-2 col-6">
           <h5>Shop</h5>
-          <ul>
-            <li><a href="shop.html">All Products</a></li>
-            <li><a href="shop.html?sort=best_selling">Best Sellers</a></li>
-            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="shop.html">All Drops</a></li>
+            <li><a href="shop.html?category=vintage-jackets">Vintage Jackets</a></li>
+            <li><a href="shop.html?category=graphic-hoodies">Hoodies</a></li>
+            <li><a href="shop.html?category=retro-tees">Graphic Tees</a></li>
+            <li><a href="shop.html?category=denim-bottoms">Cargo & Denim</a></li>
+            <li><a href="shop.html?under_999=1" style="color:var(--color-amber-accent);">🔥 Under Rs. 999</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <h5>Info &amp; Support</h5>
-          <ul>
+        <div class="col-lg-2 col-6">
+          <h5>Info</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="about.html">Our Story</a></li>
-            <li><a href="contact.html">Contact Studio</a></li>
-            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <h5>Artisan Newsletter</h5>
-          <p class="small mb-3" style="color: rgba(220, 200, 180, 0.75);">Get limited-edition release updates straight to your inbox.</p>
-          <form class="js-newsletter-form">
-            <div class="input-group">
-              <input type="email" class="form-control bg-dark text-white border-secondary fs-7" placeholder="Your email address..." required>
-              <button type="submit" class="btn btn-luxury px-3 fs-8">Subscribe</button>
-            </div>
-          </form>
+        <div class="col-lg-4">
+          <h5>Get in Touch</h5>
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-whatsapp text-success fs-5"></i>
+              <a href="https://wa.me/92319715071" class="fw-semibold">0319715071</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope fs-5" style="color:var(--color-emerald-primary);"></i>
+              <a href="mailto:hsthrift59@gmail.com">hsthrift59@gmail.com</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt fs-5" style="color:var(--color-amber-accent);"></i>
+              <span class="opacity-75">Pakistan — Nationwide Delivery</span>
+            </li>
+          </ul>
         </div>
       </div>
-      <hr class="footer-divider">
-      <div class="footer-bottom">
-        <div>&copy; 2026 Hand &amp; Heart Studio. All rights reserved.</div>
-        <div class="d-flex align-items-center gap-4">
-          <div class="footer-trust-badge"><i class="bi bi-shield-check"></i> Secure via WhatsApp</div>
-          <div class="footer-trust-badge"><i class="bi bi-patch-check"></i> 100% Handmade</div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0 opacity-60">&copy; 2026 HS_Thrift. All rights reserved.</p>
+        <div class="d-flex gap-3 opacity-60">
+          <span>Curated · Graded · Sustainable</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login | Hand &amp; Heart Studio</title>
+  <title>Admin Login | HS_Thrift</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body class="admin-login-page">
 
   <div class="login-card">
-    <div class="brand text-center mb-2"><img src="../assets/logo.png" alt="Hand &amp; Heart" style="height: 64px; width: auto; object-fit: contain;"></div>
+    <div class="brand text-center mb-2"><img src="../assets/logo.png" alt="HS_Thrift" style="height: 52px; width: auto; object-fit: contain;"></div>
     <div class="brand-sub">Admin Panel</div>
 
     <div id="expiredAlert" class="alert alert-warning d-none mb-3" role="alert">
@@ -27,7 +27,7 @@
     <form id="loginForm" novalidate>
       <div class="form-group">
         <label for="adminEmail">Admin Email</label>
-        <input type="email" id="adminEmail" class="form-control" placeholder="admin@handandheart.com" required autocomplete="email">
+        <input type="email" id="adminEmail" class="form-control" placeholder="admin@hsthrift.com" required autocomplete="email">
       </div>
 
       <div class="form-group">
@@ -114,7 +114,7 @@
           return;
         }
 
-        if (!data && (email === 'handandheart09@gmail.com' || email === 'admin') && (password === 'admin123' || password === 'admin')) {
+        if (!data && (email === 'admin@hsthrift.com' || email === 'admin') && (password === 'Admin@1234' || password === 'admin')) {
           saveAuth('mock-preview-admin-jwt-token', email, remember);
           window.location.href = '/admin/dashboard.html';
           return;

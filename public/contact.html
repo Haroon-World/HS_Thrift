@@ -3,29 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Hand & Heart Studio</title>
-  <meta name="description" content="Get in touch with Hand & Heart Studio — for product questions, custom orders, or anything else. We respond via WhatsApp.">
-  <meta name="theme-color" content="#3b2820">
+  <title>Contact Us | HS_Thrift</title>
+  <meta name="description" content="Get in touch with HS_Thrift — WhatsApp order assistance, sizing help, and drop inquiries. Fast support.">
+  <meta name="theme-color" content="#0F172A">
 
-  <!-- Favicon & Preload Assets -->
-  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-  <link rel="canonical" href="https://handandheartpk.vercel.app/contact.html">
-  <meta property="og:title" content="Contact Us | Hand &amp; Heart Studio">
-  <meta property="og:description" content="Get in touch with Hand &amp; Heart Studio — for product questions, custom orders, or anything else. We respond via WhatsApp.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://handandheartpk.vercel.app/contact.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Contact Us | Hand &amp; Heart Studio">
-  <meta name="twitter:description" content="Get in touch with Hand &amp; Heart Studio — for product questions or custom orders.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/luxury-theme.css">
@@ -36,10 +29,10 @@
   <div class="top-bar">
     <div class="container top-bar-grid fs-7">
       <div class="d-none d-md-flex align-items-center gap-1">
-        <i class="bi bi-whatsapp text-success me-1"></i> Order via WhatsApp — fast &amp; easy
+        <i class="bi bi-whatsapp text-success me-1"></i> WhatsApp Order: <a href="https://wa.me/92319715071" class="text-white text-decoration-none fw-semibold ms-1">0319715071</a>
       </div>
       <div class="text-center" id="topBarFreeShippingText">
-        <i class="bi bi-truck me-1"></i> Free shipping on orders above PKR 10,000
+        <i class="bi bi-truck me-1"></i> Free shipping on orders above Rs. 3,500
       </div>
       <div class="d-none d-md-flex align-items-center justify-content-end gap-3">
         <a href="contact.html">Contact Us</a>
@@ -48,106 +41,125 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="luxury-navbar" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand me-auto d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+  <nav class="luxury-navbar" role="navigation" aria-label="Main navigation">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
 
-      <ul class="navbar-nav d-none d-lg-flex flex-row align-items-center mx-auto mb-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
-        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-      </ul>
+      <a href="index.html" class="brand-logo-text text-decoration-none">
+        HS<span class="thrift-highlight">_Thrift</span>
+        <span class="brand-badge-pill ms-1">HELP &amp; SUPPORT</span>
+      </a>
 
-      <div class="d-none d-lg-flex align-items-center gap-2 ms-3">
-        <form action="shop.html" method="GET" role="search">
-          <input type="search" name="q" class="nav-search-input" placeholder="Search products…">
-        </form>
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
-        </button>
+      <div class="d-none d-lg-flex align-items-center gap-1 flex-grow-1 justify-content-center">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Tees</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
       </div>
 
-      <div class="d-flex d-lg-none align-items-center gap-1 ms-2">
-        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
-          <i class="bi bi-bag"></i>
-          <span class="icon-label">Cart</span>
-          <span class="header-badge js-cart-badge" style="display:none">0</span>
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="navbar-icon-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
+          <i class="bi bi-bag fs-6"></i>
+          <span class="cart-badge-count js-cart-badge" style="display:none;">0</span>
         </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavContact">
-          <i class="bi bi-list"></i>
+        <button class="d-lg-none navbar-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Menu">
+          <i class="bi bi-list fs-5"></i>
         </button>
-      </div>
-
-      <div class="collapse navbar-collapse w-100" id="mobileNavContact">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-        </ul>
-        <div class="nav-mobile-footer">
-          <form action="shop.html" method="GET" class="flex-grow-1">
-            <input type="search" name="q" class="form-control rounded-pill px-3 py-2 fs-7" placeholder="Search products…">
-          </form>
-        </div>
       </div>
     </div>
   </nav>
 
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header border-bottom">
+      <span class="brand-logo-text">HS<span class="thrift-highlight">_Thrift</span></span>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="d-flex flex-column gap-1">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop All</a>
+        <a href="shop.html?category=vintage-jackets" class="nav-link">Vintage Jackets</a>
+        <a href="shop.html?category=graphic-hoodies" class="nav-link">Hoodies & Sweaters</a>
+        <a href="shop.html?category=retro-tees" class="nav-link">Graphic Tees</a>
+        <a href="shop.html?category=denim-bottoms" class="nav-link">Cargo & Denim</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="contact.html" class="nav-link active fw-bold">Contact</a>
+      </nav>
+    </div>
+  </div>
+
   <!-- Page Header -->
-  <section class="page-section-sm bg-ivory">
-    <div class="container text-center py-2">
-      <span class="section-overline">Get In Touch</span>
-      <h1 class="font-heading display-4 mb-2">Contact Our Studio</h1>
-      <p class="text-muted mx-auto mb-0" style="max-width: 550px;">
-        Have a question about a product, a custom order request, or anything else? Reach us through the form below or directly on WhatsApp.
+  <section class="py-5" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+    <div class="container text-center text-white">
+      <span class="badge mb-2 px-3 py-2 fw-bold rounded-pill" style="background:rgba(16, 185, 129, 0.2); color:var(--color-emerald-primary); border:1px solid rgba(16,185,129,0.3);">
+        <i class="bi bi-headset me-1"></i> Customer Support
+      </span>
+      <h1 class="font-heading fw-black display-5 mb-2">Get in Touch</h1>
+      <p class="opacity-75 mx-auto mb-0" style="max-width: 550px;">
+        Questions about condition ratings, sizing, or want to place a custom order? We reply fast on WhatsApp.
       </p>
     </div>
   </section>
 
   <!-- Contact Content -->
-  <section class="page-section">
+  <section class="py-6" style="background:var(--color-cream-bg);">
     <div class="container">
       <div class="row g-5">
-        <!-- Studio Info -->
+        
+        <!-- Info Cards -->
         <div class="col-lg-5">
-          <div class="bg-white p-5 rounded-4 border border-beige shadow-sm h-100">
-            <h3 class="font-heading mb-4">Studio Information</h3>
+          <div class="bg-white p-4 p-md-5 rounded-4 border shadow-sm h-100">
+            <h4 class="fw-bold mb-4" style="font-family:var(--font-heading);">Official Contact Info</h4>
 
             <div class="d-flex gap-3 mb-4">
-              <div class="stat-icon"><i class="bi bi-whatsapp text-success fs-3"></i></div>
+              <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px; height:48px; background:rgba(16,185,129,0.15); color:var(--color-emerald-primary); font-size:1.4rem;">
+                <i class="bi bi-whatsapp"></i>
+              </div>
               <div>
-                <h6 class="fw-bold mb-1">WhatsApp Studio</h6>
-                <p class="text-muted small mb-0">Order &amp; product consultations directly via WhatsApp.</p>
-                <!-- [PLACEHOLDER] Replace with real WhatsApp number -->
-                <a href="https://wa.me/923124894571" class="small text-terracotta fw-semibold">+92 312-4894571</a>
+                <h6 class="fw-bold mb-1">WhatsApp Fast Support</h6>
+                <p class="text-muted small mb-1">Order directly or ask questions in 30 seconds.</p>
+                <a href="https://wa.me/92319715071" target="_blank" class="fw-bold text-success text-decoration-none">
+                  0319715071 <i class="bi bi-arrow-up-right small"></i>
+                </a>
               </div>
             </div>
 
             <div class="d-flex gap-3 mb-4">
-              <div class="stat-icon"><i class="bi bi-envelope text-terracotta fs-3"></i></div>
+              <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px; height:48px; background:rgba(245,158,11,0.15); color:var(--color-amber-accent); font-size:1.4rem;">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
               <div>
-                <h6 class="fw-bold mb-1">Email</h6>
-                <p class="text-muted small mb-0">handandheart09@gmail.com</p>
+                <h6 class="fw-bold mb-1">Mobile / Phone</h6>
+                <p class="text-muted small mb-1">Available 10:00 AM – 9:00 PM PKT.</p>
+                <a href="tel:0319715071" class="fw-bold text-dark text-decoration-none">
+                  0319715071
+                </a>
               </div>
             </div>
 
             <div class="d-flex gap-3 mb-4">
-              <div class="stat-icon"><i class="bi bi-clock text-warning fs-3"></i></div>
+              <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px; height:48px; background:rgba(15,23,42,0.1); color:var(--color-obsidian); font-size:1.4rem;">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
               <div>
-                <h6 class="fw-bold mb-1">Studio Hours</h6>
-                <p class="text-muted small mb-0">Monday – Saturday: 09:00 – 17:00 PKT</p>
+                <h6 class="fw-bold mb-1">Email Inquiries</h6>
+                <p class="text-muted small mb-1">For collaborations and customer queries.</p>
+                <a href="mailto:hsthrift59@gmail.com" class="fw-bold text-dark text-decoration-none">
+                  hsthrift59@gmail.com
+                </a>
               </div>
             </div>
 
             <div class="d-flex gap-3">
-              <div class="stat-icon"><i class="bi bi-geo-alt text-terracotta fs-3"></i></div>
+              <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px; height:48px; background:rgba(16,185,129,0.15); color:var(--color-emerald-primary); font-size:1.4rem;">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
               <div>
-                <h6 class="fw-bold mb-1">Location</h6>
-                <p class="text-muted small mb-0">Lahore, Pakistan</p>
+                <h6 class="fw-bold mb-1">Delivery Area</h6>
+                <p class="text-muted small mb-0">Nationwide courier delivery across all cities in Pakistan.</p>
               </div>
             </div>
           </div>
@@ -155,169 +167,162 @@
 
         <!-- Contact Form -->
         <div class="col-lg-7">
-          <div class="bg-white p-5 rounded-4 border border-beige shadow-sm">
-            <h3 class="font-heading mb-4">Send a Message</h3>
-            <form id="contactForm" novalidate>
+          <div class="bg-white p-4 p-md-5 rounded-4 border shadow-sm">
+            <h4 class="fw-bold mb-2" style="font-family:var(--font-heading);">Send Us a Message</h4>
+            <p class="text-muted small mb-4">Fill in this quick form and our team will get back to you shortly.</p>
+
+            <form id="contactForm">
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                  <label class="form-label fw-semibold">Full Name</label>
-                  <input type="text" class="form-control" placeholder="Your name" required>
+                  <label class="form-label small fw-bold">Your Name <span class="text-danger">*</span></label>
+                  <input type="text" id="cName" class="form-control rounded-3" placeholder="Full name" required>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label fw-semibold">Email / WhatsApp</label>
-                  <input type="text" class="form-control" placeholder="Your contact" required>
+                  <label class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
+                  <input type="email" id="cEmail" class="form-control rounded-3" placeholder="Your email" required>
                 </div>
               </div>
 
               <div class="mb-3">
-                <label class="form-label fw-semibold">Subject</label>
-                <input type="text" class="form-control" placeholder="Product Question / Custom Order">
+                <label class="form-label small fw-bold">Subject</label>
+                <input type="text" id="cSubject" class="form-control rounded-3" placeholder="Sizing question / order query / drop request">
               </div>
 
               <div class="mb-4">
-                <label class="form-label fw-semibold">Message</label>
-                <textarea class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+                <label class="form-label small fw-bold">Message <span class="text-danger">*</span></label>
+                <textarea id="cMessage" class="form-control rounded-3" rows="5" placeholder="How can we help you today?" required></textarea>
               </div>
 
-              <button type="submit" class="btn btn-luxury w-100 py-3">Send Message</button>
+              <button type="submit" id="cSubmitBtn" class="btn btn-luxury w-100 py-3 fw-bold">
+                <i class="bi bi-send me-1"></i> Send Message
+              </button>
             </form>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Cart Offcanvas Drawer -->
+  <!-- Cart Drawer -->
   <div class="offcanvas offcanvas-end luxury-offcanvas" tabindex="-1" id="cartDrawer">
     <div class="offcanvas-header border-bottom py-3">
-      <h5 class="offcanvas-title font-heading fs-4">Shopping Cart</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <h5 class="fw-bold fs-5 mb-0"><i class="bi bi-bag me-2"></i>Shopping Bag</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
       <div id="cartDrawerItems" class="flex-grow-1 overflow-auto"></div>
       <div class="border-top pt-4 mt-auto">
         <div class="d-flex justify-content-between mb-2 fs-6">
-          <span>Subtotal</span>
+          <span class="fw-semibold">Subtotal</span>
           <span id="cartDrawerSubtotal" class="fw-bold">Rs. 0</span>
         </div>
-        <div class="d-flex justify-content-between mb-3 text-muted small">
-          <span>Shipping Fee</span>
-          <span>To be calculated via WhatsApp</span>
-        </div>
         <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">Proceed to Checkout</a>
-        <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Cart</a>
+        <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Bag</a>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="luxury-footer">
+  <footer class="footer-section">
     <div class="container">
-      <div class="row g-5">
-        <div class="col-lg-4 col-md-6">
-          <a class="footer-brand" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="footer-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
-          <p class="mb-4" style="max-width: 340px; font-size: 0.9rem;">
-            Handmade with care, presented wholeheartedly. Premium artisan handcrafts — eco-friendly, made in small batches.
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="brand-logo-text mb-3">
+            HS<span class="thrift-highlight">_Thrift</span>
+          </div>
+          <p class="opacity-75 mb-4" style="max-width:320px;">
+            Pakistan's premier curated thrift destination. Hand-picked, graded, and steam-sanitized vintage streetwear at prices that actually make sense.
           </p>
-          <div class="footer-social-links">
-            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Facebook" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/92319715071" class="btn btn-whatsapp px-3 py-2 fw-bold">
+              <i class="bi bi-whatsapp me-1"></i> WhatsApp: 0319715071
+            </a>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6">
+        <div class="col-lg-2 col-6">
           <h5>Shop</h5>
-          <ul>
-            <li><a href="shop.html">All Products</a></li>
-            <li><a href="shop.html?sort=best_selling">Best Sellers</a></li>
-            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="shop.html">All Drops</a></li>
+            <li><a href="shop.html?category=vintage-jackets">Vintage Jackets</a></li>
+            <li><a href="shop.html?category=graphic-hoodies">Hoodies</a></li>
+            <li><a href="shop.html?category=retro-tees">Graphic Tees</a></li>
+            <li><a href="shop.html?category=denim-bottoms">Cargo & Denim</a></li>
+            <li><a href="shop.html?under_999=1" style="color:var(--color-amber-accent);">🔥 Under Rs. 999</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <h5>Info &amp; Support</h5>
-          <ul>
+        <div class="col-lg-2 col-6">
+          <h5>Info</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="about.html">Our Story</a></li>
-            <li><a href="contact.html">Contact Studio</a></li>
-            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <h5>Artisan Newsletter</h5>
-          <p class="small mb-3" style="color: rgba(220, 200, 180, 0.75);">Get limited-edition release updates straight to your inbox.</p>
-          <form class="js-newsletter-form">
-            <div class="input-group">
-              <input type="email" class="form-control bg-dark text-white border-secondary fs-7" placeholder="Your email address..." required>
-              <button type="submit" class="btn btn-luxury px-3 fs-8">Subscribe</button>
-            </div>
-          </form>
+        <div class="col-lg-4">
+          <h5>Get in Touch</h5>
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-whatsapp text-success fs-5"></i>
+              <a href="https://wa.me/92319715071" class="fw-semibold">0319715071</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope fs-5" style="color:var(--color-emerald-primary);"></i>
+              <a href="mailto:hsthrift59@gmail.com">hsthrift59@gmail.com</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt fs-5" style="color:var(--color-amber-accent);"></i>
+              <span class="opacity-75">Pakistan — Nationwide Delivery</span>
+            </li>
+          </ul>
         </div>
       </div>
-      <hr class="footer-divider">
-      <div class="footer-bottom">
-        <div>&copy; 2026 Hand &amp; Heart Studio. All rights reserved.</div>
-        <div class="d-flex align-items-center gap-4">
-          <div class="footer-trust-badge"><i class="bi bi-shield-check"></i> Secure via WhatsApp</div>
-          <div class="footer-trust-badge"><i class="bi bi-patch-check"></i> 100% Handmade</div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0 opacity-60">&copy; 2026 HS_Thrift. All rights reserved.</p>
+        <div class="d-flex gap-3 opacity-60">
+          <span>Curated · Graded · Sustainable</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('contactForm');
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const submitBtn = form.querySelector('button[type="submit"]');
-          const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('cSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Sending…';
 
-          const nameInput = form.querySelector('input[placeholder="Your name"]');
-          const contactInput = form.querySelector('input[placeholder="Your contact"]');
-          const subjectInput = form.querySelector('input[placeholder="Product Question / Custom Order"]');
-          const messageInput = form.querySelector('textarea');
+      try {
+        const payload = {
+          name: document.getElementById('cName').value.trim(),
+          email: document.getElementById('cEmail').value.trim(),
+          subject: document.getElementById('cSubject').value.trim(),
+          message: document.getElementById('cMessage').value.trim()
+        };
 
-          const name = nameInput ? nameInput.value.trim() : '';
-          const contact = contactInput ? contactInput.value.trim() : '';
-          const subject = subjectInput ? subjectInput.value.trim() : '';
-          const message = messageInput ? messageInput.value.trim() : '';
-
-          if (!name || !contact || !message) {
-            showToast('Please fill out your name, contact info, and message.', 'warning');
-            return;
-          }
-
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending message…';
-          }
-
-          try {
-            const res = await fetch('/api/contact', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, contact, subject, message })
-            });
-            const data = await res.json();
-
-            if (res.ok && data && data.success) {
-              showToast('✓ Message sent! Our team has been notified by email.', 'success');
-              form.reset();
-            } else {
-              showToast(data.error || 'Failed to send message. Please try again.', 'danger');
-            }
-          } catch (err) {
-            showToast('Network error while sending message. Please try again.', 'danger');
-          } finally {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.innerHTML = originalBtnText;
-            }
-          }
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
+        const data = await res.json();
+
+        if (data.success) {
+          showToast('Your message has been sent successfully! We will get back to you soon.', 'success');
+          document.getElementById('contactForm').reset();
+        } else {
+          showToast(data.message || 'Failed to send message. Please reach out via WhatsApp.', 'warning');
+        }
+      } catch (err) {
+        showToast('Connection error. Please contact us via WhatsApp: 0319715071.', 'danger');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-send me-1"></i> Send Message';
       }
     });
   </script>
