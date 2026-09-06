@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | Admin Hand &amp; Heart</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-text-wrap">
+        <div class="brand-name"><img src="../assets/logo.png" alt="Hand &amp; Heart" style="height: 38px; width: auto; object-fit: contain;"></div>
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+      <button type="button" class="sidebar-toggle-btn js-sidebar-toggle" onclick="toggleAdminSidebar()" title="Toggle Sidebar (Expand/Collapse)">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+    </div>
+    <ul class="sidebar-nav">
+      <li><div class="nav-section">Main</div></li>
+      <li><a href="dashboard.html"><i class="bi bi-grid-1x2"></i> <span>Dashboard</span></a></li>
+      <li><a href="orders.html"><i class="bi bi-bag-check"></i> <span>Orders</span></a></li>
+      <li><div class="nav-section">Catalog</div></li>
+      <li><a href="products.html" class="active"><i class="bi bi-box-seam"></i> <span>Products</span></a></li>
+      <li><a href="testimonials.html"><i class="bi bi-chat-quote"></i> <span>Testimonials</span></a></li>
+      <li><div class="nav-section">System</div></li>
+      <li><a href="settings.html"><i class="bi bi-gear"></i> <span>Settings</span></a></li>
+      <li><div class="nav-section">Account</div></li>
+      <li><a href="#" class="js-admin-logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a></li>
+    </ul>
+    <div class="sidebar-footer" style="color:rgba(255,255,255,.35);font-size:.7rem;">
+      <span>Logged in as: <strong id="adminEmailDisplay" style="color:rgba(255,255,255,.6);">—</strong></span>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="page-title">Product Catalog Management</div>
+      <div style="display:flex;gap:.6rem;">
+        <button class="btn-admin-ghost" id="refreshProductsBtn" onclick="loadProducts()" title="Re-fetch latest products from Neon database">
+          <i class="bi bi-arrow-repeat me-1"></i> Refresh
+        </button>
+        <button class="btn-admin-primary" onclick="openProductModal()">
+          <i class="bi bi-plus-lg me-1"></i> Add New Product
+        </button>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-card">
+        <div class="admin-card-header" style="flex-wrap:wrap;gap:1rem;">
+          <h5>All Products</h5>
+          <div style="display:flex;align-items:center;gap:1.5rem;">
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.8rem;cursor:pointer;">
+              <input type="checkbox" id="showArchived" style="accent-color:var(--admin-accent);"> Show Archived Products
+            </label>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="admin-table">            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Original Price</th>
+                <th>Sale Price</th>
+                <th title="Checked = displayed in Homepage Featured section. Unchecked = shown on Shop page only.">Show on Homepage</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <tr><td colspan="7" class="table-loading"><i class="bi bi-arrow-repeat"></i> Loading product catalog from database…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Add/Edit Modal -->
+<div class="admin-modal-overlay" id="productModal">
+  <div class="admin-modal" style="max-width:650px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+      <h4 id="productModalTitle" style="margin:0;">Add Product</h4>
+      <button onclick="closeProductModal()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--admin-muted);">&times;</button>
+    </div>
+
+    <input type="hidden" id="editProductId">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Product Name *</label>
+        <input type="text" id="pName" class="form-control" placeholder="Hand-Poured Soy Candle">
+      </div>
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Short Description</label>
+        <input type="text" id="pShortDesc" class="form-control" placeholder="One-line subtitle for product card">
+      </div>
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Full Description</label>
+        <textarea id="pDesc" class="form-control" rows="3" placeholder="Detailed description of materials, scent notes, care instructions, etc."></textarea>
+      </div>
+
+      <!-- Pricing section -->
+      <div class="form-group">
+        <label>Regular Price (PKR) *</label>
+        <input type="number" id="pPrice" class="form-control" placeholder="1850" min="0">
+      </div>
+      <div class="form-group">
+        <label>Sale / Discount Price (PKR)</label>
+        <input type="number" id="pSalePrice" class="form-control" placeholder="Optional e.g. 1500" min="0">
+      </div>
+
+      <!-- Craft Time & Materials -->
+      <div class="form-group">
+        <label>Craft Time (Hours)</label>
+        <input type="number" id="pCraftedTimeHours" class="form-control" placeholder="4" min="1">
+      </div>
+      <div class="form-group">
+        <label>Materials Used</label>
+        <input type="text" id="pMaterials" class="form-control" placeholder="e.g. 100% Soy Wax, Lavender Oil">
+      </div>
+
+      <!-- Image URL / PC Storage Upload -->
+      <div class="form-group" style="grid-column:1/-1;">
+        <label style="font-weight:700;">Product Image (Upload from PC Storage or Web URL)</label>
+        
+        <!-- Drag & Drop Zone for PC Storage -->
+        <div id="imageDropZone" style="border:2px dashed var(--admin-border);border-radius:10px;padding:1.25rem;text-align:center;cursor:pointer;background:#faf9f7;transition:all .2s;position:relative;" onclick="document.getElementById('imageFileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <div id="dropZoneContent">
+            <i class="bi bi-cloud-arrow-up text-terracotta" style="font-size:2.2rem;"></i>
+            <p style="margin:.4rem 0 .2rem;font-size:.85rem;font-weight:700;color:var(--admin-text);">Click to upload from PC storage or drag &amp; drop image here</p>
+            <p style="font-size:.75rem;color:var(--admin-muted);margin:0;">Supports JPG, PNG, WEBP files</p>
+          </div>
+          <div id="imagePreviewWrap" style="display:none;">
+            <img id="imagePreview" src="" style="max-height:140px;max-width:100%;border-radius:8px;object-fit:contain;border:1px solid var(--admin-border);">
+            <p id="imagePreviewName" style="font-size:.75rem;color:var(--admin-muted);margin-top:.4rem;margin-bottom:0;"></p>
+            <button type="button" onclick="clearImageUpload(event)" style="position:absolute;top:.5rem;right:.5rem;background:#fee2e2;border:none;color:#991b1b;border-radius:6px;padding:.25rem .5rem;font-size:.75rem;cursor:pointer;font-weight:600;"><i class="bi bi-x-lg"></i> Remove Image</button>
+          </div>
+        </div>
+        <input type="file" id="imageFileInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleFileSelect(this.files[0])">
+
+        <details style="margin-top:.6rem;">
+          <summary style="font-size:.78rem;color:var(--admin-muted);cursor:pointer;font-weight:600;">Or enter Web Image URL manually</summary>
+          <input type="url" id="pImageUrl" class="form-control form-control-sm" placeholder="https://images.unsplash.com/..." style="margin-top:.4rem;" oninput="syncUrlToPreview(this.value)">
+        </details>
+      </div>
+
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Category</label>
+        <select id="pCategoryId" class="form-control">
+          <option value="">— Select Category —</option>
+          <option value="1">Aromatherapy Candles</option>
+          <option value="2">Knit Crafts</option>
+          <option value="3">Artisan Gift Sets</option>
+        </select>
+      </div>
+
+      <!-- Feature Toggles -->
+      <div class="form-group" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;background:#f9f8f6;padding:.75rem;border-radius:8px;">
+        <label style="display:flex;align-items:center;gap:.5rem;margin:0;font-size:.85rem;cursor:pointer;">
+          <input type="checkbox" id="pStockStatus" checked style="width:16px;height:16px;accent-color:var(--admin-accent);"> In Stock
+        </label>
+        <label style="display:flex;align-items:center;gap:.5rem;margin:0;font-size:.85rem;cursor:pointer;">
+          <input type="checkbox" id="pBestSellerCheck" style="width:16px;height:16px;accent-color:var(--admin-accent);"> Best Seller Badge
+        </label>
+        <label style="display:flex;align-items:center;gap:.5rem;margin:0;font-size:.85rem;cursor:pointer;">
+          <input type="checkbox" id="pNewArrivalCheck" checked style="width:16px;height:16px;accent-color:var(--admin-accent);"> New Arrival Badge
+        </label>
+      </div>
+    </div>
+
+    <div id="productFormError" style="color:#991b1b;font-size:.82rem;margin-top:.5rem;"></div>
+    <div style="display:flex;justify-content:flex-end;gap:.6rem;margin-top:1.25rem;">
+      <button class="btn-admin-ghost" type="button" onclick="closeProductModal()">Cancel</button>
+      <button class="btn-admin-primary" id="saveProductBtn" type="button" onclick="saveProduct()"><i class="bi bi-check2 me-1"></i> Save Product</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+<script>
+  requireAuth();
+  let allProducts = [];
+
+  async function loadProducts() {
+    const tbody = document.getElementById('productsTableBody');
+    const refreshBtn = document.getElementById('refreshProductsBtn');
+    if (refreshBtn) { refreshBtn.disabled = true; refreshBtn.innerHTML = '<i class="bi bi-arrow-repeat me-1 spin"></i> Loading…'; }
+
+    try {
+      const prodResult = await adminFetch(`/api/admin-products?_=${Date.now()}`);
+      if (prodResult && prodResult.data && prodResult.data.success && Array.isArray(prodResult.data.products)) {
+        allProducts = prodResult.data.products;
+        renderProducts();
+      } else {
+        const errorMsg = prodResult?.data?.error || 'Unable to load the latest products. Please try again.';
+        tbody.innerHTML = `<tr><td colspan="7" class="table-empty text-danger"><i class="bi bi-exclamation-triangle-fill me-1"></i> ${errorMsg} <button class="btn-admin-ghost ms-2" onclick="loadProducts()"><i class="bi bi-arrow-repeat"></i> Refresh</button></td></tr>`;
+      }
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="7" class="table-empty text-danger"><i class="bi bi-exclamation-triangle-fill me-1"></i> Unable to load the latest products. Please try again. <button class="btn-admin-ghost ms-2" onclick="loadProducts()"><i class="bi bi-arrow-repeat"></i> Refresh</button></td></tr>`;
+    } finally {
+      if (refreshBtn) { refreshBtn.disabled = false; refreshBtn.innerHTML = '<i class="bi bi-arrow-repeat me-1"></i> Refresh'; }
+    }
+  }
+
+  function renderProducts() {
+    const showArchived = document.getElementById('showArchived').checked;
+    const filtered = showArchived ? allProducts : allProducts.filter(p => !p.is_archived);
+    const tbody = document.getElementById('productsTableBody');
+
+    if (!filtered.length) {
+      tbody.innerHTML = `<tr><td colspan="7" class="table-empty"><i class="bi bi-inbox"></i> No products found in database.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(p => {
+      const isDiscounted = p.sale_price && p.sale_price > 0 && p.sale_price < p.price;
+      const categoryName = p.category ? (p.category.name || p.category) : (p.category_name || 'Artisan Craft');
+      const img = p.image_url || p.image || '';
+
+      return `
+        <tr style="${p.is_archived ? 'opacity:.5;' : ''}">
+          <td>
+            <div style="display:flex;align-items:center;gap:.6rem;">
+              ${img ? `<img src="${img}" style="width:40px;height:48px;object-fit:cover;border-radius:6px;flex-shrink:0;">` : ''}
+              <div>
+                <div style="font-weight:600;">${p.name}</div>
+                ${p.is_best_seller ? '<span class="badge bg-warning text-dark" style="font-size:.65rem;margin-right:.2rem;">Best Seller</span>' : ''}
+                ${p.is_new_arrival ? '<span class="badge bg-info text-white" style="font-size:.65rem;">New</span>' : ''}
+              </div>
+            </div>
+          </td>
+          <td style="color:var(--admin-muted);font-size:.82rem;">${categoryName}</td>
+          <td style="${isDiscounted ? 'text-decoration:line-through;color:var(--admin-muted);' : 'font-weight:700;'}">${formatPKR(p.price)}</td>
+          <td>
+            ${isDiscounted 
+              ? `<span style="color:#b91c1c;font-weight:700;">${formatPKR(p.sale_price)}</span> <span class="badge bg-danger ms-1" style="font-size:.65rem;">Sale</span>`
+              : '<span class="text-muted">—</span>'}
+          </td>
+          <td>
+            <label style="cursor:pointer;margin:0;display:flex;align-items:center;gap:.3rem;" title="Checked = visible in Homepage Featured section">
+              <input type="checkbox" ${p.is_featured ? 'checked' : ''} onchange="toggleFeatured(${p.id}, this.checked)" style="accent-color:var(--admin-accent);width:16px;height:16px;">
+              <span style="font-size:.8rem;color:${p.is_featured ? 'var(--admin-accent)' : 'var(--admin-muted)'};font-weight:${p.is_featured ? '600' : '400'};">${p.is_featured ? 'Homepage ⭐' : 'Shop Only'}</span>
+            </label>
+          </td>
+          <td>
+            <span class="badge ${p.stock_status !== false ? 'bg-success' : 'bg-secondary'}" style="font-size:.7rem;">
+              ${p.stock_status !== false ? 'In Stock' : 'Out of Stock'}
+            </span>
+          </td>
+          <td>
+            <div style="display:flex;gap:.3rem;">
+              <button class="btn-admin-ghost" style="padding:.2rem .4rem;" onclick='editProduct(${JSON.stringify(p).replace(/'/g, "&apos;")})' title="Edit product"><i class="bi bi-pencil"></i></button>
+              ${p.is_archived
+                ? `<button class="btn-admin-ghost text-success" style="padding:.2rem .4rem;" onclick="toggleArchive(${p.id}, false)" title="Restore product"><i class="bi bi-arrow-counterclockwise"></i></button>`
+                : `<button class="btn-admin-ghost text-warning" style="padding:.2rem .4rem;" onclick="toggleArchive(${p.id}, true)" title="Archive product"><i class="bi bi-archive"></i></button>`
+              }
+              <button class="btn-admin-ghost text-danger" style="padding:.2rem .4rem;" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')" title="Permanently delete product"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  document.getElementById('showArchived').addEventListener('change', renderProducts);
+
+  async function toggleFeatured(id, isFeatured) {
+    try {
+      const res = await adminFetch(`/api/admin-products?id=${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ is_featured: isFeatured })
+      });
+      if (res && res.data && res.data.success) {
+        showAdminToast(isFeatured ? '✓ Product updated and visible in Homepage Featured section!' : '✓ Product removed from Homepage (still visible on Shop page).', 'success');
+        await loadProducts();
+      } else {
+        showAdminToast(res?.data?.error || 'Unable to update product. Please try again.', 'danger');
+        loadProducts();
+      }
+    } catch (e) {
+      showAdminToast('Unable to update product. Please try again.', 'danger');
+      loadProducts();
+    }
+  }
+
+  function openProductModal(product = null) {
+    document.getElementById('productModalTitle').textContent = product ? 'Edit Product' : 'Add New Product';
+    document.getElementById('editProductId').value   = product?.id || '';
+    document.getElementById('pName').value            = product?.name || '';
+    document.getElementById('pShortDesc').value       = product?.short_description || '';
+    document.getElementById('pDesc').value            = product?.description || '';
+    document.getElementById('pPrice').value           = product?.price || '';
+    document.getElementById('pSalePrice').value       = product?.sale_price || '';
+    document.getElementById('pCraftedTimeHours').value = product?.crafted_time_hours || 4;
+    document.getElementById('pMaterials').value        = product?.materials || '';
+    document.getElementById('pImageUrl').value        = product?.image_url || product?.image || '';
+    document.getElementById('pCategoryId').value     = product?.category_id || product?.category?.id || '1';
+    
+    document.getElementById('pStockStatus').checked   = product ? product.stock_status !== false : true;
+    document.getElementById('pBestSellerCheck').checked = product ? !!product.is_best_seller : false;
+    document.getElementById('pNewArrivalCheck').checked = product ? !!product.is_new_arrival : true;
+
+    syncUrlToPreview(document.getElementById('pImageUrl').value);
+    document.getElementById('productFormError').textContent = '';
+    document.getElementById('productModal').classList.add('show');
+  }
+
+  function editProduct(product) { openProductModal(product); }
+  function closeProductModal() { document.getElementById('productModal').classList.remove('show'); }
+
+  async function saveProduct() {
+    const id        = document.getElementById('editProductId').value;
+    const name      = document.getElementById('pName').value.trim();
+    const priceVal  = document.getElementById('pPrice').value;
+    const price     = parseInt(priceVal);
+    const rawSale   = document.getElementById('pSalePrice').value;
+    const salePrice = rawSale !== '' && rawSale !== null ? parseInt(rawSale) : null;
+    const errEl     = document.getElementById('productFormError');
+    const saveBtn   = document.getElementById('saveProductBtn');
+
+    errEl.textContent = '';
+    if (!name || isNaN(price)) { errEl.textContent = 'Product name and valid price are required.'; return; }
+
+    const isBestSeller = document.getElementById('pBestSellerCheck').checked;
+    const isNewArrival = document.getElementById('pNewArrivalCheck').checked;
+    const stockStatus  = document.getElementById('pStockStatus').checked;
+    const imageUrl     = document.getElementById('pImageUrl').value.trim();
+    const categoryId   = document.getElementById('pCategoryId').value;
+    const craftedHours = parseInt(document.getElementById('pCraftedTimeHours').value) || 4;
+    const materials    = document.getElementById('pMaterials').value.trim();
+
+    const payload = {
+      name,
+      short_description: document.getElementById('pShortDesc').value.trim(),
+      description: document.getElementById('pDesc').value.trim(),
+      price,
+      sale_price: salePrice,
+      image: imageUrl,
+      image_url: imageUrl,
+      category_id: categoryId,
+      stock_status: stockStatus,
+      is_best_seller: isBestSeller,
+      is_new_arrival: isNewArrival,
+      crafted_time_hours: craftedHours,
+      materials: materials
+    };
+
+    saveBtn.disabled = true; saveBtn.innerHTML = '<i class="bi bi-arrow-repeat me-1 spin"></i> Saving…';
+
+    try {
+      const res = await adminFetch(id ? `/api/admin-products?id=${id}` : '/api/admin-products', {
+        method: id ? 'PATCH' : 'POST',
+        body: JSON.stringify(payload)
+      });
+
+      if (res && res.data && res.data.success) {
+        showAdminToast(id ? 'Product updated in database successfully!' : 'New product created in database successfully!', 'success');
+        closeProductModal();
+        await loadProducts();
+      } else {
+        errEl.textContent = res?.data?.error || 'Unable to save product to database. Please try again.';
+      }
+    } catch (e) {
+      errEl.textContent = 'Unable to save product to database. Please check connection and try again.';
+    } finally {
+      saveBtn.disabled = false; saveBtn.innerHTML = '<i class="bi bi-check2 me-1"></i> Save Product';
+    }
+  }
+
+  async function toggleArchive(id, archive) {
+    try {
+      const res = await adminFetch(`/api/admin-products?id=${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ is_archived: archive })
+      });
+      if (res && res.data && res.data.success) {
+        showAdminToast(`Product ${archive ? 'archived' : 'restored'} in database.`, 'success');
+        await loadProducts();
+      } else {
+        showAdminToast(res?.data?.error || 'Unable to update product. Please try again.', 'danger');
+      }
+    } catch (e) {
+      showAdminToast('Unable to update product. Please try again.', 'danger');
+    }
+  }
+
+  async function deleteProduct(id, name) {
+    if (!confirm(`Are you sure you want to permanently delete "${name || 'this product'}" from the database? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const res = await adminFetch(`/api/admin-products?id=${id}`, {
+        method: 'DELETE'
+      });
+      if (res && res.data && res.data.success) {
+        showAdminToast('Product deleted permanently from database!', 'success');
+        await loadProducts();
+      } else {
+        showAdminToast(res?.data?.error || 'Unable to delete product. Please try again.', 'danger');
+      }
+    } catch (e) {
+      showAdminToast('Unable to delete product. Please try again.', 'danger');
+    }
+  }
+
+  let _uploadedImageDataUrl = '';
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    document.getElementById('imageDropZone').style.borderColor = 'var(--admin-accent)';
+  }
+  function handleDragLeave(e) {
+    document.getElementById('imageDropZone').style.borderColor = 'var(--admin-border)';
+  }
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('imageDropZone').style.borderColor = 'var(--admin-border)';
+    const file = e.dataTransfer.files[0];
+    if (file) handleFileSelect(file);
+  }
+
+  function handleFileSelect(file) {
+    if (!file) return;
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowed.includes(file.type)) {
+      showAdminToast('Unsupported image format. Please select JPEG, PNG, or WEBP.', 'danger');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 1000;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        _uploadedImageDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+        document.getElementById('pImageUrl').value = _uploadedImageDataUrl;
+        document.getElementById('imagePreview').src = _uploadedImageDataUrl;
+        document.getElementById('imagePreviewName').textContent = file.name + ' (Compressed ~' + Math.round(_uploadedImageDataUrl.length / 1024) + ' KB)';
+        document.getElementById('dropZoneContent').style.display = 'none';
+        document.getElementById('imagePreviewWrap').style.display = 'block';
+        showAdminToast('Image compressed & loaded successfully!', 'success');
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearImageUpload(e) {
+    if (e) e.stopPropagation();
+    _uploadedImageDataUrl = '';
+    document.getElementById('pImageUrl').value = '';
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('imagePreviewWrap').style.display = 'none';
+    document.getElementById('dropZoneContent').style.display = 'block';
+    document.getElementById('imageFileInput').value = '';
+  }
+
+  function syncUrlToPreview(url) {
+    _uploadedImageDataUrl = url;
+    const wrap = document.getElementById('imagePreviewWrap');
+    const img = document.getElementById('imagePreview');
+    const dropContent = document.getElementById('dropZoneContent');
+    if (url) {
+      img.src = url;
+      document.getElementById('imagePreviewName').textContent = 'Web URL Image';
+      dropContent.style.display = 'none';
+      wrap.style.display = 'block';
+    } else {
+      dropContent.style.display = 'block';
+      wrap.style.display = 'none';
+    }
+  }
+
+  document.getElementById('productModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeProductModal();
+  });
+
+  loadProducts();
+</script>
+</body>
+</html>

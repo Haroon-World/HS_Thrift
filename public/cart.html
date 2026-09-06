@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Hand &amp; Heart Studio</title>
+  <meta name="description" content="Review your artisan handcraft shopping cart items.">
+  <!-- Favicon & Preload Assets -->
+  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/luxury-theme.css">
+  <meta name="theme-color" content="#3b2820">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-grid fs-7">
+      <div class="d-none d-md-flex align-items-center gap-1">
+        <i class="bi bi-whatsapp text-success me-1"></i> Order via WhatsApp — fast &amp; easy
+      </div>
+      <div class="text-center" id="topBarFreeShippingText">
+        <i class="bi bi-truck me-1"></i> Free shipping on orders above PKR 10,000
+      </div>
+      <div class="d-none d-md-flex align-items-center justify-content-end gap-3">
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="luxury-navbar" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand me-auto d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+      <ul class="navbar-nav d-none d-lg-flex flex-row align-items-center mx-auto mb-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="d-none d-lg-flex align-items-center gap-2 ms-3">
+        <form action="shop.html" method="GET" role="search">
+          <input type="search" name="q" class="nav-search-input" placeholder="Search products…">
+        </form>
+        <a href="checkout.html" class="btn btn-luxury btn-sm">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-section-sm bg-ivory">
+    <div class="container text-center py-2">
+      <span class="section-overline">Shopping Cart</span>
+      <h1 class="font-heading display-4 mb-2">Review Your Selected Items</h1>
+    </div>
+  </section>
+
+  <!-- Cart Content -->
+  <section class="page-section">
+    <div class="container">
+      <div id="fullCartViewContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="luxury-footer">
+    <div class="container">
+      <div class="footer-bottom text-center d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <div>&copy; 2026 Hand &amp; Heart Studio. All rights reserved.</div>
+        <div class="footer-social-links" style="justify-content:center;">
+          <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFullCartPage();
+      window.addEventListener('storage', renderFullCartPage);
+    });
+
+    function renderFullCartPage() {
+      const container = document.getElementById('fullCartViewContainer');
+      if (!container) return;
+
+      const cart = getCart();
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-6 bg-white rounded-4 border border-beige shadow-sm my-4">
+            <i class="bi bi-bag-heart display-1 text-muted opacity-50"></i>
+            <h3 class="font-heading mt-3">Your shopping cart is empty</h3>
+            <p class="text-muted">Discover our handmade creations in the shop catalog.</p>
+            <a href="shop.html" class="btn btn-luxury mt-2">Explore Shop</a>
+          </div>
+        `;
+        return;
+      }
+
+      let subtotal = 0;
+      let html = `
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="bg-white p-4 rounded-4 border border-beige shadow-sm">
+              <h4 class="font-heading mb-4">Product List (${getCartItemCount()} items)</h4>
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead>
+                    <tr class="text-muted fs-7 text-uppercase">
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th class="text-end">Subtotal</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+      `;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        html += `
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <img src="${item.image_url}" alt="${item.name}" class="rounded-3 object-fit-cover" style="width: 64px; height: 64px;">
+                <div>
+                  <h6 class="font-heading mb-0 text-dark">${item.name}</h6>
+                </div>
+              </div>
+            </td>
+            <td class="fw-semibold">${formatRupiah(item.price)}</td>
+            <td>
+              <div class="quantity-picker p-1" style="max-width: 110px;">
+                <button type="button" class="quantity-btn js-cart-pg-qty" data-id="${item.id}" data-action="dec">-</button>
+                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                <button type="button" class="quantity-btn js-cart-pg-qty" data-id="${item.id}" data-action="inc">+</button>
+              </div>
+            </td>
+            <td class="text-end fw-bold">${formatRupiah(itemTotal)}</td>
+            <td class="text-end">
+              <button type="button" class="btn btn-link text-danger p-0 js-cart-pg-remove" data-id="${item.id}" title="Remove Item">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="bg-white p-4 rounded-4 border border-beige shadow-sm">
+              <h4 class="font-heading mb-4">Order Summary</h4>
+              <div class="d-flex justify-content-between mb-3 fs-6">
+                <span class="text-muted">Subtotal</span>
+                <span class="fw-bold">${formatRupiah(subtotal)}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3 fs-6">
+                <span class="text-muted">Shipping Fee</span>
+                <span class="text-muted fw-semibold">To be calculated via WhatsApp</span>
+              </div>
+              <hr class="my-3">
+              <div class="d-flex justify-content-between mb-4 fs-5">
+                <span class="font-heading">Estimated Total</span>
+                <span class="fw-bold text-terracotta">${formatRupiah(subtotal)}</span>
+              </div>
+              <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">Proceed to Checkout</a>
+              <a href="shop.html" class="btn btn-luxury-outline w-100 py-2 fs-7 text-center d-block">Continue Shopping</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Event delegation for page buttons
+      container.querySelectorAll('.js-cart-pg-qty').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pid = parseInt(btn.dataset.id);
+          const action = btn.dataset.action;
+          const cartItem = getCart().find(i => i.id === pid);
+          if (cartItem) {
+            const newQty = action === 'inc' ? cartItem.quantity + 1 : cartItem.quantity - 1;
+            updateCartQuantity(pid, newQty);
+            renderFullCartPage();
+          }
+        });
+      });
+
+      container.querySelectorAll('.js-cart-pg-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pid = parseInt(btn.dataset.id);
+          removeFromCart(pid);
+          renderFullCartPage();
+        });
+      });
+    }
+  </script>
+</body>
+</html>

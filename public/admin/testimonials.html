@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonials | Admin Hand &amp; Heart</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-text-wrap">
+        <div class="brand-name"><img src="../assets/logo.png" alt="Hand &amp; Heart" style="height: 38px; width: auto; object-fit: contain;"></div>
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+      <button type="button" class="sidebar-toggle-btn js-sidebar-toggle" onclick="toggleAdminSidebar()" title="Toggle Sidebar (Expand/Collapse)">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+    </div>
+    <ul class="sidebar-nav">
+      <li><div class="nav-section">Main</div></li>
+      <li><a href="dashboard.html"><i class="bi bi-grid-1x2"></i> <span>Dashboard</span></a></li>
+      <li><a href="orders.html"><i class="bi bi-bag-check"></i> <span>Orders</span></a></li>
+      <li><div class="nav-section">Catalog</div></li>
+      <li><a href="products.html"><i class="bi bi-box-seam"></i> <span>Products</span></a></li>
+      <li><a href="testimonials.html" class="active"><i class="bi bi-chat-quote"></i> <span>Testimonials</span></a></li>
+      <li><div class="nav-section">System</div></li>
+      <li><a href="settings.html"><i class="bi bi-gear"></i> <span>Settings</span></a></li>
+      <li><div class="nav-section">Account</div></li>
+      <li><a href="#" class="js-admin-logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a></li>
+    </ul>
+    <div class="sidebar-footer" style="color:rgba(255,255,255,.35);font-size:.7rem;">
+      <span>Logged in as: <strong id="adminEmailDisplay" style="color:rgba(255,255,255,.6);">—</strong></span>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="page-title">Customer Reviews &amp; Testimonials</div>
+      <button class="btn-admin-primary" onclick="openAddModal()">
+        <i class="bi bi-plus-lg me-1"></i> Add Testimonial
+      </button>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h5>All Customer Testimonials</h5>
+          <span id="testimonialCount" style="font-size:.78rem;color:var(--admin-muted);"></span>
+        </div>
+        <div id="testimonialGrid" style="padding:1.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;">
+          <div class="table-loading"><i class="bi bi-arrow-repeat"></i> Loading testimonials…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Testimonial Modal -->
+<div class="admin-modal-overlay" id="addTestimonialModal">
+  <div class="admin-modal" style="max-width:480px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <h4 style="margin:0;">Add Testimonial</h4>
+      <button onclick="closeAddModal()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--admin-muted);">&times;</button>
+    </div>
+    <div class="form-group">
+      <label>Author Name &amp; Location *</label>
+      <input type="text" id="tAuthor" class="form-control" placeholder="Sara Ahmad, Lahore">
+    </div>
+    <div class="form-group">
+      <label>Testimonial Content *</label>
+      <textarea id="tBody" class="form-control" rows="4" placeholder="Write customer feedback here…"></textarea>
+    </div>
+    <div id="testimonialError" style="color:#991b1b;font-size:.82rem;margin-bottom:.75rem;"></div>
+    <div style="display:flex;gap:.75rem;justify-content:flex-end;">
+      <button onclick="closeAddModal()" class="btn-admin-ghost">Cancel</button>
+      <button id="saveTestimonialBtn" class="btn-admin-primary" onclick="saveTestimonial()">
+        <i class="bi bi-check2 me-1"></i> Save Testimonial
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+<script>
+  requireAuth();
+
+  async function loadTestimonials() {
+    const result = await adminFetch('/api/admin-testimonials');
+    if (!result) return;
+    const testimonials = result.data.testimonials || [];
+    document.getElementById('testimonialCount').textContent = `${testimonials.length} review(s)`;
+
+    const grid = document.getElementById('testimonialGrid');
+    if (!testimonials.length) {
+      grid.innerHTML = `<div class="table-empty" style="grid-column:1/-1;"><i class="bi bi-chat-square"></i><br>No testimonials found. Click 'Add Testimonial' to create one.</div>`;
+      return;
+    }
+
+    grid.innerHTML = testimonials.map(t => `
+      <div style="background:var(--admin-bg);border-radius:12px;padding:1.25rem;border:1px solid var(--admin-border);position:relative;">
+        <i class="bi bi-quote" style="font-size:1.5rem;color:var(--admin-accent);opacity:.4;margin-bottom:.5rem;display:block;"></i>
+        <p style="font-size:.9rem;line-height:1.6;color:var(--admin-text);margin-bottom:.75rem;">${t.content || t.body}</p>
+        <div style="font-size:.78rem;font-weight:700;color:var(--admin-muted);">— ${t.author_name || t.author}</div>
+        <div style="font-size:.7rem;color:var(--admin-muted);margin-top:.2rem;">${formatDate(t.created_at || new Date().toISOString())}</div>
+        <button onclick="deleteTestimonial(${t.id})" style="position:absolute;top:.75rem;right:.75rem;background:none;border:none;color:#dc2626;cursor:pointer;font-size:1rem;padding:.2rem;" title="Delete Testimonial">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+    `).join('');
+  }
+
+  function openAddModal() {
+    document.getElementById('tAuthor').value = '';
+    document.getElementById('tBody').value = '';
+    document.getElementById('testimonialError').textContent = '';
+    document.getElementById('addTestimonialModal').classList.add('show');
+  }
+  function closeAddModal() { document.getElementById('addTestimonialModal').classList.remove('show'); }
+
+  async function saveTestimonial() {
+    const author = document.getElementById('tAuthor').value.trim();
+    const body   = document.getElementById('tBody').value.trim();
+    const errEl  = document.getElementById('testimonialError');
+    const btn    = document.getElementById('saveTestimonialBtn');
+    errEl.textContent = '';
+
+    if (!author || !body) { errEl.textContent = 'Author name and testimonial content are required.'; return; }
+
+    btn.disabled = true; btn.textContent = 'Saving…';
+    const result = await adminFetch('/api/admin-testimonials', {
+      method: 'POST',
+      body: JSON.stringify({ author_name: author, content: body })
+    });
+    btn.disabled = false; btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Save Testimonial';
+
+    if (result?.data?.success) {
+      showAdminToast('Testimonial added successfully!', 'success');
+      closeAddModal();
+      loadTestimonials();
+    } else {
+      errEl.textContent = result?.data?.error || 'Failed to save testimonial.';
+    }
+  }
+
+  async function deleteTestimonial(id) {
+    if (!confirm('Are you sure you want to delete this testimonial?')) return;
+    const result = await adminFetch(`/api/admin-testimonials?id=${id}`, { method: 'DELETE' });
+    if (result?.data?.success) {
+      showAdminToast('Testimonial deleted.', 'success');
+      loadTestimonials();
+    } else {
+      showAdminToast(result?.data?.error || 'Operation failed.', 'danger');
+    }
+  }
+
+  loadTestimonials();
+</script>
+</body>
+</html>

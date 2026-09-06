@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+hs_thrift.db
+hs_thrift.db-journal
+hs_thrift.db-shm
+hs_thrift.db-wal
+.DS_Store
+Thumbs.db
+.vercel

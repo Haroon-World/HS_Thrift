@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handcraft Product Catalog | Hand &amp; Heart Studio</title>
+  <meta name="description" content="Explore our artisan handcraft collection — woven bags, aromatherapy candles, knit goods, and more. Shipping across Indonesia.">
+
+  <!-- Favicon & Preload Assets -->
+  <link rel="preload" as="image" href="assets/logo.png" fetchpriority="high">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/luxury-theme.css">
+  <link rel="canonical" href="https://handandheartpk.vercel.app/shop.html">
+  <meta name="theme-color" content="#3b2820">
+  <meta property="og:title" content="Handcraft Product Catalog | Hand &amp; Heart Studio">
+  <meta property="og:description" content="Explore our artisan handcraft collection — woven bags, aromatherapy candles, knit goods, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://handandheartpk.vercel.app/shop.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Handcraft Product Catalog | Hand &amp; Heart Studio">
+  <meta name="twitter:description" content="Explore our artisan handcraft collection — woven bags, aromatherapy candles, knit goods, and more.">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Handcraft Product Catalog",
+    "description": "Explore our artisan handcraft collection — woven bags, aromatherapy candles, knit goods, and more.",
+    "url": "https://handandheartpk.vercel.app/shop.html"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-grid fs-7">
+      <div class="d-none d-md-flex align-items-center gap-1">
+        <i class="bi bi-whatsapp text-success me-1"></i> Order via WhatsApp — fast &amp; easy
+      </div>
+      <div class="text-center" id="topBarFreeShippingText">
+        <i class="bi bi-truck me-1"></i> Free shipping on orders above PKR 10,000
+      </div>
+      <div class="d-none d-md-flex align-items-center justify-content-end gap-3">
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="luxury-navbar" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand me-auto d-flex align-items-center gap-2" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="brand-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+
+      <ul class="navbar-nav d-none d-lg-flex flex-row align-items-center mx-auto mb-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="d-none d-lg-flex align-items-center gap-2 ms-3">
+        <form action="shop.html" method="GET" role="search">
+          <input type="search" name="q" id="navSearchInput" class="nav-search-input" placeholder="Search products…">
+        </form>
+        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
+          <i class="bi bi-bag"></i>
+          <span class="icon-label">Cart</span>
+          <span class="header-badge js-cart-badge" style="display:none">0</span>
+        </button>
+      </div>
+
+      <div class="d-flex d-lg-none align-items-center gap-1 ms-2">
+        <button class="header-icon-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartDrawer" aria-label="Shopping cart">
+          <i class="bi bi-bag"></i>
+          <span class="icon-label">Cart</span>
+          <span class="header-badge js-cart-badge" style="display:none">0</span>
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse w-100" id="mobileNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Our Story</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-mobile-footer">
+          <form action="shop.html" method="GET" class="flex-grow-1">
+            <input type="search" name="q" class="form-control rounded-pill px-3 py-2 fs-7" placeholder="Search products…">
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-section-sm bg-ivory">
+    <div class="container text-center py-2">
+      <span class="section-overline">Artisan Collection</span>
+      <h1 class="font-heading display-4 mb-2" id="catalogHeading">All Handcrafted Goods</h1>
+      <p class="text-muted mx-auto mb-0" style="max-width: 550px;">
+        Explore our curated collection of high-quality handmade works, from aromatherapy candles to unique knit goods.
+      </p>
+    </div>
+  </section>
+
+  <!-- Shop Main Content -->
+  <section class="page-section">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Sidebar Filters & Sort (Sticky on desktop) -->
+        <div class="col-lg-3 shop-sidebar-sticky">
+          <div class="bg-white p-4 rounded-4 border border-beige shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="font-heading mb-0">Filters &amp; Sort</h4>
+              <button type="button" class="btn btn-link p-0 text-muted small text-decoration-underline" id="resetFiltersBtn">Reset</button>
+            </div>
+
+            <!-- Sort By Filter -->
+            <div class="mb-4">
+              <h6 class="fw-bold text-uppercase fs-7 text-terracotta mb-2">Sort By</h6>
+              <select id="sortSelect" class="form-select form-select-sm rounded-pill fw-bold">
+                <option value="newest">Newest Arrivals</option>
+                <option value="price_low">Price: Low to High</option>
+                <option value="price_high">Price: High to Low</option>
+                <option value="best_selling">Best Sellers</option>
+              </select>
+            </div>
+
+            <hr class="my-3 border-beige">
+
+            <!-- Categories Radio Filter -->
+            <div class="mb-4">
+              <h6 class="fw-bold text-uppercase fs-7 text-terracotta mb-2">Category</h6>
+              <div id="categoryFiltersContainer">
+                <div class="spinner-border spinner-border-sm text-terracotta" role="status"></div>
+              </div>
+            </div>
+
+            <hr class="my-3 border-beige">
+
+            <!-- Availability Filter -->
+            <div class="mb-2">
+              <h6 class="fw-bold text-uppercase fs-7 text-terracotta mb-2">Availability</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="inStockCheck">
+                <label class="form-check-label fs-7 fw-semibold" for="inStockCheck">In-Stock Only</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catalog Product Grid Area -->
+        <div class="col-lg-9">
+          <!-- Summary Header -->
+          <div class="bg-white p-3 rounded-4 border border-beige shadow-sm mb-4 d-flex align-items-center justify-content-between">
+            <div class="text-muted small" id="catalogSummaryText">
+              Loading catalog…
+            </div>
+            <div class="text-muted fs-8 text-uppercase fw-bold">
+              <i class="bi bi-arrows-vertical me-1"></i> Scroll to view products
+            </div>
+          </div>
+
+          <!-- Product Grid Scrollable Wrapper (Max 6 visible in one view) -->
+          <div class="shop-products-scroll-wrapper bg-white p-3 rounded-4 border border-beige shadow-sm">
+            <div id="productsGridContainer" class="row g-4">
+              <div class="text-center py-5 w-100">
+                <div class="spinner-border text-terracotta" role="status"><span class="visually-hidden">Loading...</span></div>
+                <p class="text-muted mt-3 font-heading">Loading product catalog…</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Offcanvas Drawer -->
+  <div class="offcanvas offcanvas-end luxury-offcanvas" tabindex="-1" id="cartDrawer" aria-labelledby="cartDrawerLabel">
+    <div class="offcanvas-header border-bottom py-3">
+      <h5 class="offcanvas-title font-heading fs-4" id="cartDrawerLabel">Shopping Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+      <div id="cartDrawerItems" class="flex-grow-1 overflow-auto">
+        <div class="text-center py-5">
+          <i class="bi bi-bag-heart display-1 text-muted opacity-50"></i>
+          <h5 class="mt-3 font-heading">Loading cart...</h5>
+        </div>
+      </div>
+      <div class="border-top pt-4 mt-auto">
+        <div class="d-flex justify-content-between mb-2 fs-6">
+          <span>Subtotal</span>
+          <span id="cartDrawerSubtotal" class="fw-bold">Rs. 0</span>
+        </div>
+        <div class="d-flex justify-content-between mb-3 text-muted small">
+          <span>Shipping Fee</span>
+          <span>To be calculated via WhatsApp</span>
+        </div>
+        <a href="checkout.html" class="btn btn-luxury w-100 py-3 mb-2">Proceed to Checkout</a>
+        <a href="cart.html" class="btn btn-luxury-outline w-100 py-2 fs-7">View Full Cart</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal fade quickview-modal" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+              <div class="rounded-4 overflow-hidden bg-ivory">
+                <img id="qvImage" src="" alt="" class="img-fluid w-100 object-fit-cover" style="aspect-ratio: 4/5;">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <span id="qvTagline" class="badge bg-terracotta text-white mb-2">Handmade</span>
+              <h2 id="qvTitle" class="font-heading mb-2">Product Name</h2>
+              <div class="mb-3 fs-4">
+                <span id="qvPrice" class="fw-bold text-dark me-2">Rs. 0</span>
+                <span id="qvOriginalPrice" class="text-muted text-decoration-line-through fs-6"></span>
+              </div>
+              <p id="qvDescription" class="text-muted fs-6 mb-4"></p>
+              
+              <div class="bg-ivory p-3 rounded-3 mb-4 fs-7">
+                <div class="mb-1"><i class="bi bi-clock me-2 text-warning"></i> <strong>Craft Time:</strong> <span id="qvCrafted"></span></div>
+                <div><i class="bi bi-flower1 me-2 text-success"></i> <strong>Materials:</strong> <span id="qvMaterials"></span></div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" id="qvAddToCartBtn" class="btn btn-luxury flex-grow-1 js-add-to-cart">Add to Cart</button>
+                <a id="qvDetailLink" href="#" class="btn btn-luxury-outline">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="luxury-footer">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <a class="footer-brand" href="index.html"><img src="assets/logo.png" alt="Hand &amp; Heart" class="footer-logo-icon"><span>Hand <span>&amp;</span> Heart</span></a>
+          <p class="mb-4" style="max-width: 340px; font-size: 0.9rem;">
+            Handmade with care, presented wholeheartedly. Premium artisan handcrafts — eco-friendly, made in small batches.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://wa.me/923124894571" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://www.instagram.com/handx.heart?utm_source=qr&igsi=MWpneDM2OXg2dnAzaQ==" target="_blank" rel="noopener" class="footer-social-link" title="Facebook" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?sort=best_selling">Best Sellers</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Info &amp; Support</h5>
+          <ul>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Contact Studio</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Artisan Newsletter</h5>
+          <form class="js-newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control bg-dark text-white border-secondary fs-7" placeholder="Your email address..." required>
+              <button type="submit" class="btn btn-luxury px-3 fs-8">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Hand &amp; Heart Studio. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+
+  <!-- Client-side script to manage Catalog API, Filters, and Loading/Error/Empty States -->
+  <script>
+    let currentCategory = '';
+    let currentSearch = '';
+    let currentSort = 'newest';
+    let inStockOnly = false;
+    let currentPage = 1;
+    const PAGE_SIZE = 6;
+
+    // Static category list (always available even if API is offline)
+    const FALLBACK_CATEGORIES = [
+      { id: 1, name: 'Aromatherapy Candles', slug: 'aromatherapy-candles' },
+      { id: 2, name: 'Knit Crafts', slug: 'knit-crafts' },
+      { id: 3, name: 'Artisan Gift Sets', slug: 'artisan-gift-sets' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      currentCategory = urlParams.get('category') || '';
+      currentSearch = urlParams.get('q') || '';
+      currentSort = urlParams.get('sort') || 'newest';
+      
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) sortSelect.value = currentSort;
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          currentSort = sortSelect.value;
+          currentPage = 1;
+          fetchCatalog();
+        });
+      }
+
+      const inStockCheck = document.getElementById('inStockCheck');
+      if (inStockCheck) {
+        inStockCheck.addEventListener('change', () => {
+          inStockOnly = inStockCheck.checked;
+          currentPage = 1;
+          fetchCatalog();
+        });
+      }
+
+      const resetBtn = document.getElementById('resetFiltersBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          currentCategory = '';
+          currentSearch = '';
+          currentSort = 'newest';
+          inStockOnly = false;
+          currentPage = 1;
+          if (sortSelect) sortSelect.value = 'newest';
+          if (inStockCheck) inStockCheck.checked = false;
+          window.history.pushState({}, '', 'shop.html');
+          fetchCategories();
+          fetchCatalog();
+        });
+      }
+
+      fetchCategories();
+      fetchCatalog();
+    });
+
+    async function fetchCategories() {
+      const container = document.getElementById('categoryFiltersContainer');
+      if (!container) return;
+
+      let categories = FALLBACK_CATEGORIES;
+
+      try {
+        const res = await fetch('/api/get-products?categories=true');
+        const data = await res.json();
+        if (data.success && data.categories && data.categories.length > 0) {
+          categories = data.categories;
+        }
+      } catch (err) {
+        console.warn('Categories API unavailable — using fallback categories.');
+      }
+
+      let html = `
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="categoryFilter" value="" id="cat_all" ${!currentCategory ? 'checked' : ''}>
+          <label class="form-check-label fs-7 fw-semibold" for="cat_all">All Categories</label>
+        </div>
+      `;
+
+      categories.forEach(cat => {
+        const isChecked = currentCategory === cat.slug;
+        html += `
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="categoryFilter" value="${cat.slug}" id="cat_${cat.id}" ${isChecked ? 'checked' : ''}>
+            <label class="form-check-label fs-7" for="cat_${cat.id}">${cat.name}</label>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+
+      container.querySelectorAll('input[name="categoryFilter"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          currentCategory = radio.value;
+          currentPage = 1;
+          fetchCatalog();
+        });
+      });
+    }
+
+    async function fetchCatalog() {
+      const gridContainer = document.getElementById('productsGridContainer');
+      const summaryText = document.getElementById('catalogSummaryText');
+      if (!gridContainer) return;
+
+      gridContainer.innerHTML = `
+        <div class="text-center py-5 w-100">
+          <div class="spinner-border text-terracotta" role="status"><span class="visually-hidden">Loading...</span></div>
+          <p class="text-muted mt-3 font-heading">Loading product catalog…</p>
+        </div>
+      `;
+
+      // Fetch directly from API — DB is single source of truth.
+      // No localStorage fallback: the admin panel writes to the DB; the shop reads from DB.
+      let baseProducts = [];
+      let apiError = false;
+
+      try {
+        // Add cache-buster to bypass any browser/CDN caching
+        let apiUrl = `/api/get-products?sort=${currentSort}&_=${Date.now()}`;
+        if (currentCategory) apiUrl += `&category=${encodeURIComponent(currentCategory)}`;
+        if (currentSearch) apiUrl += `&q=${encodeURIComponent(currentSearch)}`;
+        if (inStockOnly) apiUrl += `&in_stock=1`;
+
+        const res = await fetch(apiUrl, { cache: 'no-store' });
+        const data = await res.json();
+        if (data.success && Array.isArray(data.products)) {
+          baseProducts = data.products;
+        } else {
+          apiError = true;
+        }
+      } catch (err) {
+        console.warn('Products API unavailable:', err.message);
+        apiError = true;
+      }
+
+      if (apiError) {
+        gridContainer.innerHTML = `
+          <div class="text-center py-6 bg-white rounded-4 border border-beige shadow-sm my-4 w-100">
+            <i class="bi bi-exclamation-triangle display-1 text-danger opacity-75"></i>
+            <h3 class="font-heading mt-3">Unable to load the latest products. Please try again.</h3>
+            <button class="btn btn-luxury mt-3" onclick="fetchCatalog()"><i class="bi bi-arrow-repeat me-1"></i> Refresh</button>
+          </div>
+        `;
+        return;
+      }
+
+      // ── Filter products for Shop page: show all non-archived products ──
+      let products = baseProducts.filter(p => {
+        if (p.is_archived) return false;
+        const categorySlug = p.category_slug || (p.category ? p.category.slug : '');
+        if (currentCategory && categorySlug !== currentCategory) return false;
+        if (currentSearch && !p.name.toLowerCase().includes(currentSearch.toLowerCase())) return false;
+        if (inStockOnly && p.stock_status === false) return false;
+        return true;
+      });
+
+      if (currentSort === 'price_low') {
+        products.sort((a, b) => {
+          const priceA = (a.sale_price && Number(a.sale_price) > 0) ? Number(a.sale_price) : Number(a.price);
+          const priceB = (b.sale_price && Number(b.sale_price) > 0) ? Number(b.sale_price) : Number(b.price);
+          return priceA - priceB;
+        });
+      } else if (currentSort === 'price_high') {
+        products.sort((a, b) => {
+          const priceA = (a.sale_price && Number(a.sale_price) > 0) ? Number(a.sale_price) : Number(a.price);
+          const priceB = (b.sale_price && Number(b.sale_price) > 0) ? Number(b.sale_price) : Number(b.price);
+          return priceB - priceA;
+        });
+      } else if (currentSort === 'best_selling') {
+        products.sort((a, b) => (b.is_best_seller ? 1 : 0) - (a.is_best_seller ? 1 : 0));
+      }
+
+      const totalCount = products.length;
+      const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+
+      if (currentPage > totalPages && totalPages > 0) currentPage = 1;
+
+      const pageProducts = products.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+      if (summaryText) {
+        const startNum = totalCount > 0 ? (currentPage - 1) * PAGE_SIZE + 1 : 0;
+        const endNum = Math.min(currentPage * PAGE_SIZE, totalCount);
+        summaryText.innerHTML = `Showing <strong class="text-dark">${startNum}–${endNum}</strong> of <strong class="text-dark">${totalCount}</strong> products${currentSearch ? ` for "<strong>${currentSearch}</strong>"` : ''}`;
+      }
+
+      if (products.length === 0) {
+        const hasAnyActive = baseProducts.some(p => !p.is_archived);
+        gridContainer.innerHTML = `
+          <div class="text-center py-6 bg-white rounded-4 border border-beige shadow-sm my-4 w-100">
+            <i class="bi bi-${hasAnyActive ? 'search' : 'shop'} display-1 text-muted opacity-50"></i>
+            <h3 class="font-heading mt-3">${hasAnyActive ? 'No products match your filters' : 'No products available yet'}</h3>
+            <p class="text-muted">${hasAnyActive ? 'Try changing your search terms or resetting filters.' : 'Check back soon for new artisan creations.'}</p>
+            ${hasAnyActive ? '<button class="btn btn-luxury mt-2" onclick="document.getElementById(\'resetFiltersBtn\').click()">Show All Products</button>' : ''}
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      pageProducts.forEach(p => {
+        html += `<div class="col-md-4 col-sm-6">${renderProductCardHTML(p)}</div>`;
+      });
+
+      // Pagination Controls (6 per page)
+      if (totalPages > 1) {
+        html += `
+          <div class="col-12 mt-4">
+            <nav aria-label="Catalog pagination">
+              <ul class="pagination justify-content-center align-items-center gap-1 mb-0">
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                  <button type="button" class="btn btn-luxury-outline btn-sm px-3" onclick="goToPage(${currentPage - 1})">
+                    <i class="bi bi-chevron-left"></i> Prev
+                  </button>
+                </li>
+        `;
+        for (let i = 1; i <= totalPages; i++) {
+          html += `
+            <li class="page-item">
+              <button type="button" class="btn btn-sm px-3 ${i === currentPage ? 'btn-luxury' : 'btn-luxury-outline'}" onclick="goToPage(${i})">${i}</button>
+            </li>
+          `;
+        }
+        html += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                  <button type="button" class="btn btn-luxury-outline btn-sm px-3" onclick="goToPage(${currentPage + 1})">
+                    Next <i class="bi bi-chevron-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        `;
+      }
+
+      gridContainer.innerHTML = html;
+    }
+
+    function goToPage(page) {
+      currentPage = page;
+      fetchCatalog();
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders | Admin Hand &amp; Heart</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .history-card {
+      background: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      padding: .65rem .85rem;
+      margin-bottom: .5rem;
+      font-size: .8rem;
+    }
+    .history-card .status-sent { color: #155724; font-weight: 700; }
+    .history-card .status-opened { color: #856404; font-weight: 600; }
+    .history-card .status-notsent { color: #721c24; font-weight: 600; }
+    .warning-banner {
+      background: #fff8e6;
+      border: 1px solid #ffe58f;
+      color: #8c6b00;
+      border-radius: 8px;
+      padding: .6rem .85rem;
+      font-size: .82rem;
+      margin-bottom: 1rem;
+    }
+    .danger-banner {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: .6rem .85rem;
+      font-size: .82rem;
+      margin-bottom: 1rem;
+    }
+    .success-banner {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      border-radius: 8px;
+      padding: .6rem .85rem;
+      font-size: .82rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-text-wrap">
+        <div class="brand-name"><img src="../assets/logo.png" alt="Hand &amp; Heart" style="height: 38px; width: auto; object-fit: contain;"></div>
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+      <button type="button" class="sidebar-toggle-btn js-sidebar-toggle" onclick="toggleAdminSidebar()" title="Toggle Sidebar (Expand/Collapse)">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+    </div>
+    <ul class="sidebar-nav">
+      <li><div class="nav-section">Main</div></li>
+      <li><a href="dashboard.html"><i class="bi bi-grid-1x2"></i> <span>Dashboard</span></a></li>
+      <li><a href="orders.html" class="active"><i class="bi bi-bag-check"></i> <span>Orders</span></a></li>
+      <li><div class="nav-section">Catalog</div></li>
+      <li><a href="products.html"><i class="bi bi-box-seam"></i> <span>Products</span></a></li>
+      <li><a href="testimonials.html"><i class="bi bi-chat-quote"></i> <span>Testimonials</span></a></li>
+      <li><div class="nav-section">System</div></li>
+      <li><a href="settings.html"><i class="bi bi-gear"></i> <span>Settings</span></a></li>
+      <li><div class="nav-section">Account</div></li>
+      <li><a href="#" class="js-admin-logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a></li>
+    </ul>
+    <div class="sidebar-footer" style="color:rgba(255,255,255,.35);font-size:.7rem;">
+      <span>Logged in as: <strong id="adminEmailDisplay" style="color:rgba(255,255,255,.6);">—</strong></span>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <div class="page-title">Order Fulfillment &amp; Management</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+        <button type="button" class="btn-admin-ghost" onclick="openExcelExportModal()" style="font-weight:700;font-size:.84rem;color:#155724;background:#d4edda;border:1px solid #c3e6cb;">
+          <i class="bi bi-file-earmark-excel me-1"></i> Export to Excel
+        </button>
+        <button type="button" class="btn-admin-ghost text-danger" onclick="openDateRangeDeleteModal()" style="font-weight:700;font-size:.84rem;background:#f8d7da;border:1px solid #f5c6cb;">
+          <i class="bi bi-calendar-x me-1"></i> Bulk Delete Orders
+        </button>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <!-- Search & Filter Controls Grid -->
+      <div class="admin-card" style="padding:1.25rem;margin-bottom:1rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;">
+          <!-- Search Box -->
+          <div style="flex:1;min-width:240px;">
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">
+              <i class="bi bi-search me-1"></i> Search Orders:
+            </label>
+            <input type="text" id="orderSearchInput" class="form-control" placeholder="Search by Order ID, Name, or Phone..." style="font-size:.85rem;">
+          </div>
+
+          <!-- Payment Method Filter -->
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">Payment Method:</label>
+            <select id="paymentMethodFilter" class="form-control" style="font-size:.85rem;min-width:140px;">
+              <option value="">All Methods</option>
+              <option value="COD">Cash on Delivery (COD)</option>
+              <option value="ONLINE">Online Payment</option>
+            </select>
+          </div>
+
+          <!-- Order Status Filter -->
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">Order Status:</label>
+            <select id="statusFilter" class="form-control" style="font-size:.85rem;min-width:130px;">
+              <option value="">All Statuses</option>
+              <option value="PENDING">Pending</option>
+              <option value="CONFIRMED">Confirmed</option>
+              <option value="PROCESSING">Processing</option>
+              <option value="READY">Ready to Ship</option>
+              <option value="SHIPPED">Shipped</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+          </div>
+
+          <!-- Payment Status Filter -->
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">Payment Status:</label>
+            <select id="paymentStatusFilter" class="form-control" style="font-size:.85rem;min-width:130px;">
+              <option value="">All Payments</option>
+              <option value="UNPAID">Unpaid</option>
+              <option value="PAID">Paid</option>
+              <option value="FAILED">Failed</option>
+              <option value="REFUNDED">Refunded</option>
+            </select>
+          </div>
+
+          <!-- Date Range Filters -->
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">Start Date:</label>
+            <input type="date" id="startDateFilter" class="form-control" style="font-size:.85rem;">
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:700;color:var(--admin-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;">End Date:</label>
+            <input type="date" id="endDateFilter" class="form-control" style="font-size:.85rem;">
+          </div>
+
+          <!-- Clear Filters Button -->
+          <div>
+            <button type="button" id="resetFiltersBtn" class="btn-admin-ghost" onclick="resetAllFilters()" style="font-size:.82rem;padding:.45rem .8rem;">
+              <i class="bi bi-x-circle me-1"></i> Clear Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bulk Select Floating Action Bar -->
+      <div id="bulkSelectActionBar" style="display:none;background:#fff8e6;border:1px solid #ffe58f;border-radius:8px;padding:.65rem 1rem;margin-bottom:.75rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+        <div style="font-weight:700;font-size:.85rem;color:#8c6b00;">
+          <i class="bi bi-check2-square me-1"></i> <span id="selectedOrdersCountText">0</span> order(s) selected
+        </div>
+        <div style="display:flex;gap:.5rem;">
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="clearSelectedOrdersCheckboxes()">Cancel Selection</button>
+          <button type="button" class="btn-admin-primary btn-danger" style="background:#dc3545;font-size:.8rem;padding:.4rem .85rem;border:none;" onclick="deleteCheckedSelectedOrders()">
+            <i class="bi bi-trash me-1"></i> Delete Selected Orders
+          </button>
+        </div>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h5>Order List</h5>
+          <span id="orderCountBadge" style="font-size:.78rem;color:var(--admin-muted);"></span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width:38px;text-align:center;"><input type="checkbox" id="selectAllOrdersCb" onclick="toggleSelectAllOrders(this)" title="Select All Orders on Page"></th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Shipping Address</th>
+                <th>Payment Method</th>
+                <th>Total</th>
+                <th>Order Status</th>
+                <th>Payment</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr><td colspan="10" class="table-loading"><i class="bi bi-arrow-repeat"></i> Loading orders…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div id="paginationBar" style="padding:1rem 1.25rem;border-top:1px solid var(--admin-border);display:flex;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail / Status Update Modal -->
+<div class="admin-modal-overlay" id="orderModal">
+  <div class="admin-modal" style="max-width:760px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <div>
+        <h4 id="modalOrderId" style="margin:0;">Order —</h4>
+        <div id="modalOrderBadges" style="margin-top:.25rem;display:flex;gap:.4rem;align-items:center;"></div>
+      </div>
+      <button onclick="closeModal()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--admin-muted);">&times;</button>
+    </div>
+
+    <!-- Section 1: Customer & Shipping Information -->
+    <div id="modalCustomerInfo" style="background:var(--admin-bg);border-radius:10px;padding:1rem;margin-bottom:1rem;font-size:.88rem;line-height:1.8;"></div>
+
+    <!-- Section 2: Ordered Items & Total -->
+    <div id="modalItemsList" style="margin-bottom:1.25rem;"></div>
+
+    <!-- Section 3: Payment Verification & Status Warnings -->
+    <div id="paymentWarningContainer"></div>
+
+    <!-- Integrated Status & Payment Control Panel -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1.25rem;background:#f9f8f6;border-radius:10px;padding:1rem;border:1px solid var(--admin-border);">
+      
+      <!-- Editable Payment Method -->
+      <div>
+        <label style="font-weight:700;font-size:.8rem;color:var(--admin-text);margin-bottom:.3rem;display:block;">
+          <i class="bi bi-wallet2 me-1"></i> Payment Method:
+        </label>
+        <select id="modalPaymentMethod" class="form-control" style="font-weight:600;font-size:.84rem;" onchange="onModalControlStateChange()">
+          <option value="COD">Cash on Delivery (COD)</option>
+          <option value="ONLINE">Online Payment</option>
+        </select>
+        <div style="font-size:.72rem;color:var(--admin-muted);margin-top:.3rem;">Admin editable anytime</div>
+      </div>
+
+      <!-- Payment Status Dropdown -->
+      <div>
+        <label style="font-weight:700;font-size:.8rem;color:var(--admin-text);margin-bottom:.3rem;display:block;">
+          <i class="bi bi-credit-card me-1"></i> Payment Status:
+        </label>
+        <select id="modalPaymentStatus" class="form-control" style="font-weight:600;font-size:.84rem;" onchange="onModalControlStateChange()">
+          <option value="UNPAID">Unpaid</option>
+          <option value="PAID">Paid</option>
+          <option value="FAILED">Failed</option>
+          <option value="REFUNDED">Refunded</option>
+        </select>
+        <div id="paymentActionBtnContainer" style="margin-top:.4rem;"></div>
+      </div>
+
+      <!-- Order Status Dropdown -->
+      <div>
+        <label style="font-weight:700;font-size:.8rem;color:var(--admin-text);margin-bottom:.3rem;display:block;">
+          <i class="bi bi-box-seam me-1"></i> Order Status:
+        </label>
+        <select id="modalOrderStatus" class="form-control" style="font-weight:600;font-size:.84rem;" onchange="onModalControlStateChange()">
+          <option value="PENDING">Pending</option>
+          <option value="CONFIRMED">Confirmed</option>
+          <option value="PROCESSING">Processing</option>
+          <option value="READY">Ready to Ship</option>
+          <option value="SHIPPED">Shipped</option>
+          <option value="COMPLETED">Completed</option>
+          <option value="CANCELLED">Cancelled</option>
+        </select>
+        <div style="font-size:.72rem;color:var(--admin-muted);margin-top:.3rem;">Independent status</div>
+      </div>
+    </div>
+
+    <!-- Section 4: Integrated WhatsApp Communication & 2-Step Send (Linked with Above Controls) -->
+    <div id="waNotifyArea" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:1rem;margin-bottom:1.25rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem;">
+        <div style="font-weight:700;font-size:.88rem;color:#166534;display:flex;align-items:center;gap:.4rem;">
+          <i class="bi bi-whatsapp" style="color:#25D366;font-size:1.1rem;"></i> Linked WhatsApp Message (Auto-Generated):
+        </div>
+      </div>
+
+      <div id="notificationStatusBadgeContainer" style="margin-bottom:.5rem;"></div>
+
+      <div id="waPreviewText" style="font-size:.82rem;color:#14532d;background:#ffffff;border:1px solid #dcfce7;border-radius:6px;padding:.75rem .9rem;margin-bottom:.75rem;white-space:pre-wrap;font-family:inherit;max-height:200px;overflow-y:auto;" contenteditable="true">
+        <!-- Dynamic message pre-written automatically linked with dropdown states above -->
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;">
+        <span style="font-size:.75rem;color:#166534;">Opens pre-filled wa.me chat or mark sent directly if already notified.</span>
+        <div style="display:flex;gap:.5rem;">
+          <button id="markSentDirectBtn" type="button" onclick="markSentDirectly()" class="btn-admin-ghost" style="padding:.5rem .9rem;font-size:.84rem;font-weight:700;color:#155724;background:#d4edda;border:1px solid #c3e6cb;">
+            <i class="bi bi-check-circle me-1"></i> Mark Status as Sent
+          </button>
+          <button id="waNotifyBtn" type="button" onclick="triggerWhatsAppSendWorkflow()" class="btn-admin-primary" style="background:#25D366;padding:.5rem 1.1rem;border-radius:8px;font-size:.84rem;font-weight:700;color:white;display:inline-flex;align-items:center;box-shadow:0 2px 8px rgba(37,211,102,.3);border:none;">
+            <i class="bi bi-whatsapp me-1 fs-6"></i> Send via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Notification & Audit History Sub-tab / Collapsible -->
+    <div style="margin-bottom:1.25rem;">
+      <button type="button" class="btn-admin-ghost" style="font-size:.8rem;width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:.5rem .75rem;background:#f8f9fa;" onclick="toggleHistoryTab()">
+        <span><i class="bi bi-clock-history me-1"></i> WhatsApp Notification History &amp; Audit Logs</span>
+        <i id="historyChevron" class="bi bi-chevron-down"></i>
+      </button>
+
+      <div id="historyTabContent" style="display:none;margin-top:.75rem;">
+        <div style="font-weight:700;font-size:.8rem;margin-bottom:.4rem;color:var(--admin-muted);">WhatsApp Notifications Log:</div>
+        <div id="waNotificationsHistoryList"></div>
+
+        <div style="font-weight:700;font-size:.8rem;margin-top:.8rem;margin-bottom:.4rem;color:var(--admin-muted);">Order Audit History:</div>
+        <div id="auditLogsHistoryList"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div style="display:flex;gap:.75rem;justify-content:space-between;align-items:center;border-top:1px solid var(--admin-border);padding-top:1rem;flex-wrap:wrap;">
+      <button type="button" class="btn-admin-ghost text-danger" onclick="deleteCurrentOrderNow()" title="Permanently delete this order from database">
+        <i class="bi bi-trash me-1"></i> Delete Order
+      </button>
+
+      <div style="display:flex;gap:.75rem;">
+        <button onclick="closeModal()" class="btn-admin-ghost">Cancel</button>
+        <button id="saveStatusBtn" class="btn-admin-primary" onclick="saveOrderStatus()">
+          <i class="bi bi-check2 me-1"></i> Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2-Step Confirmation Modal after WhatsApp Opened -->
+<div class="admin-modal-overlay" id="waConfirmModal" style="z-index:9999;">
+  <div class="admin-modal" style="max-width:440px;text-align:center;padding:1.5rem;">
+    <i class="bi bi-whatsapp display-4" style="color:#25D366;"></i>
+    <h4 style="margin-top:1rem;margin-bottom:.5rem;">WhatsApp Chat Opened</h4>
+    <p style="font-size:.86rem;color:var(--admin-muted);line-height:1.6;margin-bottom:1.25rem;">
+      WhatsApp has been opened with the prepared message for this customer.<br><br>
+      <strong>Did you send the message to the customer?</strong>
+    </p>
+
+    <div style="display:flex;gap:.75rem;justify-content:center;">
+      <button class="btn-admin-ghost text-danger" onclick="confirmWASentStatus(false)">
+        <i class="bi bi-x-circle me-1"></i> No, Not Sent
+      </button>
+      <button class="btn-admin-primary" style="background:#25D366;border-color:#25D366;" onclick="confirmWASentStatus(true)">
+        <i class="bi bi-check-circle me-1"></i> Yes, Mark as Sent
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin.js?v=6"></script>
+<script>
+  requireAuth();
+
+  let currentPage = 1;
+  let currentSearch = '';
+  let currentStatus = '';
+  let currentPaymentStatus = '';
+  let currentPaymentMethod = '';
+  let currentStartDate = '';
+  let currentEndDate = '';
+  let currentOrderId = '';
+
+  const urlParams = new URLSearchParams(location.search);
+  if (urlParams.get('id')) {
+    currentOrderId = urlParams.get('id');
+  }
+  if (urlParams.get('status')) {
+    currentStatus = urlParams.get('status');
+    document.getElementById('statusFilter').value = currentStatus;
+  }
+  if (urlParams.get('payment_status')) {
+    currentPaymentStatus = urlParams.get('payment_status');
+    document.getElementById('paymentStatusFilter').value = currentPaymentStatus;
+  }
+  if (urlParams.get('payment_method')) {
+    currentPaymentMethod = urlParams.get('payment_method');
+    document.getElementById('paymentMethodFilter').value = currentPaymentMethod;
+  }
+
+  let searchDebounceTimer = null;
+  document.getElementById('orderSearchInput').addEventListener('input', (e) => {
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => {
+      currentSearch = e.target.value.trim();
+      loadOrders(1);
+    }, 300);
+  });
+
+  document.getElementById('statusFilter').addEventListener('change', (e) => {
+    currentStatus = e.target.value;
+    loadOrders(1);
+  });
+
+  document.getElementById('paymentStatusFilter').addEventListener('change', (e) => {
+    currentPaymentStatus = e.target.value;
+    loadOrders(1);
+  });
+
+  document.getElementById('paymentMethodFilter').addEventListener('change', (e) => {
+    currentPaymentMethod = e.target.value;
+    loadOrders(1);
+  });
+
+  document.getElementById('startDateFilter').addEventListener('change', (e) => {
+    currentStartDate = e.target.value;
+    loadOrders(1);
+  });
+
+  document.getElementById('endDateFilter').addEventListener('change', (e) => {
+    currentEndDate = e.target.value;
+    loadOrders(1);
+  });
+
+  function resetAllFilters() {
+    document.getElementById('orderSearchInput').value = '';
+    document.getElementById('statusFilter').value = '';
+    document.getElementById('paymentStatusFilter').value = '';
+    document.getElementById('paymentMethodFilter').value = '';
+    document.getElementById('startDateFilter').value = '';
+    document.getElementById('endDateFilter').value = '';
+
+    currentSearch = '';
+    currentStatus = '';
+    currentPaymentStatus = '';
+    currentPaymentMethod = '';
+    currentStartDate = '';
+    currentEndDate = '';
+    loadOrders(1);
+  }
+
+  async function loadOrders(page = 1) {
+    currentPage = page;
+    const body = document.getElementById('ordersTableBody');
+    body.innerHTML = `<tr><td colspan="9" class="table-loading"><i class="bi bi-arrow-repeat"></i> Loading orders…</td></tr>`;
+
+    let queryParams = [];
+    queryParams.push(`page=${page}`);
+    queryParams.push(`fetch_items=true`);
+    queryParams.push(`_=${Date.now()}`);
+    if (currentSearch) queryParams.push(`q=${encodeURIComponent(currentSearch)}`);
+    if (currentStatus) queryParams.push(`status=${encodeURIComponent(currentStatus)}`);
+    if (currentPaymentStatus) queryParams.push(`payment_status=${encodeURIComponent(currentPaymentStatus)}`);
+    if (currentPaymentMethod) queryParams.push(`payment_method=${encodeURIComponent(currentPaymentMethod)}`);
+    if (currentStartDate) queryParams.push(`start_date=${encodeURIComponent(currentStartDate)}`);
+    if (currentEndDate) queryParams.push(`end_date=${encodeURIComponent(currentEndDate)}`);
+
+    const qs = '?' + queryParams.join('&');
+    const result = await adminFetch(`/api/admin-orders${qs}`);
+    if (!result) return;
+
+    const { orders, pagination, summary } = result.data || {};
+    const totalCount = pagination?.total || summary?.total_orders || (orders ? orders.length : 0);
+    document.getElementById('orderCountBadge').textContent = `${totalCount} order(s) found`;
+
+    if (!orders || !orders.length) {
+      body.innerHTML = `<tr><td colspan="10" class="table-empty"><i class="bi bi-inbox"></i> No orders matching criteria.</td></tr>`;
+      renderPaginationControls(pagination || { page: 1, limit: 15, total: 0, pages: 1 });
+      updateSelectedOrdersUI();
+      return;
+    }
+
+    body.innerHTML = orders.map(o => {
+      const nameHtml = o.customer_name 
+        ? `<div style="font-weight:600;">${o.customer_name}</div>` 
+        : '<div style="font-weight:600;color:var(--admin-muted);font-style:italic;">Contact info removed</div>';
+      
+      const phoneHtml = o.customer_phone 
+        ? `<div style="color:var(--admin-muted);font-size:.75rem;">${o.customer_phone}</div>` 
+        : '';
+
+      const addrText = o.customer_address 
+        ? o.customer_address 
+        : 'Contact info removed';
+      const addrStyle = o.customer_address ? '' : 'font-style:italic;';
+
+      return `
+        <tr>
+          <td style="text-align:center;"><input type="checkbox" class="order-select-checkbox" value="${o.order_id}" onclick="updateSelectedOrdersUI()"></td>
+          <td><strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;">#${o.order_id}</strong></td>
+          <td>
+            ${nameHtml}
+            ${phoneHtml}
+          </td>
+          <td style="color:var(--admin-muted);font-size:.78rem;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${addrStyle}" title="${addrText}">${addrText}</td>
+          <td>${formatPaymentMethod(o.payment_method)}</td>
+          <td style="font-weight:700;">${formatPKR(o.total_amount)}</td>
+          <td>${statusBadge(o.order_status, STATUS_LABELS)}</td>
+          <td>${statusBadge(o.payment_status, PAYMENT_LABELS)}</td>
+          <td style="color:var(--admin-muted);font-size:.75rem;">${formatDate(o.created_at)}</td>
+          <td>
+            <div style="display:flex;gap:.35rem;align-items:center;">
+              <button class="btn-admin-ghost" style="font-size:.75rem;padding:.3rem .6rem;" onclick="openOrderModal(${JSON.stringify(o).replace(/"/g, '&quot;')})">
+                <i class="bi bi-pencil me-1"></i> Edit
+              </button>
+              <button class="btn-admin-ghost text-danger" style="font-size:.75rem;padding:.3rem .55rem;" onclick="deleteSingleOrderDirectly('${o.order_id}')" title="Delete Order">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    renderPaginationControls(pagination || { page: 1, limit: 15, total: totalCount, pages: Math.ceil(totalCount / 15) });
+
+    if (currentOrderId) {
+      const target = orders.find(o => o.order_id === currentOrderId);
+      if (target) { openOrderModal(target); currentOrderId = ''; }
+    }
+  }
+
+  function renderPaginationControls(p) {
+    const bar = document.getElementById('paginationBar');
+    if (!p || p.total === 0) {
+      bar.innerHTML = '<span style="font-size:.78rem;color:var(--admin-muted);">No pages</span>';
+      return;
+    }
+
+    const startItem = (p.page - 1) * p.limit + 1;
+    const endItem = Math.min(p.page * p.limit, p.total);
+
+    let html = `<span style="font-size:.78rem;color:var(--admin-muted);">Showing <strong>${startItem}–${endItem}</strong> of <strong>${p.total}</strong> orders</span>`;
+
+    if (p.pages > 1) {
+      html += `<div style="display:flex;gap:.3rem;align-items:center;">`;
+      html += `<button type="button" class="btn-admin-ghost" style="font-size:.75rem;padding:.25rem .6rem;" ${p.page <= 1 ? 'disabled' : ''} onclick="loadOrders(${p.page - 1})">Prev</button>`;
+
+      for (let i = 1; i <= p.pages; i++) {
+        if (i === 1 || i === p.pages || Math.abs(i - p.page) <= 1) {
+          html += `<button type="button" class="${i === p.page ? 'btn-admin-primary' : 'btn-admin-ghost'}" style="font-size:.75rem;padding:.25rem .55rem;" onclick="loadOrders(${i})">${i}</button>`;
+        } else if (i === 2 && p.page > 3) {
+          html += `<span style="font-size:.75rem;color:var(--admin-muted);">…</span>`;
+        } else if (i === p.pages - 1 && p.page < p.pages - 2) {
+          html += `<span style="font-size:.75rem;color:var(--admin-muted);">…</span>`;
+        }
+      }
+
+      html += `<button type="button" class="btn-admin-ghost" style="font-size:.75rem;padding:.25rem .6rem;" ${p.page >= p.pages ? 'disabled' : ''} onclick="loadOrders(${p.page + 1})">Next</button>`;
+      html += `</div>`;
+    }
+
+    bar.innerHTML = html;
+  }
+
+  let _activeOrder = null;
+  let _activeLogId = null;
+
+  function openOrderModal(order) {
+    _activeOrder = order;
+    document.getElementById('modalOrderId').textContent = `Order #${order.order_id}`;
+    
+    document.getElementById('modalOrderBadges').innerHTML = `
+      ${formatPaymentMethod(order.payment_method)}
+      ${statusBadge(order.order_status, STATUS_LABELS)}
+      ${statusBadge(order.payment_status, PAYMENT_LABELS)}
+    `;
+
+    const nameText = order.customer_name || '<span style="color:var(--admin-muted);font-style:italic;">Contact info removed</span>';
+    const phoneText = order.customer_phone || '<span style="color:var(--admin-muted);font-style:italic;">Contact info removed</span>';
+    const addrText = order.customer_address || '<span style="color:var(--admin-muted);font-style:italic;">Contact info removed</span>';
+
+    document.getElementById('modalCustomerInfo').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+        <div><strong>Customer Name:</strong> ${nameText}</div>
+        <div><strong>Phone / WhatsApp:</strong> ${phoneText}</div>
+        <div><strong>Delivery Address:</strong> ${addrText}</div>
+        <div><strong>Date Placed:</strong> ${formatDate(order.created_at)}</div>
+      </div>
+    `;
+
+    // Populate Editable Dropdowns
+    document.getElementById('modalPaymentMethod').value = (order.payment_method || 'COD').toUpperCase();
+    document.getElementById('modalPaymentStatus').value = order.payment_status;
+    document.getElementById('modalOrderStatus').value   = order.order_status;
+
+    let itemsHtml = '';
+    if (order.items && order.items.length > 0) {
+      itemsHtml += '<div style="font-weight:700;font-size:.85rem;margin-bottom:.4rem;">Ordered Items:</div>';
+      itemsHtml += '<div style="background:var(--admin-bg);border-radius:8px;padding:.6rem .8rem;margin-bottom:.75rem;font-size:.82rem;">';
+      order.items.forEach(item => {
+        itemsHtml += `<div style="display:flex;justify-content:space-between;margin-bottom:.25rem;">
+          <span>• ${item.product_name} × ${item.quantity}</span>
+          <span style="font-weight:600;">${formatPKR(item.price * item.quantity)}</span>
+        </div>`;
+      });
+      itemsHtml += '</div>';
+    }
+
+    const subtotal = order.subtotal !== undefined ? order.subtotal : (order.total_amount - (order.shipping_fee || 0));
+    const shippingFee = order.shipping_fee !== undefined ? order.shipping_fee : 0;
+
+    itemsHtml += `
+      <div style="font-size:.84rem;line-height:1.6;border-top:1px dashed var(--admin-border);padding-top:.5rem;">
+        <div style="display:flex;justify-content:space-between;"><span>Subtotal:</span> <strong>${formatPKR(subtotal)}</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span>Shipping Fee:</span> <strong>${shippingFee === 0 ? 'FREE' : formatPKR(shippingFee)}</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:.95rem;font-weight:700;color:var(--admin-text);margin-top:.2rem;"><span>Total Amount:</span> <span style="color:#c17c3a;">${formatPKR(order.total_amount)}</span></div>
+      </div>
+    `;
+
+    document.getElementById('modalItemsList').innerHTML = itemsHtml;
+
+    renderPaymentActionArea();
+    renderHistoryTab();
+
+    updateWhatsAppNotificationPreview();
+    document.getElementById('orderModal').classList.add('show');
+  }
+
+  function renderPaymentActionArea() {
+    if (!_activeOrder) return;
+    const currentMethod = document.getElementById('modalPaymentMethod').value;
+    const isCOD = currentMethod === 'COD';
+    const currentPayStatus = document.getElementById('modalPaymentStatus').value;
+    const currentOrdStatus = document.getElementById('modalOrderStatus').value;
+    const isPaid = currentPayStatus === 'PAID';
+
+    const warnContainer = document.getElementById('paymentWarningContainer');
+    const btnContainer = document.getElementById('paymentActionBtnContainer');
+
+    let warnHtml = '';
+    let btnHtml = '';
+
+    if (isCOD) {
+      if (!isPaid && (currentOrdStatus === 'SHIPPED' || currentOrdStatus === 'READY')) {
+        warnHtml = `<div class="warning-banner"><i class="bi bi-info-circle-fill me-1"></i> COD payment is still pending. Payment should be collected on delivery.</div>`;
+      } else if (!isPaid && currentOrdStatus === 'COMPLETED') {
+        warnHtml = `<div class="danger-banner"><i class="bi bi-exclamation-triangle-fill me-1"></i> Order marked as delivered but COD payment has not been recorded. Please verify whether cash was collected.</div>`;
+      }
+
+      if (!isPaid) {
+        btnHtml = `<button type="button" class="btn-admin-primary btn-sm w-100" style="font-size:.74rem;padding:.25rem .5rem;" onclick="confirmCODPaymentReceived()"><i class="bi bi-cash me-1"></i> Mark Cash Received</button>`;
+      } else {
+        btnHtml = `<div style="font-size:.72rem;color:#155724;font-weight:600;"><i class="bi bi-check-circle-fill me-1"></i> COD Cash Verified</div>`;
+      }
+    } else {
+      // ONLINE PAYMENT
+      if (!isPaid && ['PROCESSING', 'READY', 'SHIPPED', 'COMPLETED'].includes(currentOrdStatus)) {
+        warnHtml = `<div class="danger-banner"><i class="bi bi-exclamation-triangle-fill me-1"></i> Online payment has not been verified for this order.</div>`;
+      } else if (isPaid) {
+        warnHtml = `<div class="success-banner"><i class="bi bi-shield-check me-1"></i> Online payment verified.</div>`;
+      }
+
+      if (!isPaid) {
+        btnHtml = `<button type="button" class="btn-admin-primary btn-sm w-100" style="background:#0284c7;border-color:#0284c7;font-size:.74rem;padding:.25rem .5rem;" onclick="verifyOnlinePaymentNow()"><i class="bi bi-shield-check me-1"></i> Mark Payment Paid</button>`;
+      } else {
+        btnHtml = `<div style="font-size:.72rem;color:#0369a1;font-weight:600;"><i class="bi bi-shield-check me-1"></i> Online Payment Verified</div>`;
+      }
+    }
+
+    warnContainer.innerHTML = warnHtml;
+    btnContainer.innerHTML = btnHtml;
+  }
+
+  function onModalControlStateChange() {
+    if (!_activeOrder) return;
+    renderPaymentActionArea();
+    updateWhatsAppNotificationPreview();
+  }
+
+  async function verifyOnlinePaymentNow() {
+    if (!_activeOrder) return;
+    if (!confirm("Have you verified the customer's payment screenshot/payment?")) return;
+
+    try {
+      const res = await adminFetch('/api/admin-orders', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'verify-online-payment', order_id: _activeOrder.order_id })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        showAdminToast('✓ Online payment verified and marked as Paid!', 'success');
+        _activeOrder.payment_status = 'PAID';
+        document.getElementById('modalPaymentStatus').value = 'PAID';
+        onModalControlStateChange();
+        loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('PAYMENT VERIFICATION FAILED', res?.data?.error || 'Failed to verify online payment on database. Please try again.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('PAYMENT VERIFICATION FAILED', 'Failed to verify online payment on database. Please try again.');
+    }
+  }
+
+  async function confirmCODPaymentReceived() {
+    if (!_activeOrder) return;
+    if (!confirm("Confirm that the COD payment has been received from the customer.")) return;
+
+    try {
+      const res = await adminFetch('/api/admin-orders', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'mark-cod-received', order_id: _activeOrder.order_id })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        showAdminToast('✓ COD payment recorded as received!', 'success');
+        _activeOrder.payment_status = 'PAID';
+        document.getElementById('modalPaymentStatus').value = 'PAID';
+        onModalControlStateChange();
+        loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('RECORD PAYMENT FAILED', res?.data?.error || 'Failed to record COD payment on database. Please try again.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('RECORD PAYMENT FAILED', 'Failed to record COD payment on database. Please try again.');
+    }
+  }
+
+  function generateWhatsAppMessageText(ordStatus, payStatus, payMethod) {
+    if (!_activeOrder) return '';
+
+    const name = _activeOrder.customer_name || 'Customer';
+    const orderId = '#' + _activeOrder.order_id;
+    const isCOD = payMethod === 'COD';
+    const paymentMethodText = isCOD ? 'Cash on Delivery' : 'Online Payment';
+    const address = _activeOrder.customer_address || 'Provided address';
+    const subtotal = _activeOrder.subtotal !== undefined ? _activeOrder.subtotal : (_activeOrder.total_amount - (_activeOrder.shipping_fee || 0));
+    const shippingFee = _activeOrder.shipping_fee !== undefined ? _activeOrder.shipping_fee : 0;
+    const grandTotalStr = Number(_activeOrder.total_amount || 0).toLocaleString('en-US');
+
+    let itemsStr = '';
+    if (_activeOrder.items && _activeOrder.items.length > 0) {
+      itemsStr = _activeOrder.items.map(i => `• ${i.product_name} × ${i.quantity} — Rs. ${Number(i.price * i.quantity).toLocaleString('en-US')}`).join('\n');
+    } else {
+      itemsStr = '• Order Items';
+    }
+
+    if (ordStatus === 'CANCELLED') {
+      return `Hello ${name},
+
+Your order ${orderId} from Hand & Heart Studio (Artisan Daim Afzal) has been cancelled.
+
+If you have any questions or would like to re-order, please reply to this message.
+
+Thank you,
+Hand & Heart Studio`;
+    }
+
+    if (ordStatus === 'COMPLETED') {
+      const note = isCOD && payStatus === 'UNPAID' ? 'Please ensure the COD payment has been collected.' : 'Thank you for choosing Hand & Heart!';
+      return `Hello ${name}! 🌿
+
+Your order ${orderId} from Hand & Heart Studio has been delivered successfully.
+
+${note}
+
+Crafted by Hand, Made with Heart by Daim Afzal.`;
+    }
+
+    if (ordStatus === 'SHIPPED') {
+      const shippingNote = isCOD ? 'Please ensure cash payment is ready upon courier delivery.' : 'Thank you for completing your online payment!';
+      return `Hello ${name}! 🚚
+
+Your order ${orderId} from Hand & Heart Studio has been shipped.
+
+Order Total: PKR ${grandTotalStr}
+Payment Method: ${paymentMethodText}
+Payment Status: ${payStatus}
+
+${shippingNote}
+
+Thank you for choosing Hand & Heart!`;
+    }
+
+    if (ordStatus === 'READY') {
+      return `Hello ${name}! 🎁
+
+Great news! Your handcrafted order ${orderId} from Hand & Heart Studio is packed and ready to ship.
+
+Order Total: PKR ${grandTotalStr}
+Payment Method: ${paymentMethodText}
+Payment Status: ${payStatus}
+
+Thank you for choosing Hand & Heart!`;
+    }
+
+    if (ordStatus === 'PROCESSING') {
+      return `Hello ${name}! 🔨
+
+Your order ${orderId} from Hand & Heart Studio is now being handcrafted & prepared by Master Artisan Daim Afzal.
+
+Order Total: PKR ${grandTotalStr}
+Payment Method: ${paymentMethodText}
+Payment Status: ${payStatus}
+
+We will notify you as soon as your order is ready to ship.`;
+    }
+
+    if (payStatus === 'PAID') {
+      return `Hello ${name}! 💳
+
+We have received and verified your payment for order ${orderId}.
+
+Payment Status: Paid
+Amount: PKR ${grandTotalStr}
+
+Your order will now proceed to the next stage.
+
+Thank you for choosing Hand & Heart Studio!`;
+    }
+
+    // Default: Order Confirmation / Unpaid
+    const payInstructions = isCOD 
+      ? 'Your order will be processed shortly for Cash on Delivery.' 
+      : 'Please complete your payment using your preferred bank/Easypaisa/JazzCash account and send the payment screenshot to us on WhatsApp so that we can verify your payment and proceed with your order.';
+
+    return `Hello ${name}! ❤️
+
+Thank you for your order ${orderId} from Hand & Heart Studio.
+
+Payment Method: ${paymentMethodText}
+Payment Status: ${payStatus}
+Order Total: PKR ${grandTotalStr}
+
+Order Details:
+${itemsStr}
+
+Delivery Address:
+${address}
+
+${payInstructions}
+
+Crafted by Hand, Made with Heart by Daim Afzal.`;
+  }
+
+  function updateWhatsAppNotificationPreview() {
+    if (!_activeOrder) return;
+
+    const phone = (_activeOrder.customer_phone || '').replace(/[^0-9]/g, '');
+    const hasPhone = Boolean(_activeOrder.customer_phone && phone.length > 3);
+
+    const currentMethod = document.getElementById('modalPaymentMethod').value;
+    const currentOrdStatus = document.getElementById('modalOrderStatus').value;
+    const currentPayStatus = document.getElementById('modalPaymentStatus').value;
+
+    const msg = generateWhatsAppMessageText(currentOrdStatus, currentPayStatus, currentMethod);
+
+    const previewEl = document.getElementById('waPreviewText');
+    const notifyBtn = document.getElementById('waNotifyBtn');
+    const badgeContainer = document.getElementById('notificationStatusBadgeContainer');
+
+    // Check if notification for current order_status was marked SENT
+    const sentForCurrent = (_activeOrder.notifications || []).find(n => n.status === 'SENT' && (n.order_status_at_send === currentOrdStatus || n.message_type === currentOrdStatus));
+    
+    if (sentForCurrent) {
+      badgeContainer.innerHTML = `<span style="font-size:.78rem;color:#155724;background:#d4edda;padding:.25rem .6rem;border-radius:4px;font-weight:700;"><i class="bi bi-check-circle-fill me-1"></i> Customer notified for status ${currentOrdStatus} (Sent: ${formatDate(sentForCurrent.sent_at)})</span>`;
+    } else {
+      badgeContainer.innerHTML = `<span style="font-size:.78rem;color:#856404;background:#fff3cd;padding:.25rem .6rem;border-radius:4px;font-weight:700;"><i class="bi bi-exclamation-triangle-fill me-1"></i> Customer has NOT been notified about status ${currentOrdStatus}</span>`;
+    }
+
+    if (!hasPhone) {
+      previewEl.innerHTML = `<span style="color:#b91c1c;font-style:normal;">Contact info removed — WhatsApp notification unavailable.</span>`;
+      notifyBtn.style.opacity = '0.5';
+      notifyBtn.style.pointerEvents = 'none';
+    } else {
+      previewEl.textContent = msg;
+      notifyBtn.style.opacity = '1';
+      notifyBtn.style.pointerEvents = 'auto';
+    }
+  }
+
+  async function triggerWhatsAppSendWorkflow() {
+    if (!_activeOrder) return;
+
+    const phone = (_activeOrder.customer_phone || '').replace(/[^0-9]/g, '');
+    if (!phone || phone.length < 4) {
+      showAdminToast('Customer WhatsApp phone is invalid or removed.', 'danger');
+      return;
+    }
+
+    const msgText = document.getElementById('waPreviewText').textContent.trim();
+    const currentOrdStatus = document.getElementById('modalOrderStatus').value;
+    const currentPayStatus = document.getElementById('modalPaymentStatus').value;
+
+    // Check if message of this type was already marked SENT
+    const alreadySent = (_activeOrder.notifications || []).find(n => (n.order_status_at_send === currentOrdStatus || n.message_type === currentOrdStatus) && n.status === 'SENT');
+    if (alreadySent) {
+      if (!confirm(`A WhatsApp message for ${currentOrdStatus} was already marked as sent on ${formatDate(alreadySent.sent_at)}. Send it again?`)) {
+        return;
+      }
+    }
+
+    // Step 1: Log attempt as OPENED in backend
+    try {
+      const res = await adminFetch('/api/admin-data?action=log-wa-notification', {
+        method: 'POST',
+        body: JSON.stringify({
+          order_id: _activeOrder.order_id,
+          customer_phone: _activeOrder.customer_phone,
+          message_type: currentOrdStatus,
+          message_content: msgText,
+          order_status: currentOrdStatus,
+          payment_status: currentPayStatus
+        })
+      });
+
+      if (res && res.data && res.data.notification) {
+        _activeLogId = res.data.notification.id;
+      }
+    } catch (e) {
+      console.warn('Could not log initial WA attempt:', e);
+    }
+
+    // Step 2: Open wa.me link in new tab
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgText)}`;
+    window.open(waUrl, '_blank');
+
+    // Step 3: Show 2-step confirmation prompt modal
+    document.getElementById('waConfirmModal').classList.add('show');
+  }
+
+  async function markSentDirectly() {
+    if (!_activeOrder) return;
+    const btn = document.getElementById('markSentDirectBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="bi bi-arrow-repeat me-1 spin"></i> Saving…'; }
+
+    const currentOrdStatus = document.getElementById('modalOrderStatus').value;
+
+    try {
+      const res = await adminFetch('/api/admin-data?action=confirm-wa-sent', {
+        method: 'POST',
+        body: JSON.stringify({
+          notification_id: _activeLogId,
+          order_id: _activeOrder.order_id,
+          order_status: currentOrdStatus
+        })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        showAdminToast(`✓ Status notification marked as SENT for ${currentOrdStatus}!`, 'success');
+        const updatedRes = await adminFetch(`/api/admin-orders?q=${encodeURIComponent(_activeOrder.order_id)}&fetch_items=true&_=${Date.now()}`);
+        if (updatedRes && updatedRes.ok && updatedRes.data && updatedRes.data.orders && updatedRes.data.orders.length > 0) {
+          _activeOrder = updatedRes.data.orders.find(o => o.order_id === _activeOrder.order_id || String(o.id) === String(_activeOrder.id)) || updatedRes.data.orders[0];
+          openOrderModal(_activeOrder);
+        }
+        await loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('WHATSAPP STATUS FAILED', res?.data?.error || 'Failed to update WhatsApp notification state in database.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('WHATSAPP STATUS FAILED', 'Failed to update WhatsApp notification state in database.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-check-circle me-1"></i> Mark Status as Sent'; }
+    }
+  }
+
+  async function confirmWASentStatus(isSent) {
+    if (!_activeOrder) return;
+    const currentOrdStatus = document.getElementById('modalOrderStatus').value;
+
+    try {
+      if (isSent) {
+        const res = await adminFetch('/api/admin-data?action=confirm-wa-sent', {
+          method: 'POST',
+          body: JSON.stringify({
+            notification_id: _activeLogId,
+            order_id: _activeOrder?.order_id,
+            order_status: currentOrdStatus
+          })
+        });
+
+        if (res && res.ok && res.data && res.data.success) {
+          showAdminToast('✓ WhatsApp notification marked as SENT!', 'success');
+        } else {
+          showAdminErrorAlert('WHATSAPP STATUS FAILED', res?.data?.error || 'Failed to mark WhatsApp notification as sent.');
+        }
+      } else {
+        const res = await adminFetch('/api/admin-data?action=confirm-wa-not-sent', {
+          method: 'POST',
+          body: JSON.stringify({
+            notification_id: _activeLogId,
+            order_id: _activeOrder?.order_id
+          })
+        });
+        if (res && res.ok) {
+          showAdminToast('WhatsApp notification kept as NOT_SENT.', 'warning');
+        } else {
+          showAdminErrorAlert('WHATSAPP STATUS FAILED', res?.data?.error || 'Failed to update WhatsApp notification status.');
+        }
+      }
+    } catch (e) {
+      showAdminErrorAlert('WHATSAPP STATUS FAILED', 'Failed to update WhatsApp notification status.');
+    } finally {
+      document.getElementById('waConfirmModal').classList.remove('show');
+      const updatedRes = await adminFetch(`/api/admin-orders?order_id=${_activeOrder.order_id}&fetch_items=true&_=${Date.now()}`);
+      if (updatedRes && updatedRes.ok && updatedRes.data && updatedRes.data.orders && updatedRes.data.orders.length > 0) {
+        _activeOrder = updatedRes.data.orders[0];
+        openOrderModal(_activeOrder);
+      }
+      await loadOrders(currentPage);
+    }
+  }
+
+  function toggleHistoryTab() {
+    const el = document.getElementById('historyTabContent');
+    const chev = document.getElementById('historyChevron');
+    if (el.style.display === 'none') {
+      el.style.display = 'block';
+      chev.classList.replace('bi-chevron-down', 'bi-chevron-up');
+      renderHistoryTab();
+    } else {
+      el.style.display = 'none';
+      chev.classList.replace('bi-chevron-up', 'bi-chevron-down');
+    }
+  }
+
+  function renderHistoryTab() {
+    if (!_activeOrder) return;
+
+    const notifBody = document.getElementById('waNotificationsHistoryList');
+    const auditBody = document.getElementById('auditLogsHistoryList');
+
+    const notifs = _activeOrder.notifications || [];
+    if (!notifs.length) {
+      notifBody.innerHTML = `<div style="font-size:.78rem;color:var(--admin-muted);font-style:italic;">No WhatsApp notifications prepared or sent yet.</div>`;
+    } else {
+      notifBody.innerHTML = notifs.map(n => {
+        let statusCls = n.status === 'SENT' ? 'status-sent' : (n.status === 'OPENED' ? 'status-opened' : 'status-notsent');
+        let statusIcon = n.status === 'SENT' ? '✓' : (n.status === 'OPENED' ? '⏳' : '⚠');
+        return `
+          <div class="history-card">
+            <div style="display:flex;justify-content:space-between;">
+              <span class="${statusCls}">${statusIcon} ${n.message_type} (${n.status})</span>
+              <span style="color:var(--admin-muted);">${formatDate(n.created_at || n.sent_at)}</span>
+            </div>
+            <div style="font-size:.75rem;color:var(--admin-muted);margin-top:.2rem;">Sent By: ${n.sent_by || 'Admin'}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const audits = _activeOrder.audit_logs || [];
+    if (!audits.length) {
+      auditBody.innerHTML = `<div style="font-size:.78rem;color:var(--admin-muted);font-style:italic;">No audit history recorded.</div>`;
+    } else {
+      auditBody.innerHTML = audits.map(a => `
+        <div class="history-card">
+          <div style="display:flex;justify-content:space-between;font-weight:600;">
+            <span>${a.action_type}</span>
+            <span style="color:var(--admin-muted);">${formatDate(a.created_at)}</span>
+          </div>
+          <div style="font-size:.75rem;color:var(--admin-muted);margin-top:.2rem;">
+            ${a.old_value ? `Old: ${a.old_value} &rarr; ` : ''}New: ${a.new_value} (By: ${a.performed_by})
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function closeModal() {
+    document.getElementById('orderModal').classList.remove('show');
+    document.getElementById('waConfirmModal').classList.remove('show');
+    _activeOrder = null;
+    _activeLogId = null;
+  }
+
+  async function saveOrderStatus() {
+    if (!_activeOrder) return;
+    const btn = document.getElementById('saveStatusBtn');
+
+    const newPaymentMethod = document.getElementById('modalPaymentMethod').value;
+    const newPaymentStatus = document.getElementById('modalPaymentStatus').value;
+    const newOrderStatus   = document.getElementById('modalOrderStatus').value;
+
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="bi bi-arrow-repeat me-1 spin"></i> Saving…';
+    }
+
+    try {
+      const res = await adminFetch('/api/admin-orders', {
+        method: 'POST',
+        body: JSON.stringify({
+          order_id: _activeOrder.order_id,
+          payment_method: newPaymentMethod,
+          payment_status: newPaymentStatus,
+          order_status: newOrderStatus
+        })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        if (res.data.order) {
+          Object.assign(_activeOrder, res.data.order);
+        } else {
+          _activeOrder.payment_method = newPaymentMethod;
+          _activeOrder.payment_status = newPaymentStatus;
+          _activeOrder.order_status   = newOrderStatus;
+        }
+        showAdminToast('✓ Order status updated successfully!', 'success');
+        closeModal();
+        await loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('ORDER STATUS SAVE FAILED', res?.data?.error || 'Order status update failed to save to database. Please try again.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('ORDER STATUS SAVE FAILED', 'Network or server error during order status update. Please try again.');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Save Changes';
+      }
+    }
+  }
+
+  async function deleteSingleOrderDirectly(orderId) {
+    if (!orderId) return;
+    if (!confirm(`Are you sure you want to PERMANENTLY delete Order #${orderId}?\n\nThis will remove the whole order details, ordered items, and logs from the database. This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const res = await adminFetch(`/api/admin-orders?action=delete-order`, {
+        method: 'POST',
+        body: JSON.stringify({ order_id: orderId })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        showAdminToast(`✓ Order #${orderId} permanently deleted!`, 'success');
+        if (_activeOrder && (_activeOrder.order_id === orderId || String(_activeOrder.id) === String(orderId))) {
+          closeModal();
+        }
+        await loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('DELETE ORDER FAILED', res?.data?.error || 'Failed to delete order from database.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('DELETE ORDER FAILED', 'Failed to delete order from database.');
+    }
+  }
+
+  async function deleteCurrentOrderNow() {
+    if (!_activeOrder) return;
+    deleteSingleOrderDirectly(_activeOrder.order_id);
+  }
+
+  // --- MULTI-SELECT CHECKBOX LOGIC ---
+
+  function toggleSelectAllOrders(masterCb) {
+    const checkboxes = document.querySelectorAll('.order-select-checkbox');
+    checkboxes.forEach(cb => { cb.checked = masterCb.checked; });
+    updateSelectedOrdersUI();
+  }
+
+  function updateSelectedOrdersUI() {
+    const checked = Array.from(document.querySelectorAll('.order-select-checkbox:checked')).map(cb => cb.value);
+    const actionBar = document.getElementById('bulkSelectActionBar');
+    const countText = document.getElementById('selectedOrdersCountText');
+    const masterCb = document.getElementById('selectAllOrdersCb');
+
+    const totalCbs = document.querySelectorAll('.order-select-checkbox');
+    if (masterCb && totalCbs.length > 0) {
+      masterCb.checked = (checked.length === totalCbs.length);
+    }
+
+    if (checked.length > 0) {
+      if (actionBar) actionBar.style.display = 'flex';
+      if (countText) countText.textContent = checked.length;
+    } else {
+      if (actionBar) actionBar.style.display = 'none';
+    }
+  }
+
+  function clearSelectedOrdersCheckboxes() {
+    const masterCb = document.getElementById('selectAllOrdersCb');
+    if (masterCb) masterCb.checked = false;
+    const checkboxes = document.querySelectorAll('.order-select-checkbox');
+    checkboxes.forEach(cb => { cb.checked = false; });
+    updateSelectedOrdersUI();
+  }
+
+  async function deleteCheckedSelectedOrders() {
+    const checkedIds = Array.from(document.querySelectorAll('.order-select-checkbox:checked')).map(cb => cb.value);
+    if (checkedIds.length === 0) {
+      showAdminToast('No orders selected for deletion.', 'warning');
+      return;
+    }
+
+    if (!confirm(`Are you sure you want to PERMANENTLY delete ${checkedIds.length} selected orders?\n\nOrders: ${checkedIds.join(', ')}\n\nThis will remove their whole order details, items, and logs from the database. This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const res = await adminFetch(`/api/admin-orders?action=delete-order`, {
+        method: 'POST',
+        body: JSON.stringify({ order_ids: checkedIds })
+      });
+
+      if (res && res.ok && res.data && res.data.success) {
+        showAdminToast(`✓ ${res.data.message || 'Selected orders deleted successfully!'}`, 'success');
+        clearSelectedOrdersCheckboxes();
+        await loadOrders(currentPage);
+      } else {
+        showAdminErrorAlert('BULK DELETE FAILED', res?.data?.error || 'Failed to delete selected orders.');
+      }
+    } catch (e) {
+      showAdminErrorAlert('BULK DELETE FAILED', 'Failed to delete selected orders.');
+    }
+  }
+
+  // --- EXCEL EXPORT & BULK DATE RANGE DELETE MODAL LOGIC ---
+
+  function openExcelExportModal() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('exportStartDate').value = currentStartDate || '';
+    document.getElementById('exportEndDate').value = currentEndDate || today;
+    document.getElementById('excelExportModal').classList.add('show');
+  }
+
+  function closeExcelExportModal() {
+    document.getElementById('excelExportModal').classList.remove('show');
+  }
+
+  function setExportDatePreset(preset) {
+    const todayObj = new Date();
+    const endStr = todayObj.toISOString().split('T')[0];
+    let startObj = new Date();
+
+    if (preset === 'today') {
+      // today
+    } else if (preset === '7days') {
+      startObj.setDate(startObj.getDate() - 7);
+    } else if (preset === '30days') {
+      startObj.setDate(startObj.getDate() - 30);
+    } else if (preset === 'this_month') {
+      startObj.setDate(1);
+    } else if (preset === 'all') {
+      document.getElementById('exportStartDate').value = '';
+      document.getElementById('exportEndDate').value = '';
+      return;
+    }
+
+    document.getElementById('exportStartDate').value = startObj.toISOString().split('T')[0];
+    document.getElementById('exportEndDate').value = endStr;
+  }
+
+  async function downloadExcelExport() {
+    const btn = document.getElementById('runExportBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Generating Export…'; }
+
+    try {
+      const sDate = document.getElementById('exportStartDate').value.trim();
+      const eDate = document.getElementById('exportEndDate').value.trim();
+      const statusF = document.getElementById('exportStatusFilter').value.trim();
+
+      let queryParams = [`limit=1000`, `fetch_items=true`];
+      if (sDate) queryParams.push(`start_date=${encodeURIComponent(sDate)}`);
+      if (eDate) queryParams.push(`end_date=${encodeURIComponent(eDate)}`);
+      if (statusF) queryParams.push(`status=${encodeURIComponent(statusF)}`);
+
+      const result = await adminFetch(`/api/admin-orders?${queryParams.join('&')}`);
+      if (!result || !result.data || !result.data.orders) {
+        showAdminToast('No orders found to export.', 'warning');
+        return;
+      }
+
+      const orders = result.data.orders;
+      if (orders.length === 0) {
+        showAdminToast('No orders match your selected date range and filter criteria.', 'warning');
+        return;
+      }
+
+      // Build CSV string
+      const headers = ['Order ID', 'Date & Time', 'Customer Name', 'Phone / WhatsApp', 'Delivery Address', 'Payment Method', 'Payment Status', 'Order Status', 'Items Ordered', 'Subtotal (PKR)', 'Shipping Fee (PKR)', 'Total Amount (PKR)', 'Notes'];
+      
+      let csvRows = [headers.join(',')];
+
+      orders.forEach(o => {
+        const itemsStr = (o.items || []).map(i => `${i.product_name} x${i.quantity}`).join('; ');
+        const subtotal = o.subtotal !== undefined ? o.subtotal : (o.total_amount - (o.shipping_fee || 0));
+
+        const row = [
+          `"${(o.order_id || '').replace(/"/g, '""')}"`,
+          `"${new Date(o.created_at).toLocaleString('en-US').replace(/"/g, '""')}"`,
+          `"${(o.customer_name || 'N/A').replace(/"/g, '""')}"`,
+          `"${(o.customer_phone || 'N/A').replace(/"/g, '""')}"`,
+          `"${(o.customer_address || 'N/A').replace(/"/g, '""')}"`,
+          `"${(o.payment_method || 'COD').replace(/"/g, '""')}"`,
+          `"${(o.payment_status || 'UNPAID').replace(/"/g, '""')}"`,
+          `"${(o.order_status || 'PENDING').replace(/"/g, '""')}"`,
+          `"${itemsStr.replace(/"/g, '""')}"`,
+          Number(subtotal || 0),
+          Number(o.shipping_fee || 0),
+          Number(o.total_amount || 0),
+          `"${(o.order_notes || '').replace(/"/g, '""')}"`
+        ];
+        csvRows.push(row.join(','));
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csvRows.join('\n'));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', csvContent);
+      const filenameDate = sDate && eDate ? `${sDate}_to_${eDate}` : new Date().toISOString().split('T')[0];
+      downloadAnchor.setAttribute('download', `Hand_And_Heart_Orders_${filenameDate}.csv`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      document.body.removeChild(downloadAnchor);
+
+      showAdminToast(`✓ Successfully exported ${orders.length} orders to Excel CSV!`, 'success');
+      closeExcelExportModal();
+    } catch (err) {
+      showAdminToast('Failed to export orders to Excel.', 'danger');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-download me-1"></i> Download Excel CSV'; }
+    }
+  }
+
+  function openDateRangeDeleteModal() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bulkDeleteStartDate').value = currentStartDate || '';
+    document.getElementById('bulkDeleteEndDate').value = currentEndDate || today;
+    document.getElementById('bulkDeleteConfirmText').value = '';
+    const modalEl = document.getElementById('dateRangeDeleteModal');
+    if (modalEl) modalEl.classList.add('show');
+  }
+
+  function closeDateRangeDeleteModal() {
+    const modalEl = document.getElementById('dateRangeDeleteModal');
+    if (modalEl) modalEl.classList.remove('show');
+  }
+
+  function setBulkDeleteDatePreset(preset, btnEl) {
+    document.querySelectorAll('.preset-time-btn').forEach(b => {
+      b.style.background = '';
+      b.style.color = '';
+      b.style.border = '';
+      b.style.fontWeight = '';
+      b.classList.remove('active');
+    });
+
+    if (btnEl) {
+      btnEl.style.background = '#f8d7da';
+      btnEl.style.color = '#721c24';
+      btnEl.style.border = '1px solid #f5c6cb';
+      btnEl.style.fontWeight = '700';
+      btnEl.classList.add('active');
+    }
+
+    const todayObj = new Date();
+    const endStr = todayObj.toISOString().split('T')[0];
+    let startObj = new Date();
+
+    if (preset === 'all') {
+      document.getElementById('bulkDeleteStartDate').value = '2020-01-01';
+      document.getElementById('bulkDeleteEndDate').value = endStr;
+    } else if (preset === '7days') {
+      startObj.setDate(startObj.getDate() - 7);
+      document.getElementById('bulkDeleteStartDate').value = startObj.toISOString().split('T')[0];
+      document.getElementById('bulkDeleteEndDate').value = endStr;
+    } else if (preset === '10days') {
+      startObj.setDate(startObj.getDate() - 10);
+      document.getElementById('bulkDeleteStartDate').value = startObj.toISOString().split('T')[0];
+      document.getElementById('bulkDeleteEndDate').value = endStr;
+    } else if (preset === '30days') {
+      startObj.setDate(startObj.getDate() - 30);
+      document.getElementById('bulkDeleteStartDate').value = startObj.toISOString().split('T')[0];
+      document.getElementById('bulkDeleteEndDate').value = endStr;
+    } else if (preset === 'older_30') {
+      startObj.setDate(startObj.getDate() - 30);
+      document.getElementById('bulkDeleteStartDate').value = '2020-01-01';
+      document.getElementById('bulkDeleteEndDate').value = startObj.toISOString().split('T')[0];
+    } else if (preset === 'older_60') {
+      startObj.setDate(startObj.getDate() - 60);
+      document.getElementById('bulkDeleteStartDate').value = '2020-01-01';
+      document.getElementById('bulkDeleteEndDate').value = startObj.toISOString().split('T')[0];
+    } else if (preset === 'older_90') {
+      startObj.setDate(startObj.getDate() - 90);
+      document.getElementById('bulkDeleteStartDate').value = '2020-01-01';
+      document.getElementById('bulkDeleteEndDate').value = startObj.toISOString().split('T')[0];
+    }
+  }
+
+  async function confirmBulkDateRangeDelete() {
+    const sDate = document.getElementById('bulkDeleteStartDate').value.trim();
+    const eDate = document.getElementById('bulkDeleteEndDate').value.trim();
+    const confirmInput = document.getElementById('bulkDeleteConfirmText').value.trim();
+
+    if (!sDate || !eDate) {
+      showAdminToast('Please select both Start Date and End Date.', 'warning');
+      return;
+    }
+
+    if (confirmInput.toUpperCase() !== 'DELETE') {
+      showAdminToast('Please type DELETE in capital letters to confirm.', 'warning');
+      return;
+    }
+
+    const btn = document.getElementById('confirmBulkDeleteBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Deleting Orders…'; }
+
+    try {
+      const res = await adminFetch(`/api/admin-orders?action=delete-range`, {
+        method: 'POST',
+        body: JSON.stringify({ start_date: sDate, end_date: eDate })
+      });
+
+      if (res && res.data && res.data.success) {
+        showAdminToast(`✓ ${res.data.message || 'Orders deleted successfully!'}`, 'success');
+        closeDateRangeDeleteModal();
+        loadOrders(1);
+      } else {
+        showAdminToast(res?.data?.error || 'Failed to delete orders in date range.', 'danger');
+      }
+    } catch (e) {
+      showAdminToast('Error executing date range deletion.', 'danger');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-trash me-1"></i> Permanently Delete Range'; }
+    }
+  }
+
+  document.getElementById('orderModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+  document.getElementById('excelExportModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeExcelExportModal();
+  });
+  document.getElementById('dateRangeDeleteModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeDateRangeDeleteModal();
+  });
+
+  loadOrders();
+</script>
+
+<!-- EXCEL EXPORT MODAL -->
+<div class="admin-modal-overlay" id="excelExportModal" style="z-index:9999;">
+  <div class="admin-modal" style="max-width:480px;width:100%;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--admin-border);">
+      <div class="modal-title font-heading fs-5" style="color:#155724;font-weight:700;">
+        <i class="bi bi-file-earmark-excel me-2 text-success"></i> Export Orders to Excel
+      </div>
+      <button onclick="closeExcelExportModal()" class="btn-close-modal" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--admin-muted);">&times;</button>
+    </div>
+    <div>
+      <p class="text-muted fs-7 mb-3">Select the date range and optional status filter to generate a complete downloadable Excel CSV report.</p>
+      
+      <div class="mb-3">
+        <label class="form-label fw-bold fs-8 text-uppercase text-muted mb-1">Quick Date Presets:</label>
+        <div class="d-flex gap-2 flex-wrap">
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="setExportDatePreset('today')">Today</button>
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="setExportDatePreset('7days')">Last 7 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="setExportDatePreset('30days')">Last 30 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="setExportDatePreset('this_month')">This Month</button>
+          <button type="button" class="btn-admin-ghost btn-sm" onclick="setExportDatePreset('all')">All Time</button>
+        </div>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-6">
+          <label class="form-label fw-bold fs-7 mb-1">Start Date:</label>
+          <input type="date" id="exportStartDate" class="form-control">
+        </div>
+        <div class="col-6">
+          <label class="form-label fw-bold fs-7 mb-1">End Date:</label>
+          <input type="date" id="exportEndDate" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold fs-7 mb-1">Order Status Filter:</label>
+        <select id="exportStatusFilter" class="form-control">
+          <option value="">All Statuses</option>
+          <option value="PENDING">Pending</option>
+          <option value="CONFIRMED">Confirmed</option>
+          <option value="SHIPPED">Shipped</option>
+          <option value="COMPLETED">Completed</option>
+          <option value="CANCELLED">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 pt-2 border-top">
+        <button type="button" class="btn-admin-ghost" onclick="closeExcelExportModal()">Cancel</button>
+        <button type="button" id="runExportBtn" class="btn-admin-primary" style="background:#28a745;border:none;" onclick="downloadExcelExport()">
+          <i class="bi bi-download me-1"></i> Download Excel CSV
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BULK DATE RANGE DELETE MODAL -->
+<div class="admin-modal-overlay" id="dateRangeDeleteModal" style="z-index:9999;">
+  <div class="admin-modal" style="max-width:520px;width:100%;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #f5c6cb;">
+      <div class="modal-title font-heading fs-5" style="color:#721c24;font-weight:700;">
+        <i class="bi bi-exclamation-triangle-fill me-2 text-danger"></i> Bulk Delete Orders by Timeframe
+      </div>
+      <button onclick="closeDateRangeDeleteModal()" class="btn-close-modal" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--admin-muted);">&times;</button>
+    </div>
+    <div>
+      <p class="text-danger fs-7 mb-3 fw-bold">
+        ⚠️ Warning: This will permanently delete whole order records, customer details, and ordered items created within the selected timeframe.
+      </p>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold fs-8 text-uppercase text-muted mb-1">Select Order Timeframe to Delete:</label>
+        <div class="d-flex gap-2 flex-wrap mb-2">
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('all', this)">⚠️ All Orders (Full Reset)</button>
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('7days', this)">Last 7 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('10days', this)">Last 10 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('30days', this)">Last 30 Days</button>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('older_30', this)">Older than 30 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('older_60', this)">Older than 60 Days</button>
+          <button type="button" class="btn-admin-ghost btn-sm text-danger preset-time-btn" onclick="setBulkDeleteDatePreset('older_90', this)">Older than 90 Days</button>
+        </div>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-6">
+          <label class="form-label fw-bold fs-7 mb-1">Start Date:</label>
+          <input type="date" id="bulkDeleteStartDate" class="form-control">
+        </div>
+        <div class="col-6">
+          <label class="form-label fw-bold fs-7 mb-1">End Date:</label>
+          <input type="date" id="bulkDeleteEndDate" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold fs-7 text-danger mb-1">Type DELETE in capital letters to confirm:</label>
+        <input type="text" id="bulkDeleteConfirmText" class="form-control border-danger" placeholder="Type DELETE here...">
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 pt-2 border-top">
+        <button type="button" class="btn-admin-ghost" onclick="closeDateRangeDeleteModal()">Cancel</button>
+        <button type="button" id="confirmBulkDeleteBtn" class="btn-admin-primary btn-danger" style="background:#dc3545;border:none;" onclick="confirmBulkDateRangeDelete()">
+          <i class="bi bi-trash me-1"></i> Permanently Delete Range
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

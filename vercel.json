@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "public",
+  "regions": ["sin1"],
+  "rewrites": [
+    { "source": "/product/:slug*", "destination": "/product.html" }
+  ]
+}
