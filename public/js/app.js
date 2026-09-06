@@ -499,7 +499,7 @@ function renderCategoryCardHTML(cat) {
       <div class="collection-card-content">
         <div class="collection-card-tag">Browse Collection</div>
         <div class="collection-card-title">${cat.name}</div>
-        <div style="color: rgba(255,255,255,0.7); font-size:0.875rem; margin-top:4px;">${cat.description ? cat.description.substring(0, 55) + '...' : ''}</div>
+        <div style="color: #E2E8F0; font-size:0.875rem; margin-top:4px;">${cat.description ? cat.description.substring(0, 55) + '...' : ''}</div>
       </div>
     </a>
   `;

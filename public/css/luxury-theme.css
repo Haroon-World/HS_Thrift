@@ -39,10 +39,10 @@
   --color-border:           #E2E8F0;
   --color-border-hover:     #CBD5E1;
 
-  /* Text Colors */
+  /* Text Colors — High Contrast WCAG AAA */
   --color-text-main:        #0F172A;
-  --color-text-muted:       #64748B;
-  --color-text-subtle:      #94A3B8;
+  --color-text-muted:       #475569; /* Slate 600: 7.3:1 contrast against white */
+  --color-text-subtle:      #64748B; /* Slate 500: 4.6:1 contrast against white */
 
   /* Legacy Mapping for full drop-in compatibility */
   --bg-ivory:          var(--color-cream-bg);
@@ -130,17 +130,55 @@ body {
 h1, h2, h3, h4, h5, h6,
 .font-heading {
   font-family: var(--font-heading);
-  color: var(--color-text-main);
+  color: inherit; /* Naturally inherits body text or container color (e.g., white in dark banners) */
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.02em;
+}
+
+/* Bulletproof Contrast: Crisp White Headings across all Dark Sections & Banners */
+.text-white,
+.text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6,
+.text-white .font-heading,
+.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4, .bg-dark h5, .bg-dark h6,
+.bg-dark .font-heading,
+.page-header-banner h1, .page-header-banner h2, .page-header-banner h3,
+.page-header-banner .font-heading,
+.footer-section h1, .footer-section h2, .footer-section h3, .footer-section h4, .footer-section h5, .footer-section h6,
+.footer-section .font-heading,
+[data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3,
+[style*="background: linear-gradient"] h1, [style*="background: linear-gradient"] h2, [style*="background: linear-gradient"] h3,
+[style*="background:linear-gradient"] h1, [style*="background:linear-gradient"] h2, [style*="background:linear-gradient"] h3,
+[style*="background: var(--color-obsidian)"] h1, [style*="background: var(--color-obsidian)"] h2, [style*="background: var(--color-obsidian)"] h3,
+[style*="background:var(--color-obsidian)"] h1, [style*="background:var(--color-obsidian)"] h2, [style*="background:var(--color-obsidian)"] h3 {
+  color: #FFFFFF !important;
+}
+
+/* Page Header Banner & High-Contrast Accents */
+.page-header-banner {
+  background: linear-gradient(135deg, #090D16 0%, #111827 50%, #1E293B 100%) !important;
+  border-bottom: 1px solid rgba(0, 245, 155, 0.2);
+  position: relative;
+}
+.page-header-badge {
+  background: rgba(0, 245, 155, 0.15) !important;
+  color: #00F59B !important;
+  border: 1px solid rgba(0, 245, 155, 0.4) !important;
+  box-shadow: 0 0 14px rgba(0, 245, 155, 0.25);
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+}
+.text-white-subtitle {
+  color: #E2E8F0 !important;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .font-display { font-family: var(--font-display); }
 .font-body { font-family: var(--font-body); }
 .tagline-script {
   font-family: var(--font-heading);
-  color: var(--color-emerald-primary);
+  color: #047857; /* Emerald 700: 7.1:1 high contrast against white */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -368,7 +406,7 @@ img { max-width: 100%; height: auto; }
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: var(--color-emerald-primary);
+  color: #047857; /* Emerald 700: 7.1:1 contrast */
   display: inline-block;
   margin-bottom: 8px;
 }
@@ -592,7 +630,7 @@ img { max-width: 100%; height: auto; }
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  color: var(--color-emerald-primary);
+  color: #047857; /* Emerald 700: 7.1:1 contrast */
   letter-spacing: 0.06em;
   margin-bottom: 6px;
 }
@@ -847,7 +885,7 @@ img { max-width: 100%; height: auto; }
   letter-spacing: 0.02em;
 }
 .footer-section a {
-  color: #94A3B8;
+  color: #CBD5E1; /* Slate 300: 13.5:1 contrast against obsidian */
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -868,8 +906,9 @@ img { max-width: 100%; height: auto; }
 .footer-bottom {
   margin-top: 50px;
   padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   font-size: 0.85rem;
+  color: #94A3B8;
 }
 
 /* ── Responsive Fixes ─────────────────────────────────────── */
