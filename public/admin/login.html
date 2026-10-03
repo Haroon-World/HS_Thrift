@@ -113,12 +113,7 @@
           window.location.href = '/admin/dashboard.html';
           return;
         }
-
-        if (!data && (email === 'admin@hsthrift.com' || email === 'admin') && (password === 'Admin@1234' || password === 'admin')) {
-          saveAuth('mock-preview-admin-jwt-token', email, remember);
-          window.location.href = '/admin/dashboard.html';
-          return;
-        }
+        // Authentication is enforced server-side only (no client-side fallback credentials).
 
         if (data && !data.success) {
           errorEl.textContent = data.error || 'Invalid email or password.';
